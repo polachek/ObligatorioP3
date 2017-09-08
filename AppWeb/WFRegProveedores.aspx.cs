@@ -15,22 +15,46 @@ namespace AppWeb
 
         }
 
-        protected void BtnAsig_Click(object sender, EventArgs e)
+        protected void BtnAccion_Click(object sender, EventArgs e)
         {
-            Proveedor p = new Proveedor { RUT = "12345", NombreFantasia = "Nombre Fantasia Prov", Email = "Email@proveedor", Telefono = "12345", Password = "1234", Arancelll = 25, FechaRegistro = "2017/09/15", Activo = 0, porcentajeExtra = 2 };
-            if (p.Insertar())
+            string rut = TxtRut.Text;
+            string nomFant = TxtNomFantasia.Text;
+            string email = TxtEmail.Text;
+            string tel = TxtTel.Text;
+            string pass = TxtPass.Text;
+
+            if (CheckBoxVip.Checked)
+            {bool esVip = true;}else {bool esVip = false;}
+
+            DateTime fechaRegDateTime = DateTime.Now;
+            string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
+
+            Proveedor p = new Proveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, Password = pass, Arancelll = 25, FechaRegistro = fechaRegistro, esInactivo = false, porcentajeExtra = 2 };
+
+            // Validacion si ya existe un Proveedor con ese Rut o el email ingresado
+            if(Proveedor.FindByRUT(p.RUT) != null)
             {
-                Asignacion.Text = "Insertaste a : " + p.RUT;
+                Asignacion.Text = "Ya existe un Proveedor con ese Rut";
+            }else if (Proveedor.FindByEmail(p.Email) != null)
+            {
+                Asignacion.Text = "Ya existe un Proveedor con ese Email";
+            }else
+            {
+                // Verificaciones de Rut y Email OK
+                Asignacion.Text = "";
+                if (p.Insertar())
+                {
+                    Asignacion.Text = "Insertaste a : " + p.RUT;
+                }
+                else
+                    Asignacion.Text = "No";
+
             }
-            else
-                Asignacion.Text = "No";
+            
+
         }
 
-        protected void BtnAsig2_Click(object sender, EventArgs e)
-        {
-            Asignacion.Text = "Buscar por Rut :" + Proveedor.FindByRUT("ProvTest");
-        }
-
+        /* RESPALDO PARA LISRA PROVEEDORES
         protected void BtnAsig3_Click(object sender, EventArgs e)
         {
             List<Proveedor> listaProv = Proveedor.FindAll();
@@ -44,5 +68,6 @@ namespace AppWeb
                 listprov.DataBind();
             }
         }
+        */
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace Dominio
 {
@@ -21,8 +22,7 @@ namespace Dominio
         public string Password { get; set; }        
         //public DateTime FechaRegistro { get; set; } de momento lo comento para test con BD y agrego string con formato Date de la BD
         public string FechaRegistro { get; set; }
-        //public bool Activo { get; set; } de momento lo comento para test con BD y agrego int
-        public int Activo { get; set; }
+        public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
         public double Arancelll { get; set; } // Solo para test con BD
         public int porcentajeExtra { get; set; }
@@ -75,7 +75,7 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
                 cmd.Parameters.AddWithValue
                   ("@fechaRegistro", this.FechaRegistro);
                 cmd.Parameters.AddWithValue
-                  ("@esInactivo", this.Activo);
+                  ("@esInactivo", this.esInactivo);
                 cmd.Parameters.AddWithValue
                   ("@porcentajeExtra", this.porcentajeExtra);
                 cn.Open();
@@ -93,7 +93,28 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
 
         public bool Eliminar()
         {
-            throw new NotImplementedException();
+            string cadenaDelete = @"DELETE Proveedor WHERE RUT=@rut;";
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = cadenaDelete;
+            cmd.Parameters.Add(new SqlParameter("@rut", this.RUT));
+            SqlConnection cn = Conexion.CrearConexion();
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Debug.Assert(false, ex.Message);
+                return false;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+            }
         }
 
         public bool Modificar()
@@ -121,6 +142,7 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
                         {
                             RUT = rut,
                             NombreFantasia = dr["NombreFantasia"].ToString(),
+                            Email = dr["Email"].ToString(),
                         };
                         return p;
                     }
@@ -134,6 +156,41 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
             }
             finally { cn.Close(); cn.Dispose(); }
         }
+
+        public static Proveedor FindByEmail(string email)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand
+                (@"SELECT * From Proveedor WHERE Email = @email");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@email", email);
+            try
+            {
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                    if (dr.Read())
+                    {
+                        Proveedor p = new Proveedor
+                        {
+                            RUT = dr["RUT"].ToString(),
+                            NombreFantasia = dr["NombreFantasia"].ToString(),
+                            Email = email,
+                        };
+                        return p;
+                    }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("No existe el Proveedor");
+
+            }
+            finally { cn.Close(); cn.Dispose(); }
+        }
+
+        
 
         public static List<Proveedor> FindAll()
         {
