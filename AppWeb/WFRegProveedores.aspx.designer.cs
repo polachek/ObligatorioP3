@@ -31,6 +31,15 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.Button BtnAsig2;
         
         /// <summary>
+        /// Control BtnAsig3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAsig3;
+        
+        /// <summary>
         /// Control Asignacion.
         /// </summary>
         /// <remarks>
@@ -38,5 +47,14 @@ namespace AppWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Asignacion;
+        
+        /// <summary>
+        /// Control listprov.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox listprov;
     }
 }

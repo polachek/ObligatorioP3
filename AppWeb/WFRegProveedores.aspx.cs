@@ -30,5 +30,19 @@ namespace AppWeb
         {
             Asignacion.Text = "Buscar por Rut :" + Proveedor.FindByRUT("ProvTest");
         }
+
+        protected void BtnAsig3_Click(object sender, EventArgs e)
+        {
+            List<Proveedor> listaProv = Proveedor.FindAll();
+            if (listaProv == null || listaProv.Count == 0)
+            {
+                Asignacion.Text = "No hay proovedores";
+            }
+            else
+            {
+                listprov.DataSource = listaProv;
+                listprov.DataBind();
+            }
+        }
     }
 }

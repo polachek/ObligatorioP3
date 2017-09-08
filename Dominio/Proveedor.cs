@@ -48,9 +48,6 @@ namespace Dominio
         #endregion
 
         #region Acceso a datos
-        static string cadenaConexion =  ConfigurationManager.ConnectionStrings
-         ["ConexionPolachekNoteb"].ConnectionString; // Seba Agrega la tuya en Web.Config así como agregue las mías
-                                                  // y para conectarte cambias aquí el string de conexion
         public bool Insertar()
         {
             SqlConnection cn = null;
@@ -58,7 +55,7 @@ namespace Dominio
             try
             {
                 cn =
-                   new SqlConnection(cadenaConexion);
+                   Conexion.CrearConexion();
                 SqlCommand cmd = new SqlCommand(
                    @"INSERT INTO Proveedor 
 VALUES (@rut, @nombrefantasia, @email, @telefono, @password, @arancel, @fecharegistro, @esInactivo, @porcentajeExtra);
@@ -108,7 +105,7 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
         #region Finders
         public static Proveedor FindByRUT(string rut)
         {
-            SqlConnection cn = new SqlConnection(cadenaConexion);
+            SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand
                 (@"SELECT * From Proveedor WHERE Rut = @rut");
             cmd.Connection = cn;
@@ -136,6 +133,59 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
 
             }
             finally { cn.Close(); cn.Dispose(); }
+        }
+
+        public static List<Proveedor> FindAll()
+        {
+
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"SELECT * FROM Proveedor";
+
+            cmd.Connection = cn;
+            List<Proveedor> listaProveedores = null;
+            try
+            {
+                Conexion.AbrirConexion(cn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    listaProveedores = new List<Proveedor>();
+                    while (dr.Read())
+                    {
+
+                        Proveedor p = CargarDatosDesdeReader(dr);
+                        listaProveedores.Add(p);
+                    }
+                }
+                return listaProveedores;
+            }
+            catch (SqlException ex)
+            {
+                //
+                System.Diagnostics.Debug.Assert(false, ex.Message);
+                return null;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+            }
+        }
+
+        protected static Proveedor CargarDatosDesdeReader(IDataRecord fila)
+        {
+            Proveedor p = null;
+            if (fila != null)
+            {
+                p = new Proveedor
+                {
+                    RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
+                    NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
+                    Email = fila.IsDBNull(fila.GetOrdinal("Email")) ? "" : fila.GetString(fila.GetOrdinal("Email")),
+                };
+            }
+            return p;
         }
         #endregion
     }

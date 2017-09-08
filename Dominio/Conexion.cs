@@ -18,7 +18,7 @@ namespace Dominio
         //Cambiarla si se utiliza otro servicio de SQLServer.
         private static string cadenaConexion =
                                     ConfigurationManager
-                                    .ConnectionStrings["conexionAgenda"]
+                                    .ConnectionStrings["ConexionPolachekPC"]
                                     .ConnectionString;
         public static SqlConnection CrearConexion()
         {

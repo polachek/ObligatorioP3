@@ -6,9 +6,12 @@
     
     <asp:Button ID="BtnAsig2" runat="server" Text="Buscar por Rutn" OnClick="BtnAsig2_Click" />
 
+    <asp:Button ID="BtnAsig3" runat="server" Text="Ver todos" OnClick="BtnAsig3_Click" />
     <br />
     <br />
     <br />
 
     <asp:Label ID="Asignacion" runat="server" Text="Label"></asp:Label>
+
+    <asp:ListBox ID="listprov" runat="server"></asp:ListBox>
 </asp:Content>
