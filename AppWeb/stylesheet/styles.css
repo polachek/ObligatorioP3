@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900");
+
+body{
+    margin: 0px;
+}
+
+/* Global */
+.clear-both{
+	clear: both;
+}
+
+/* Header */
+#header{
+	background: linear-gradient(0deg, #fff, #860dfe) no-repeat;
+}
+
+#header h1{
+	display: inline-block;
+	margin-bottom: 2px;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #FFF;
+	padding-left: 15px;
+	text-shadow: 1px 1px #000;
+}
+
+#header p{
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #FFF;
+	margin: 0px;
+	padding-left: 15px;
+	text-shadow: 1px 1px #BF00FF;
+}
+
+#header .header-left{
+	float: left;
+	width: 25%;
+}
+
+#header .header-mid{
+	float: left;
+	width: 40%;
+}
+
+#header .header-right{
+	float: left;
+	width: 35%;
+}
+
+#header .image-header{
+	display: block;
+    height: 7em;
+	margin: 0 auto;
+}
