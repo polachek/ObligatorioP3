@@ -9,6 +9,22 @@ body{
 	clear: both;
 }
 
+.boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #1883ba;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+	cursor: pointer;
+  }
+  .boton_personalizado:hover{
+    color: #1883ba;
+    background-color: #ffffff;
+  }
+
 /* Header */
 #header{
 	background: linear-gradient(0deg, #fff, #860dfe) no-repeat;
@@ -50,4 +66,21 @@ body{
 	display: block;
     height: 7em;
 	margin: 0 auto;
+}
+
+/** Pagina Formulario Web Registro Proveedores **/
+.page-regprov{
+
+}
+
+.page-regprov #WpAltaProveedor{
+	width: 30%;
+    padding: 1%;
+	display: inline-block;
+}
+
+.page-regprov #regprov-right{
+	width: 56%;
+    padding: 1%;
+	display: inline-block;
 }

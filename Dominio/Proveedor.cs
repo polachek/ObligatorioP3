@@ -17,15 +17,14 @@ namespace Dominio
         public string RUT { get; set; }
         public string NombreFantasia { get; set; }
         public string Email { get; set; }
-        //public string Usuario { get; set; } lo comento para ver despues
+        public Usuario MiUsuario { get; set; } = new Usuario();
         public string Telefono { get; set; }
-        public string Password { get; set; }        
-        //public DateTime FechaRegistro { get; set; } de momento lo comento para test con BD y agrego string con formato Date de la BD
         public string FechaRegistro { get; set; }
         public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
         public double Arancelll { get; set; } // Solo para test con BD
-        public int porcentajeExtra { get; set; }
+        //public int porcentajeExtra { get; set; }
+        public bool esVip { get; set; }
 
         #endregion
 
@@ -38,12 +37,20 @@ namespace Dominio
         #region Métodos de lógica
         public virtual bool Validar()
         {
-            return this.RUT.Length > 1 // Hay que poner 12, pero para test lo dejamos así
+            return this.RUT.Length == 12 
                 && this.NombreFantasia.Length > 3
                 && this.Email.Length > 3
                 && this.Telefono.Length > 3
-               // && this.FechaRegistro > DateTime.Now
                  ;
+        }
+        #endregion
+
+        #region Manejo de Usuario
+        
+        public bool AgregarUsuario(Usuario usu)
+        {
+            this.MiUsuario = usu;
+            return true;
         }
         #endregion
 
@@ -52,25 +59,51 @@ namespace Dominio
         {
             SqlConnection cn = null;
             if (!this.Validar()) return false;
+            SqlTransaction trn = null;
+
+            cn = Conexion.CrearConexion();
+            cn.Open();
+            trn = cn.BeginTransaction();
+
             try
             {
-                cn =Conexion.CrearConexion();
+                
                 SqlCommand cmd = new SqlCommand(
                    @"INSERT INTO Proveedor 
-                    VALUES (@rut, @nombrefantasia, @email, @telefono, @password, @arancel, @fecharegistro, @esInactivo, @porcentajeExtra);
+                    VALUES (@rut, @nombrefantasia, @email, @telefono, @arancel, @fecharegistro, @esInactivo, @esVip);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)", cn
                 );
                 cmd.Parameters.AddWithValue("@RUT", this.RUT);
                 cmd.Parameters.AddWithValue("@nombreFantasia", this.NombreFantasia);
                 cmd.Parameters.AddWithValue("@email", this.Email);
                 cmd.Parameters.AddWithValue("@telefono", this.Telefono);
-                cmd.Parameters.AddWithValue("@password", this.Password);
                 cmd.Parameters.AddWithValue("@arancel", this.Arancelll);                
                 cmd.Parameters.AddWithValue("@fechaRegistro", this.FechaRegistro);
                 cmd.Parameters.AddWithValue("@esInactivo", this.esInactivo);
-                cmd.Parameters.AddWithValue("@porcentajeExtra", this.porcentajeExtra);
-                cn.Open();
+                cmd.Parameters.AddWithValue("@esVip", this.esVip);
+
+
+                cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
+                              
+                cmd.CommandText = @"INSERT INTO Usuario
+                            VALUES(@usuario,@password)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
+                cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
+                cmd.ExecuteNonQuery();
+
+                if (esVip)
+                {
+                    cmd.CommandText = @"INSERT INTO ProveedorVip
+                            VALUES(@idProveedor,@porcentajeExtra)";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
+                    cmd.Parameters.AddWithValue("@porcentajeExtra", 5);
+                    cmd.ExecuteNonQuery();
+                }
+
+                trn.Commit();
                 return true;
             }
             catch (Exception ex)
@@ -78,7 +111,7 @@ namespace Dominio
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                 return false;
             }
-            finally { cn.Close(); cn.Dispose();}
+            finally { cn.Close(); cn.Dispose(); trn.Dispose(); }
         }
 
         public bool Eliminar()

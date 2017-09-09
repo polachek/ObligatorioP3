@@ -2,7 +2,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadSitio" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
-  <asp:PlaceHolder ID="PHAltaProveedor" runat="server">
+ <div class="page-regprov">
+  <h1 class="main-title">Registro de Proveedores</h1>
+  <div ID="WpAltaProveedor">
 
     <asp:Panel ID="Panel2" runat="server">
       <asp:Label ID="Label4" runat="server" Text="Rut: "></asp:Label>
@@ -35,7 +37,7 @@
 
     <asp:Panel ID="Panel5" runat="server">
       <asp:Label ID="Label5" runat="server" Text="Contraseña para su Usuario: "></asp:Label>
-      <asp:TextBox ID="TxtPass" runat="server"></asp:TextBox>
+      <asp:TextBox ID="TxtPass" runat="server" TextMode="Password"></asp:TextBox>
       <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
       <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ForeColor="Tomato" ControlToValidate="TxtPass" ErrorMessage="Su contraseña debe tener un largo mínimo de 6, sin espacios y contener por lo menos una mayúscula" ValidationExpression="^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$"></asp:RegularExpressionValidator>
     </asp:Panel>
@@ -44,7 +46,14 @@
       <asp:CheckBox ID="CheckBoxVip" runat="server" Text="Proveedor Vip" />
     </asp:Panel>
 
-    <asp:Button ID="BtnAccion" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
-      <asp:Label ID="Asignacion" runat="server" Text="Label"></asp:Label>
-  </asp:PlaceHolder>
+    <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
+    <br />
+    <br />
+    <asp:Label ID="Asignacion" runat="server" Text=""></asp:Label>
+  </div>
+
+  <div id="regprov-right">
+
+  </div>
+ </div>
 </asp:Content>

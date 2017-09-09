@@ -22,16 +22,17 @@ namespace AppWeb
             string email = TxtEmail.Text;
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
+            bool CheckVip;
 
             if (CheckBoxVip.Checked)
-            {bool esVip = true;}else {bool esVip = false;}
+            {CheckVip = true;}else {CheckVip = false;}
 
             DateTime fechaRegDateTime = DateTime.Now;
             string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
 
-            Proveedor p = new Proveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, Password = pass, Arancelll = 25, FechaRegistro = fechaRegistro, esInactivo = false, porcentajeExtra = 2 };
+            Proveedor p = new Proveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, Arancelll = 25, FechaRegistro = fechaRegistro, esInactivo = false, esVip = CheckVip };
 
-            // Validacion si ya existe un Proveedor con ese Rut o el email ingresado
+            // Validacion si ya existe un Proveedor con ese Rut o email ingresado
             if(Proveedor.FindByRUT(p.RUT) != null)
             {
                 Asignacion.Text = "Ya existe un Proveedor con ese Rut";
@@ -42,6 +43,11 @@ namespace AppWeb
             {
                 // Verificaciones de Rut y Email OK
                 Asignacion.Text = "";
+                string passEncriptada = Usuario.EncriptarPassSHA512(pass);
+                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
+
+                p.AgregarUsuario(usu);
+
                 if (p.Insertar())
                 {
                     Asignacion.Text = "Insertaste a : " + p.RUT;
