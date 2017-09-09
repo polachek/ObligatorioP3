@@ -49,6 +49,11 @@ namespace AppWeb
             SqlDataReader login = cmd.ExecuteReader();
             if (login.Read())
             {
+                // login es la consulta - GetInt32 obtiene un int - GetOrdinal obtiene el reultado de la column
+                string rol = login.GetInt32(login.GetOrdinal("rol")).ToString();
+
+                Session["User"] = user;
+                Session["Rol"] = rol;
                 cn.Close();
                 return true;
             }
@@ -69,7 +74,9 @@ namespace AppWeb
 
             if (r)
             {
-                e.Authenticated = true;
+                //e.Authenticated = true; Hacer redireccion a correspondintes panales de usuarios
+                // El login esta OK
+                LbLogin.Text = "Login OK, falta redireccion, ver codigo, Rol de usuario: " + Session["Rol"].ToString();
             }
             else
                 e.Authenticated = false;

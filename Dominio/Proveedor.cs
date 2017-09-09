@@ -85,10 +85,11 @@ namespace Dominio
                 cmd.ExecuteNonQuery();
                               
                 cmd.CommandText = @"INSERT INTO Usuario
-                            VALUES(@usuario,@password)";
+                            VALUES(@usuario,@password,@rol)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
                 cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
+                cmd.Parameters.AddWithValue("@rol", 2);
                 cmd.ExecuteNonQuery();
                 
                 if (esVip)
