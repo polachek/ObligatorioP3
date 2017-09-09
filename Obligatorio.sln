@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppWeb", "AppWeb\AppWeb.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dominio", "Dominio\Dominio.csproj", "{D1A9C1A9-D5D7-40EC-9ED0-E786A1ACC496}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfAgregarProv", "WcfAgregarProv\WcfAgregarProv.csproj", "{37100015-4FEE-4358-A4A5-1F0298045070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfListaProv", "WcfListaProv\WcfListaProv.csproj", "{9DAFDD0B-38DE-47A4-AB4F-54F443CB0193}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D1A9C1A9-D5D7-40EC-9ED0-E786A1ACC496}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1A9C1A9-D5D7-40EC-9ED0-E786A1ACC496}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1A9C1A9-D5D7-40EC-9ED0-E786A1ACC496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37100015-4FEE-4358-A4A5-1F0298045070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37100015-4FEE-4358-A4A5-1F0298045070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37100015-4FEE-4358-A4A5-1F0298045070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37100015-4FEE-4358-A4A5-1F0298045070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAFDD0B-38DE-47A4-AB4F-54F443CB0193}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAFDD0B-38DE-47A4-AB4F-54F443CB0193}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAFDD0B-38DE-47A4-AB4F-54F443CB0193}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAFDD0B-38DE-47A4-AB4F-54F443CB0193}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

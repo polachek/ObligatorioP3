@@ -66,8 +66,7 @@ namespace Dominio
             trn = cn.BeginTransaction();
 
             try
-            {
-                
+            {           
                 SqlCommand cmd = new SqlCommand(
                    @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @arancel, @fecharegistro, @esInactivo, @esVip);
@@ -82,7 +81,6 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@esInactivo", this.esInactivo);
                 cmd.Parameters.AddWithValue("@esVip", this.esVip);
 
-
                 cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
                               
@@ -92,7 +90,7 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
                 cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
                 cmd.ExecuteNonQuery();
-
+                
                 if (esVip)
                 {
                     cmd.CommandText = @"INSERT INTO ProveedorVip
