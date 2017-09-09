@@ -20,7 +20,7 @@
           <asp:Menu ID="MenuInicio" runat="server" Orientation="Horizontal" StaticSubMenuIndent="16px">
               <Items>
                   <asp:MenuItem Text="Catalogo de Servicios" Value="Catalogo de Servicios"></asp:MenuItem>
-                  <asp:MenuItem Text="Iniciar Sesion" Value="Iniciar Sesion"></asp:MenuItem> 
+                  <asp:MenuItem Text="Iniciar Sesion" Value="Iniciar Sesion" NavigateUrl="Login.aspx"></asp:MenuItem> 
                   <asp:MenuItem Text="Registro de Proveedores" Value="Registro de Proveedores" NavigateUrl="WFRegProveedores.aspx"></asp:MenuItem>
               </Items>
           </asp:Menu>

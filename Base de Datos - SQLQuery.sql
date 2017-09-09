@@ -3,6 +3,9 @@ Select * From Usuario
 Select * From Proveedor
 Select * From ProveedorVip
 
+-- Agregar columna a tabla 
+--Alter table NombreTabla add NombreAtributo TipoDatoAtributo
+
 
 
 -- Crear la DataBase
@@ -31,6 +34,7 @@ porcentajeExtra INT,
 CREATE TABLE Usuario(
 usuario VARCHAR(50),
 password CHAR(128),
+rol int,
 )
 
 -- Tabla Parametros
