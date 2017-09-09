@@ -62,3 +62,4 @@ packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe
 packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe.config
 .vs/config/applicationhost.config
 .vs/
+AppWeb/obj/Debug/build.force
