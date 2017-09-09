@@ -54,38 +54,28 @@ namespace Dominio
             if (!this.Validar()) return false;
             try
             {
-                cn =
-                   Conexion.CrearConexion();
+                cn =Conexion.CrearConexion();
                 SqlCommand cmd = new SqlCommand(
                    @"INSERT INTO Proveedor 
-VALUES (@rut, @nombrefantasia, @email, @telefono, @password, @arancel, @fecharegistro, @esInactivo, @porcentajeExtra);
-SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
-                cmd.Parameters.AddWithValue
-                    ("@RUT", this.RUT);
-                cmd.Parameters.AddWithValue
-                  ("@nombreFantasia", this.NombreFantasia);
-                cmd.Parameters.AddWithValue
-                  ("@email", this.Email);
-                cmd.Parameters.AddWithValue
-                  ("@telefono", this.Telefono);
-                cmd.Parameters.AddWithValue
-                  ("@password", this.Password);
-                cmd.Parameters.AddWithValue
-                  ("@arancel", this.Arancelll);                
-                cmd.Parameters.AddWithValue
-                  ("@fechaRegistro", this.FechaRegistro);
-                cmd.Parameters.AddWithValue
-                  ("@esInactivo", this.esInactivo);
-                cmd.Parameters.AddWithValue
-                  ("@porcentajeExtra", this.porcentajeExtra);
+                    VALUES (@rut, @nombrefantasia, @email, @telefono, @password, @arancel, @fecharegistro, @esInactivo, @porcentajeExtra);
+                    SELECT CAST (SCOPE_IDENTITY() AS INT)", cn
+                );
+                cmd.Parameters.AddWithValue("@RUT", this.RUT);
+                cmd.Parameters.AddWithValue("@nombreFantasia", this.NombreFantasia);
+                cmd.Parameters.AddWithValue("@email", this.Email);
+                cmd.Parameters.AddWithValue("@telefono", this.Telefono);
+                cmd.Parameters.AddWithValue("@password", this.Password);
+                cmd.Parameters.AddWithValue("@arancel", this.Arancelll);                
+                cmd.Parameters.AddWithValue("@fechaRegistro", this.FechaRegistro);
+                cmd.Parameters.AddWithValue("@esInactivo", this.esInactivo);
+                cmd.Parameters.AddWithValue("@porcentajeExtra", this.porcentajeExtra);
                 cn.Open();
                 cmd.ExecuteNonQuery();
                 return true;
             }
             catch (Exception ex)
             {
-                System.Diagnostics.
-                    Debug.Assert(false, "Error: " + ex.Message);
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                 return false;
             }
             finally { cn.Close(); cn.Dispose();}
@@ -94,7 +84,6 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
         public bool Eliminar()
         {
             string cadenaDelete = @"DELETE Proveedor WHERE RUT=@rut;";
-
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = cadenaDelete;
             cmd.Parameters.Add(new SqlParameter("@rut", this.RUT));
@@ -103,7 +92,6 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
             {
                 Conexion.AbrirConexion(cn);
                 cmd.ExecuteNonQuery();
-
                 return true;
             }
             catch (Exception ex)
@@ -127,8 +115,7 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
         public static Proveedor FindByRUT(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand
-                (@"SELECT * From Proveedor WHERE Rut = @rut");
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Rut = @rut");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@rut", rut);
             try
@@ -160,8 +147,7 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
         public static Proveedor FindByEmail(string email)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand
-                (@"SELECT * From Proveedor WHERE Email = @email");
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Email = @email");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@email", email);
             try
@@ -183,22 +169,16 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
             }
             catch (Exception ex)
             {
-
                 throw new Exception("No existe el Proveedor");
-
             }
             finally { cn.Close(); cn.Dispose(); }
         }
-
-        
-
+       
         public static List<Proveedor> FindAll()
         {
-
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = @"SELECT * FROM Proveedor";
-
             cmd.Connection = cn;
             List<Proveedor> listaProveedores = null;
             try
@@ -211,7 +191,6 @@ SELECT CAST (SCOPE_IDENTITY() AS INT)", cn);
                     listaProveedores = new List<Proveedor>();
                     while (dr.Read())
                     {
-
                         Proveedor p = CargarDatosDesdeReader(dr);
                         listaProveedores.Add(p);
                     }

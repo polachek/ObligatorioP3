@@ -16,35 +16,29 @@ namespace Dominio
         //La cadena de conexión está configurada para el servidor de prueba 
         //que viene con Visual Studio
         //Cambiarla si se utiliza otro servicio de SQLServer.
-        private static string cadenaConexion =
-                                    ConfigurationManager
-                                    .ConnectionStrings["ConexionPolachekPC"]
-                                    .ConnectionString;
+        private static string cadenaConexion1 = ConfigurationManager.ConnectionStrings["ConexionPolachekPC"].ConnectionString;
+        private static string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionSeba"].ConnectionString;
+
         public static SqlConnection CrearConexion()
         {
             return new SqlConnection(cadenaConexion);
         }
         public static void AbrirConexion(SqlConnection cn)
         {
-
             try
             {
                 if (cn.State == ConnectionState.Closed)
                 {
                     cn.Open();
                 }
-
             }
             catch (Exception ex)
             {
-
                 Debug.Assert(false, ex.Message);
-
             }
         }
         public static void CerrarConexion(SqlConnection cn)
         {
-
             try
             {
                 if (cn.State != ConnectionState.Closed)
@@ -56,9 +50,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-
                 Debug.Assert(false, ex.Message);
-
             }
         }
         #endregion
