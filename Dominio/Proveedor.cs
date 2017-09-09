@@ -123,6 +123,7 @@ namespace Dominio
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
+                {
                     if (dr.Read())
                     {
                         Proveedor p = new Proveedor
@@ -133,6 +134,7 @@ namespace Dominio
                         };
                         return p;
                     }
+                }
                 return null;
             }
             catch (Exception ex)
