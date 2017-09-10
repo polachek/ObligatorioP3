@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
  <div class="page-regprov">
   <h1 class="main-title">Registro de Proveedores</h1>
-  <div ID="WpAltaProveedor">
+  <div ID="wpAltaProveedor">
 
     <asp:Panel ID="Panel2" runat="server">
       <asp:Label ID="Label4" runat="server" Text="Rut: "></asp:Label>
@@ -47,6 +47,8 @@
     </asp:Panel>
 
     <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
+
+      
     <br />
     <br />
     <asp:Label ID="Asignacion" runat="server" Text=""></asp:Label>
