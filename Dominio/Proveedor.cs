@@ -253,9 +253,45 @@ namespace Dominio
                     RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
                     NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
                     Email = fila.IsDBNull(fila.GetOrdinal("Email")) ? "" : fila.GetString(fila.GetOrdinal("Email")),
+                    Telefono = fila.IsDBNull(fila.GetOrdinal("Telefono")) ? "" : fila.GetString(fila.GetOrdinal("Telefono")),
+                    FechaRegistro = fila.GetDateTime(fila.GetOrdinal("fechaRegistro")).ToString("yyyy/MM/dd"),
+                    esInactivo = fila.GetBoolean(fila.GetOrdinal("esInactivo")),
+                    esVip = fila.GetBoolean(fila.GetOrdinal("esVip")),
                 };
             }
             return p;
+        }
+
+        public static int FindPorcentajeVip(string rut)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * From ProveedorVip WHERE idProveedor = @rut");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@rut", rut);
+            try
+            {
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        int porcentajeExtra;
+                        {
+                            porcentajeExtra = Convert.ToInt32(dr["porcentajeExtra"]);
+                        };
+                        return porcentajeExtra;
+                    }
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("No existe el Proveedor");
+
+            }
+            finally { cn.Close(); cn.Dispose(); }
         }
         #endregion
     }

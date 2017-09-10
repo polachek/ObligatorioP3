@@ -26,39 +26,52 @@ namespace AppWeb.Administrador
         }
 
         protected void GridProveedores_RowCommand(object sender, GridViewCommandEventArgs e)
-        {/*
-            Rematadora r = Rematadora.Instancia;
+        {
             int fila = int.Parse(e.CommandArgument + "");
+            List<Proveedor> listaProv = Proveedor.FindAll();
 
-            if (e.CommandName == "Remove")
+            if (e.CommandName == "VerDatos")
             {
-                if (r.ListaRematadores[fila].RemateAsignado.Count == 0)
-                {
-                    TxtError.Text = "";
-                    r.ListaRematadores.RemoveAt(fila);
+                PanelDatos.Visible = true;
+                Proveedor prov = listaProv[fila];
+                LBRUT.Text = "RUT :" + prov.RUT;
+                LBNomFant.Text = "Nombre Fantasia :" + prov.NombreFantasia;
+                LBEmail.Text = "Email :" + prov.Email;
+                LBTelefono.Text = "Telefono :" + prov.Telefono;
 
-                    GridViewRematadores.DataSource = r.ListaRematadores;
-                    GridViewRematadores.DataBind();
-                    CheckCantidadPersonas();
+                if (!prov.esInactivo) {
+                    LBInactivo.ForeColor = System.Drawing.Color.Green;
+                    string strEsInactivo = "Es Inactivo : No";
+                    LBInactivo.Text = strEsInactivo;
+                }else
+                {
+                    LBInactivo.ForeColor = System.Drawing.Color.Red;
+                    string strEsInactivo = "Es Inactivo : Si";
+                    LBInactivo.Text = strEsInactivo;
+                }
+
+                if (!prov.esVip)
+                {
+                    LBVip.ForeColor = System.Drawing.Color.Green;
+                    string strEsVip = "Es VIP : No";
+                    LBVip.Text = strEsVip;
                 }
                 else
                 {
-                    TxtError.Text = "No es posible eliminar un Rematador con Remates Asociados a él";
+                    LBVip.ForeColor = System.Drawing.Color.Red;
+                    string strEsVip = "Es VIP : Si";
+                    LBVip.Text = strEsVip;
+                }
+
+                if (prov.esVip)
+                {
+                    int porcentExt = Proveedor.FindPorcentajeVip(prov.RUT);
+                    Extra.Text = "" + porcentExt;
                 }
 
 
             }
-            else if (e.CommandName == "Actualizar")
-            {
-                Rematador pAModif = r.ListaRematadores[fila];
-                TxtID.Text = pAModif.Id + "";
-                TxtNombre.Text = pAModif.Nombre;
-                TxtApellido.Text = pAModif.Apellido;
-                TxtTelefono.Text = pAModif.Telefono;
-                BtnAccion.Text = "Modificar";
-
-                Session["filaMod"] = fila;
-            }*/
+           
         }
     }
 }

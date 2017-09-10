@@ -73,7 +73,6 @@
     <Content Include="PanelAdministrador.aspx" />
     <Content Include="PanelProveedor.aspx" />
     <Content Include="Sitio.Master" />
-    <Content Include="TestServicio.aspx" />
     <Content Include="WFRegProveedores.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -132,13 +131,6 @@
     </Compile>
     <Compile Include="Sitio.Master.designer.cs">
       <DependentUpon>Sitio.Master</DependentUpon>
-    </Compile>
-    <Compile Include="TestServicio.aspx.cs">
-      <DependentUpon>TestServicio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TestServicio.aspx.designer.cs">
-      <DependentUpon>TestServicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="WFRegProveedores.aspx.cs">
       <DependentUpon>WFRegProveedores.aspx</DependentUpon>

@@ -22,7 +22,6 @@
                   <asp:MenuItem Text="Catalogo de Servicios" Value="Catalogo de Servicios"></asp:MenuItem>
                   <asp:MenuItem Text="Iniciar Sesion" Value="Iniciar Sesion" NavigateUrl="Login.aspx"></asp:MenuItem> 
                   <asp:MenuItem Text="Registro de Proveedores" Value="Registro de Proveedores" NavigateUrl="WFRegProveedores.aspx"></asp:MenuItem>
-                  <asp:MenuItem Text="TEST SERVICIO FIND ALL" Value="TEST SERVICIO FIND AL" NavigateUrl="~/TestServicio.aspx"></asp:MenuItem> 
               </Items>
           </asp:Menu>
          </form>
