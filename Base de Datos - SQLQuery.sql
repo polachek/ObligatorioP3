@@ -6,6 +6,9 @@ Select * From ProveedorVip
 -- Agregar columna a tabla 
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo
 
+-- Insertar Admin - Clave: Administrador
+insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1);
+
 
 
 -- Crear la DataBase

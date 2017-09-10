@@ -74,9 +74,19 @@ namespace AppWeb
 
             if (r)
             {
-                //e.Authenticated = true; Hacer redireccion a correspondintes panales de usuarios
-                // El login esta OK
-                LbLogin.Text = "Login OK, falta redireccion, ver codigo, Rol de usuario: " + Session["Rol"].ToString();
+                e.Authenticated = true;
+
+                if (Session["Rol"].ToString() == "2")
+                {
+                    Response.Redirect("~/PanelProveedor.aspx");
+                } else if (Session["Rol"].ToString() == "1")
+                {
+                    Response.Redirect("~/PanelAdministrador.aspx");
+                }else
+                {
+                    Response.Redirect("~/Inicio.aspx");
+                }
+
             }
             else
                 e.Authenticated = false;

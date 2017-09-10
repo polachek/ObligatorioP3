@@ -7,36 +7,45 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace AppWeb {
+namespace AppWeb.Administrador {
     
     
-    public partial class Inicio {
+    public partial class FormWeb_ListadoProveedores {
         
         /// <summary>
-        /// Control form1.
+        /// Control Panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Control MenuInicio.
+        /// Control GridViewListadoProveedores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu MenuInicio;
+        protected global::System.Web.UI.WebControls.GridView GridViewListadoProveedores;
         
         /// <summary>
-        /// Control Label1.
+        /// Control PanelCantProveedores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Panel PanelCantProveedores;
+        
+        /// <summary>
+        /// Control Label7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
     }
 }

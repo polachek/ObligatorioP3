@@ -26,7 +26,7 @@
           </asp:Menu>
          </form>
 	  </header>
-
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
 				<!-- Footer -->
 					<footer id="footer">
 						<span class="copyright">&copy; Guillermo Polachek - 153924 / Sebastián Villar - 177751</span>

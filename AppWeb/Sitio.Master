@@ -19,7 +19,17 @@
 	   <p>Eventos &nbsp;&bull;&nbsp; Fotografía &nbsp;&bull;&nbsp; Discoteca &nbsp;&bull;&nbsp; Fiestas</p>
       </div>
       <div class="header-mid"><img class="image-header" src="stylesheet/images/header-img.png" /></div>
-      <div class="header-right"></div>
+      <div class="header-right">
+
+          <asp:Panel ID="userLog" runat="server" Visible="false">
+            <asp:Button ID="Btn_Salir" runat="server" Text="Salir" OnClick="BtnSalir_Click" />
+            <asp:Label ID="LBUser" runat="server"></asp:Label>
+          </asp:Panel>
+          <asp:Panel ID="userNotlog" runat="server" Visible="false">
+              <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx">Inciar Sesion</asp:HyperLink>
+          </asp:Panel>
+          
+      </div>
       <div class="clear-both"></div>
 	 </header>
 

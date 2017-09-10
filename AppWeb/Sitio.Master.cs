@@ -11,7 +11,23 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["User"] == null)
+            {
+                userNotlog.Visible = true;
+            }else
+            {
+                userLog.Visible = true;
+                LBUser.Text = "Bienvenido " + Session["User"].ToString();
+            }
+        }
 
+        protected void BtnSalir_Click(object sender, EventArgs e)
+        {
+            Session["User"] = null;
+            Session["Rol"] = null;
+            Session["usu"] = null;
+
+            Response.Redirect("~/Inicio.aspx");
         }
     }
 }

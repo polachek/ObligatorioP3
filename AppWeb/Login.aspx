@@ -12,6 +12,6 @@
          <TextBoxStyle Font-Size="0.8em" />
          <TitleTextStyle BackColor="#507CD1" Font-Bold="True" Font-Size="0.9em" ForeColor="White" />
      </asp:Login>
-     <asp:Label ID="LbLogin" runat="server" Text="Label"></asp:Label>
+
  </div>
 </asp:Content>

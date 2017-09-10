@@ -10,15 +10,15 @@
 namespace AppWeb {
     
     
-    public partial class Login {
+    public partial class PanelAdministrador {
         
         /// <summary>
-        /// Control Login1.
+        /// Control HyperLink1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Login Login1;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
     }
 }
