@@ -66,7 +66,10 @@ namespace AppWeb.Administrador
                 if (prov.esVip)
                 {
                     int porcentExt = Proveedor.FindPorcentajeVip(prov.RUT);
-                    Extra.Text = "" + porcentExt;
+                    Extra.Text = "Porcentaje extra: " + porcentExt;
+                }else
+                {
+                    Extra.Text = "";
                 }
 
 
