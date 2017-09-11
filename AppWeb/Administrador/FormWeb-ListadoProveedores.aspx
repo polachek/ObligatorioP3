@@ -2,11 +2,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadSitio" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
-<!-- INICIO Fancybox -->
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" href="/assets/fancybox/jquery.fancybox.min.css" />
-<script src="/assets/fancybox/jquery.fancybox.min.js"></script>
-<!-- FIN Fancybox -->
 
   <div class="page-listado-proveedores">
     <h1>Listado de Proveedores</h1>
