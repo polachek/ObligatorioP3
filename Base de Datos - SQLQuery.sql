@@ -9,6 +9,11 @@ Select * From ProveedorVip
 -- Insertar Admin - Clave: Administrador
 insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1);
 
+-- Seleccionar servicios con tipos de evento asociados a cada servicio
+SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
+FROM Servicio AS s 
+INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
 
 
 -- Crear la DataBase
