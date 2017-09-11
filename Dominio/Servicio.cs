@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Diagnostics;
 
 namespace Dominio
 {
@@ -39,9 +40,9 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = @"SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
-                                FROM Servicio s, TipoEvento t, TipoEventoYServicio e
-                                WHERE s.idServicio = e.idServicio
-                                AND e.idTipoEvento = t.idTipoEvento";
+                            FROM Servicio AS s 
+                            INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                            INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento";           
             cmd.Connection = cn;
             List<Servicio> listaServicios = null;
             try
@@ -80,7 +81,8 @@ namespace Dominio
                 {
                     Nombre = fila.IsDBNull(fila.GetOrdinal("Nombre")) ? "" : fila.GetString(fila.GetOrdinal("Nombre")),
                     Descripcion = fila.IsDBNull(fila.GetOrdinal("Descripcion")) ? "" : fila.GetString(fila.GetOrdinal("Descripcion")),
-                    Foto = fila.IsDBNull(fila.GetOrdinal("imagen")) ? "" : fila.GetString(fila.GetOrdinal("imagen"))
+                    Foto = fila.IsDBNull(fila.GetOrdinal("imagen")) ? "" : fila.GetString(fila.GetOrdinal("imagen")),
+                    ListaTipoEventos = null
                 };
             }
             return s;

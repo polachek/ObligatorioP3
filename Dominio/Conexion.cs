@@ -21,8 +21,9 @@ namespace Dominio
 
         public static SqlConnection CrearConexion()
         {
-            return new SqlConnection(cadenaConexion1);
+            return new SqlConnection(cadenaConexion);
         }
+
         public static void AbrirConexion(SqlConnection cn)
         {
             try
@@ -37,6 +38,7 @@ namespace Dominio
                 Debug.Assert(false, ex.Message);
             }
         }
+
         public static void CerrarConexion(SqlConnection cn)
         {
             try

@@ -27,5 +27,8 @@ namespace WcfServicioExponerCatalogo
 
         [DataMember]
         public string Foto { get; set; }
+
+        [DataMember]
+        public string ListaTipoEventos { get; set; }
     }
 }
