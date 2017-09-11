@@ -10,7 +10,7 @@ using Dominio;
 namespace WcfServicioExponerCatalogo
 {
     public class ServicioExponerCatalogo : IServicioExponerCatalogo
-    {
+    {    
         public IEnumerable<DtoServicio> ObtenerServicios()
         {
             List<Servicio> listaCompleta = Servicio.FindAll();
@@ -21,13 +21,24 @@ namespace WcfServicioExponerCatalogo
                 servicios.Add(
                     new DtoServicio()
                     {
-                        Nombre = s.Nombre,
-                        Descripcion = s.Descripcion
+                        Servicio = s.Nombre,
+                        Descripcion = s.Descripcion,
+                        Foto = s.Foto,
+                        TipoEvento = s.ListaTipoEventos[0]
                     }
                 );
             }
             return servicios;
         }
+
+        /*
+        public IEnumerable<DtoServicioYTiposEvento> ObtenerServiciosYTiposEvento()
+        {
+            List<Servicio> listaCompleta = Servicio.FindAll();
+            List<DtoServicioYTiposEvento> serviciosYTiposEvento = new List<DtoServicioYTiposEvento>();
+            return serviciosYTiposEvento;
+        }
+        */
     }
 }
 
