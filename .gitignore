@@ -63,3 +63,9 @@ packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe.config
 .vs/config/applicationhost.config
 .vs/
 AppWeb/obj/Debug/build.force
+WcfAgregarProv/bin/Dominio.dll
+WcfAgregarProv/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+WcfListaProv/bin/Dominio.dll
+WcfListaProv/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+WcfServicioExponerCatalogo/bin/Dominio.dll
+WcfServicioExponerCatalogo/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
