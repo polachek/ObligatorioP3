@@ -2,6 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadSitio" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
+
   <div class="page-listado-proveedores">
     <h1>Listado de Proveedores</h1>
 
@@ -34,5 +35,6 @@
          <asp:Label ID="Extra" runat="server" Text="Vip: "></asp:Label>
      </div>
     </asp:Panel>
+
   </div>
 </asp:Content>

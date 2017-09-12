@@ -18,7 +18,7 @@
 	   <h1>ProvEventos</h1>
 	   <p>Eventos &nbsp;&bull;&nbsp; Fotografía &nbsp;&bull;&nbsp; Discoteca &nbsp;&bull;&nbsp; Fiestas</p>
       </div>
-      <div class="header-mid"><img class="image-header" src="stylesheet/images/header-img.png" /></div>
+      <div class="header-mid"><img class="image-header" src="/stylesheet/images/header-img.png" /></div>
       <div class="header-right">
 
           <asp:Panel ID="userLog" runat="server" Visible="false">

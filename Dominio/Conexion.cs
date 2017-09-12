@@ -16,12 +16,17 @@ namespace Dominio
         //La cadena de conexión está configurada para el servidor de prueba 
         //que viene con Visual Studio
         //Cambiarla si se utiliza otro servicio de SQLServer.
-        private static string cadenaConexion1 = ConfigurationManager.ConnectionStrings["ConexionPolachekPC"].ConnectionString;
         private static string cadenaConexion = ConfigurationManager.ConnectionStrings["ConexionSeba"].ConnectionString;
+        private static string cadenaConexionPolaNotebook = ConfigurationManager.ConnectionStrings["ConexionPolachekNoteb"].ConnectionString;
+        private static string cadenaConexionPolaPC = ConfigurationManager.ConnectionStrings["ConexionPolachekPC"].ConnectionString;
 
         public static SqlConnection CrearConexion()
         {
+<<<<<<< HEAD
             return new SqlConnection(cadenaConexion);
+=======
+            return new SqlConnection(cadenaConexionPolaPC);
+>>>>>>> origin/dev
         }
 
         public static void AbrirConexion(SqlConnection cn)
