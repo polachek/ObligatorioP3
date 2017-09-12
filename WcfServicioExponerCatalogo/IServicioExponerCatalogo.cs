@@ -12,7 +12,6 @@ namespace WcfServicioExponerCatalogo
     [ServiceContract]
     public interface IServicioExponerCatalogo
     {
-
         [OperationContract]
         IEnumerable<DtoServicio> ObtenerServicios();
 
@@ -21,8 +20,15 @@ namespace WcfServicioExponerCatalogo
         IEnumerable<DtoServicioYTiposEvento> ObtenerServiciosYTiposEvento();
         */
     }
+    /*
+    [DataContract]
+    public class DtoServicioYTiposEvento
+    {
+        [DataMember]
+        public List<TipoEvento> ListaTipoEvento { get; set; }
+    }
+    */
 
-    
     [DataContract]
     public class DtoServicio
     {
@@ -36,20 +42,9 @@ namespace WcfServicioExponerCatalogo
         public string Foto { get; set; }
 
         [DataMember]
-        public string TipoEvento { get; set; }
+        public List<TipoEvento> TipoEvento { get; set; }
     }
+
     
-    /*
-    [DataContract]
-    public class DtoServicioYTiposEvento
-    {
-        [DataMember]
-        public string Servicio { get; set; }
 
-
-
-        [DataMember]
-        public string TipoEvento { get; set; }
-    }
-    */
 }

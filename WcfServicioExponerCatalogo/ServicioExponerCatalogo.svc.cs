@@ -18,27 +18,19 @@ namespace WcfServicioExponerCatalogo
             List<DtoServicio> servicios = new List<DtoServicio>();
             foreach (Servicio s in listaCompleta)
             {
+                List<TipoEvento> listaTipoEvento = Servicio.FindTiposEventoByServicio(s.Nombre);
                 servicios.Add(
                     new DtoServicio()
                     {
                         Servicio = s.Nombre,
                         Descripcion = s.Descripcion,
                         Foto = s.Foto,
-                        TipoEvento = s.ListaTipoEventos[0]
+                        TipoEvento = listaTipoEvento
                     }
                 );
             }
             return servicios;
         }
-
-        /*
-        public IEnumerable<DtoServicioYTiposEvento> ObtenerServiciosYTiposEvento()
-        {
-            List<Servicio> listaCompleta = Servicio.FindAll();
-            List<DtoServicioYTiposEvento> serviciosYTiposEvento = new List<DtoServicioYTiposEvento>();
-            return serviciosYTiposEvento;
-        }
-        */
     }
 }
 

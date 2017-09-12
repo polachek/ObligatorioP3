@@ -15,7 +15,7 @@ namespace Dominio
         public string Nombre { get; set; }
         public string Foto { get; set; }
         public string Descripcion { get; set; }
-        public List<String> ListaTipoEventos = new List<String>();
+        public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
         {
@@ -64,7 +64,7 @@ namespace Dominio
                             Nombre = nombreServicio,
                             Descripcion = desc,
                             Foto = foto,
-                            ListaTipoEventos = new List<String>()
+                            ListaTipoEventos = new List<TipoEvento>()
                         };                       
                         return s;
                     }
@@ -115,31 +115,37 @@ namespace Dominio
             }
         }
 
-        public static List<String> FindTiposEvento(string nombre) {
+        public static List<TipoEvento> FindTiposEventoByServicio(string servicio)
+        {
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"SELECT t.nombre
+
+            cmd.CommandText = @"SELECT t.nombre, t.descripción
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-                                WHERE t.nombre = @nombre";
+                                WHERE s.nombre = @servicio";
+
             cmd.Connection = cn;
-            cmd.Parameters.AddWithValue("@nombre", nombre);
-            List<String> listaTiposEvento = null;
+            cmd.Parameters.AddWithValue("@servicio", servicio);
+            List<TipoEvento> listaTipoEvento = null;
             try
             {
                 Conexion.AbrirConexion(cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    listaTiposEvento = new List<String>();
+                    listaTipoEvento = new List<TipoEvento>();
                     while (dr.Read())
                     {
-                        string s = dr.GetString(dr.GetOrdinal("nombre"));
-                        listaTiposEvento.Add(s);
+                        Servicio s = Servicio.FindByNombre(servicio);
+                        string tipo = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
+                        string desc = dr.IsDBNull(dr.GetOrdinal("descripción")) ? "" : dr.GetString(dr.GetOrdinal("descripción"));
+                        TipoEvento t = new TipoEvento(tipo, desc);
+                        listaTipoEvento.Add(t);
                     }
                 }
-                return listaTiposEvento;
+                return listaTipoEvento;
             }
             catch (SqlException ex)
             {
@@ -151,7 +157,6 @@ namespace Dominio
             {
                 Conexion.CerrarConexion(cn);
             }
-
         }
 
         protected static Servicio CargarDatosDesdeReader(IDataRecord fila)
@@ -160,7 +165,6 @@ namespace Dominio
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("Servicio")) ? "" : fila.GetString(fila.GetOrdinal("Servicio"));
             string desc = fila.IsDBNull(fila.GetOrdinal("Descripción del servicio")) ? "" : fila.GetString(fila.GetOrdinal("Descripción del servicio"));
             string foto = fila.IsDBNull(fila.GetOrdinal("Foto")) ? "" : fila.GetString(fila.GetOrdinal("Foto"));
-            string tipoEvento = fila.IsDBNull(fila.GetOrdinal("Tipo de evento")) ? "" : fila.GetString(fila.GetOrdinal("Tipo de evento"));
 
             if (fila != null)
             {
@@ -168,9 +172,9 @@ namespace Dominio
                 {
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    Foto = foto
+                    Foto = foto,
+                    ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
-                s.ListaTipoEventos.Add(tipoEvento);
             }
             return s;
         }
