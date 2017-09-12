@@ -22,6 +22,7 @@ namespace AppWeb
                     System.Windows.Forms.MessageBox.Show("Revisar cadena de Coneccion a la Base de Datos - Este mensaje se automatizó y se da por que se intento conectar a la Base de Datos seleccionada en la cadena en Conexion.cs, se automatizó para evitar problemas relacionados a la conexión");
                 }
             }
+
         }
 
         public static bool IsAvailable()
