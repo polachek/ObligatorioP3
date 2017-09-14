@@ -2,6 +2,7 @@
 Select * From Usuario
 Select * From Proveedor
 Select * From ProveedorVip
+Select * From Servicio
 
 -- Agregar columna a tabla 
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo
@@ -61,21 +62,24 @@ CREATE DATABASE ObligatorioP3
 
 -- Tabla Proveedor
 CREATE TABLE Proveedor(
-idProveedor INT IDENTITY(1,1),
-RUT varchar(12) PRIMARY KEY,
+RUT varchar(50) PRIMARY KEY ,
 nombreFantasia VARCHAR(50),
-email VARCHAR(50) UNIQUE,
+email VARCHAR(50) UNIQUE REFERENCES Usuario,
 telefono VARCHAR(50),
-arancel DECIMAL(7,2),
 fechaRegistro DATE,
 esInactivo BIT,
-esVip BIT,
+tipo VARCHAR(10),
 )
 
 -- Tabla ProveedorVip
 CREATE TABLE ProveedorVip(
-idProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
-porcentajeExtra INT,
+rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
+porcentExtraAsign INT,
+)
+
+-- Tabla ProveedorComun
+CREATE TABLE ProveedorComun(
+rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
 )
 
 -- Tabla Usuario
@@ -83,11 +87,13 @@ CREATE TABLE Usuario(
 usuario VARCHAR(50),
 password CHAR(128),
 rol int,
+email VARCHAR(50) Primary key,
 )
 
 -- Tabla Parametros
 CREATE TABLE Parametros(
 arancel DECIMAL(7,2),
+porcentajeExtra INT,
 )
 
 -- Tabla Servicio

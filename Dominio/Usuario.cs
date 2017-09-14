@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Dominio
     {
         public string User { get; set; }
         public string Passw { get; set; }
+        public int Rol { get; set; }
 
         #region Encriptar Pass
         public static string EncriptarPassSHA512(string inputString)
@@ -31,5 +33,36 @@ namespace Dominio
             return result.ToString();
         }
         #endregion
+
+        /* #region Agregar Usuario
+         public bool Insertar(SqlCommand cmd)
+         {
+             SqlConnection cn = null;
+              SqlTransaction trn = null;
+
+             cn = Conexion.CrearConexion();
+             cn.Open();
+             trn = cn.BeginTransaction();
+
+             try
+             {
+                 cmd.CommandText = @"INSERT INTO Usuario
+                             VALUES(@usuario,@password,@rol)";
+                 cmd.Parameters.AddWithValue("@usuario", user);
+                 cmd.Parameters.AddWithValue("@password", pass);
+                 cmd.Parameters.AddWithValue("@rol", rol);
+                 cmd.ExecuteNonQuery();
+
+
+                 return true;
+             }
+             catch (Exception ex)
+             {
+                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                 return false;
+             }
+            // finally { cn.Close(); cn.Dispose(); trn.Dispose(); }
+         }
+         #endregion*/
     }
 }

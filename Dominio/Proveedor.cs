@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Dominio
 {
-    public class Proveedor : IActiveRecord
+    public abstract class Proveedor : IActiveRecord
     {
         #region Propiedades
 
@@ -25,6 +25,7 @@ namespace Dominio
         public double Arancelll { get; set; } // Solo para test con BD
         //public int porcentajeExtra { get; set; }
         public bool esVip { get; set; }
+        public List<Servicio> listaServicios { get; set; }
 
         #endregion
 
@@ -33,6 +34,7 @@ namespace Dominio
             string ret = string.Format("{0} {1}", "Rut: " + RUT + " - ", "NombreFantasia:" + NombreFantasia);
             return ret;
         }
+
 
         #region Métodos de lógica
         public virtual bool Validar()
@@ -62,16 +64,29 @@ namespace Dominio
             SqlTransaction trn = null;
 
             cn = Conexion.CrearConexion();
-            cn.Open();
-            trn = cn.BeginTransaction();
+
 
             try
-            {           
-                SqlCommand cmd = new SqlCommand(
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                cn.Open();
+                trn = cn.BeginTransaction();
+
+                cmd.Connection = cn;
+                cmd.Transaction = trn;
+                
+                Usuario miUsuario = new Usuario();
+
+                miUsuario.User = MiUsuario.User;
+                miUsuario.Passw = MiUsuario.Passw;
+                miUsuario.Rol = 2;
+               // miUsuario.Insertar(cmd);
+
+           cmd.CommandText=
                    @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @arancel, @fecharegistro, @esInactivo, @esVip);
-                    SELECT CAST (SCOPE_IDENTITY() AS INT)", cn
-                );
+                    SELECT CAST (SCOPE_IDENTITY() AS INT)";
                 cmd.Parameters.AddWithValue("@RUT", this.RUT);
                 cmd.Parameters.AddWithValue("@nombreFantasia", this.NombreFantasia);
                 cmd.Parameters.AddWithValue("@email", this.Email);
@@ -82,16 +97,19 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@esVip", this.esVip);
 
                 cmd.Transaction = trn;
-                cmd.ExecuteNonQuery();
-                              
-                cmd.CommandText = @"INSERT INTO Usuario
+         cmd.ExecuteNonQuery();
+
+                
+
+
+                /*cmd.CommandText = @"INSERT INTO Usuario
                             VALUES(@usuario,@password,@rol)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
                 cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
                 cmd.Parameters.AddWithValue("@rol", 2);
-                cmd.ExecuteNonQuery();
-                
+                cmd.ExecuteNonQuery();*/
+
                 if (esVip)
                 {
                     cmd.CommandText = @"INSERT INTO ProveedorVip
@@ -158,13 +176,13 @@ namespace Dominio
                 {
                     if (dr.Read())
                     {
-                        Proveedor p = new Proveedor
+                        /*Proveedor p = new Proveedor
                         {
                             RUT = rut,
                             NombreFantasia = dr["NombreFantasia"].ToString(),
                             Email = dr["Email"].ToString(),
                         };
-                        return p;
+                        return p;*/
                     }
                 }
                 return null;
@@ -191,13 +209,13 @@ namespace Dominio
                 if (dr.HasRows)
                     if (dr.Read())
                     {
-                        Proveedor p = new Proveedor
+                        /*Proveedor p = new Proveedor
                         {
                             RUT = dr["RUT"].ToString(),
                             NombreFantasia = dr["NombreFantasia"].ToString(),
                             Email = email,
                         };
-                        return p;
+                        return p;*/
                     }
                 return null;
             }
@@ -248,7 +266,7 @@ namespace Dominio
             Proveedor p = null;
             if (fila != null)
             {
-                p = new Proveedor
+                /*p = new Proveedor
                 {
                     RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
                     NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
@@ -257,7 +275,7 @@ namespace Dominio
                     FechaRegistro = fila.GetDateTime(fila.GetOrdinal("fechaRegistro")).ToString("yyyy/MM/dd"),
                     esInactivo = fila.GetBoolean(fila.GetOrdinal("esInactivo")),
                     esVip = fila.GetBoolean(fila.GetOrdinal("esVip")),
-                };
+                };*/
             }
             return p;
         }

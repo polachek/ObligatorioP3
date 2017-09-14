@@ -123,3 +123,4 @@ WcfListaProv/bin/*
 WcfListaProv/obj/*
 WcfServicioCatalogoServicios/bin/WcfServicioCatalogoServicios.pdb
 
+Dominio/Conexion.cs

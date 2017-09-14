@@ -82,10 +82,7 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = @"SELECT s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
-                                FROM Servicio AS s 
-                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
-                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento";
+            cmd.CommandText = @"SELECT * FROM Servicio";
             cmd.Connection = cn;
             List<Servicio> listaServicios = null;
             try
@@ -114,6 +111,45 @@ namespace Dominio
                 Conexion.CerrarConexion(cn);
             }
         }
+
+        public static List<Servicio> FindServicioTipo()
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+
+            cmd.CommandText = @"SELECT s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
+                                FROM Servicio AS s 
+                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento";
+            cmd.Connection = cn;
+            List<Servicio> listaServicios = null;
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    listaServicios = new List<Servicio>();
+                    while (dr.Read())
+                    {
+                        Servicio s = CargarDatosDesdeReaderServicioTipo(dr);
+                        listaServicios.Add(s);
+                    }
+                }
+                return listaServicios;
+            }
+            catch (SqlException ex)
+            {
+                //
+                System.Diagnostics.Debug.Assert(false, ex.Message);
+                return null;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+            }
+        }
+
 
         public static List<TipoEvento> FindTiposEventoByServicio(string servicio)
         {
@@ -160,6 +196,23 @@ namespace Dominio
         }
 
         protected static Servicio CargarDatosDesdeReader(IDataRecord fila)
+        {
+            Servicio s = null;
+            string nombreServicio = fila.IsDBNull(fila.GetOrdinal("nombre")) ? "" : fila.GetString(fila.GetOrdinal("nombre"));
+            string desc = fila.IsDBNull(fila.GetOrdinal("descripcion")) ? "" : fila.GetString(fila.GetOrdinal("descripcion"));
+
+            if (fila != null)
+            {
+                s = new Servicio()
+                {
+                    Nombre = nombreServicio,
+                    Descripcion = desc,
+                };
+            }
+            return s;
+        }
+
+        protected static Servicio CargarDatosDesdeReaderServicioTipo(IDataRecord fila)
         {
             Servicio s = null;
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("Servicio")) ? "" : fila.GetString(fila.GetOrdinal("Servicio"));

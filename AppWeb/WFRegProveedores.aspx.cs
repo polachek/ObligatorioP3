@@ -12,7 +12,7 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            cargarServicios();
         }
 
         protected void BtnAccion_Click(object sender, EventArgs e)
@@ -56,8 +56,21 @@ namespace AppWeb
                     Asignacion.Text = "No";
 
             }
-            
+        }
 
+        private void cargarServicios()
+        {
+            List<Servicio> listaServicios = Servicio.FindAll();
+            if (listaServicios == null || listaServicios.Count == 0)
+            {
+                PanelCantServicios.Visible = true;
+            }
+            else
+            {
+                PanelCantServicios.Visible = false;
+                ListBoxServicios.DataSource = listaServicios;
+                ListBoxServicios.DataBind();
+            }
         }
 
     }

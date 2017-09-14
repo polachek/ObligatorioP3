@@ -15,7 +15,7 @@ namespace WcfServicioCatalogoServicios
     {
         public IEnumerable<DtoServicio> ObtenerServicios()
         {
-            List<Servicio> listaCompleta = Servicio.FindAll();
+            List<Servicio> listaCompleta = Servicio.FindServicioTipo();
             if (listaCompleta == null) return null;
             List<DtoServicio> servicios = new List<DtoServicio>();
             foreach (Servicio s in listaCompleta)
