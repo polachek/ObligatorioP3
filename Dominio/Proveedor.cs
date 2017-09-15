@@ -22,9 +22,7 @@ namespace Dominio
         public string FechaRegistro { get; set; }
         public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
-        public double Arancelll { get; set; } // Solo para test con BD
-        //public int porcentajeExtra { get; set; }
-        public bool esVip { get; set; }
+        public string Tipo { get; set; }
         public List<Servicio> listaServicios { get; set; }
 
         #endregion
@@ -81,20 +79,20 @@ namespace Dominio
                 miUsuario.User = MiUsuario.User;
                 miUsuario.Passw = MiUsuario.Passw;
                 miUsuario.Rol = 2;
-               // miUsuario.Insertar(cmd);
+                miUsuario.Insertar(cmd);
 
            cmd.CommandText=
                    @"INSERT INTO Proveedor 
-                    VALUES (@rut, @nombrefantasia, @email, @telefono, @arancel, @fecharegistro, @esInactivo, @esVip);
+                    VALUES (@rut, @nombrefantasia, @email, @telefono, @fecharegistro, @esInactivo, @tipo);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)";
+                cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@RUT", this.RUT);
                 cmd.Parameters.AddWithValue("@nombreFantasia", this.NombreFantasia);
                 cmd.Parameters.AddWithValue("@email", this.Email);
                 cmd.Parameters.AddWithValue("@telefono", this.Telefono);
-                cmd.Parameters.AddWithValue("@arancel", this.Arancelll);                
                 cmd.Parameters.AddWithValue("@fechaRegistro", this.FechaRegistro);
                 cmd.Parameters.AddWithValue("@esInactivo", this.esInactivo);
-                cmd.Parameters.AddWithValue("@esVip", this.esVip);
+                cmd.Parameters.AddWithValue("@tipo", this.Tipo);
 
                 cmd.Transaction = trn;
          cmd.ExecuteNonQuery();
@@ -110,7 +108,7 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@rol", 2);
                 cmd.ExecuteNonQuery();*/
 
-                if (esVip)
+                if (Tipo == "VIP")
                 {
                     cmd.CommandText = @"INSERT INTO ProveedorVip
                             VALUES(@idProveedor,@porcentajeExtra)";

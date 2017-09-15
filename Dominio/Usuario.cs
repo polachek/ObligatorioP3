@@ -34,23 +34,16 @@ namespace Dominio
         }
         #endregion
 
-        /* #region Agregar Usuario
+         #region Agregar Usuario
          public bool Insertar(SqlCommand cmd)
          {
-             SqlConnection cn = null;
-              SqlTransaction trn = null;
-
-             cn = Conexion.CrearConexion();
-             cn.Open();
-             trn = cn.BeginTransaction();
-
              try
              {
                  cmd.CommandText = @"INSERT INTO Usuario
                              VALUES(@usuario,@password,@rol)";
-                 cmd.Parameters.AddWithValue("@usuario", user);
-                 cmd.Parameters.AddWithValue("@password", pass);
-                 cmd.Parameters.AddWithValue("@rol", rol);
+                 cmd.Parameters.AddWithValue("@usuario", this.User);
+                 cmd.Parameters.AddWithValue("@password", this.Passw);
+                 cmd.Parameters.AddWithValue("@rol", this.Rol);
                  cmd.ExecuteNonQuery();
 
 
@@ -61,8 +54,7 @@ namespace Dominio
                  System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                  return false;
              }
-            // finally { cn.Close(); cn.Dispose(); trn.Dispose(); }
          }
-         #endregion*/
+         #endregion
     }
 }

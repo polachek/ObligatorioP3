@@ -22,40 +22,62 @@ namespace AppWeb
             string email = TxtEmail.Text;
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
-            bool CheckVip;
+            string tipo = "";
 
             if (CheckBoxVip.Checked)
-            {CheckVip = true;}else {CheckVip = false;}
+            { tipo = "VIP";}else { tipo = "COMUN";}
 
             DateTime fechaRegDateTime = DateTime.Now;
             string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
 
-            Proveedor p = new Proveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, Arancelll = 25, FechaRegistro = fechaRegistro, esInactivo = false, esVip = CheckVip };
+            if (tipo == "COMUN")
+            {
+                Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
+                if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+            }
+            else
+            {
+                Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
+                if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+            }            
 
+            
+
+        }
+
+        private bool validarRutyEmail(Proveedor prov)
+        {
             // Validacion si ya existe un Proveedor con ese Rut o email ingresado
-            if(Proveedor.FindByRUT(p.RUT) != null)
+            if (Proveedor.FindByRUT(prov.RUT) != null)
             {
                 Asignacion.Text = "Ya existe un Proveedor con ese Rut";
-            }else if (Proveedor.FindByEmail(p.Email) != null)
+                return false;
+            }
+            else if (Proveedor.FindByEmail(prov.Email) != null)
             {
                 Asignacion.Text = "Ya existe un Proveedor con ese Email";
+                return false;                
             }else
             {
-                // Verificaciones de Rut y Email OK
-                Asignacion.Text = "";
-                string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
-
-                p.AgregarUsuario(usu);
-
-                if (p.Insertar())
-                {
-                    Asignacion.Text = "Insertaste a : " + p.RUT;
-                }
-                else
-                    Asignacion.Text = "No";
-
+                return true;
             }
+        }
+
+        private void insertarProveedor(Proveedor p, string pass)
+        {
+            // Verificaciones de Rut y Email OK
+            Asignacion.Text = "";
+            string passEncriptada = Usuario.EncriptarPassSHA512(pass);
+            Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada };
+
+            p.AgregarUsuario(usu);
+
+            if (p.Insertar())
+            {
+                Asignacion.Text = "Insertaste a : " + p.RUT;
+            }
+            else
+                Asignacion.Text = "No";
         }
 
         private void cargarServicios()

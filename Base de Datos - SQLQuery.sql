@@ -8,7 +8,78 @@ Select * From Servicio
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo
 
 -- Insertar Admin - Clave: Administrador
-insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1);
+insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1, 'guillermollana@gmail.com');
+
+
+
+-- Seleccionar servicios con tipos de evento asociados a cada servicio
+SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
+FROM Servicio AS s 
+INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+
+-- Crear la DataBase
+CREATE DATABASE ObligatorioP3
+
+-- Tabla Usuario
+CREATE TABLE Usuario(
+usuario VARCHAR(50),
+password CHAR(128),
+rol int,
+email VARCHAR(50) Primary key,
+)
+
+-- Tabla Proveedor
+CREATE TABLE Proveedor(
+RUT varchar(12) PRIMARY KEY ,
+nombreFantasia VARCHAR(50),
+email VARCHAR(50) UNIQUE REFERENCES Usuario,
+telefono VARCHAR(50),
+fechaRegistro DATE,
+esInactivo BIT,
+tipo VARCHAR(10),
+)
+
+-- Tabla ProveedorVip
+CREATE TABLE ProveedorVip(
+rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
+porcentExtraAsign INT,
+)
+
+-- Tabla ProveedorComun
+CREATE TABLE ProveedorComun(
+rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
+)
+
+
+
+-- Tabla Parametros
+CREATE TABLE Parametros(
+arancel DECIMAL(7,2),
+porcentajeExtra INT,
+)
+
+-- Tabla Servicio
+CREATE TABLE Servicio(
+idServicio INT IDENTITY(1,1) PRIMARY KEY,
+nombre VARCHAR(50),
+descripcion VARCHAR(150),
+imagen VARCHAR(2083),
+)
+
+-- Tabla TipoEvento
+CREATE TABLE TipoEvento(
+	idTipoEvento INT IDENTITY(1,1) PRIMARY KEY,
+	nombre VARCHAR (50),
+	descripción VARCHAR(250)	
+)
+
+-- Tabla TipoEventoYServicio
+CREATE TABLE TipoEventoYServicio(
+	idServicio int REFERENCES Servicio (idServicio),
+	idTipoEvento int REFERENCES TipoEvento (idTipoEvento),
+	PRIMARY KEY (idServicio, idTipoEvento)
+)
 
 -- Insertar Servicios
 INSERT INTO Servicio
@@ -50,75 +121,3 @@ VALUES (2,2)
 --Wedding planner y boda
 INSERT INTO TipoEventoYServicio
 VALUES (3,1)
-
--- Seleccionar servicios con tipos de evento asociados a cada servicio
-SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
-FROM Servicio AS s 
-INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
-INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-
--- Crear la DataBase
-CREATE DATABASE ObligatorioP3
-
--- Tabla Proveedor
-CREATE TABLE Proveedor(
-RUT varchar(50) PRIMARY KEY ,
-nombreFantasia VARCHAR(50),
-email VARCHAR(50) UNIQUE REFERENCES Usuario,
-telefono VARCHAR(50),
-fechaRegistro DATE,
-esInactivo BIT,
-tipo VARCHAR(10),
-)
-
--- Tabla ProveedorVip
-CREATE TABLE ProveedorVip(
-rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
-porcentExtraAsign INT,
-)
-
--- Tabla ProveedorComun
-CREATE TABLE ProveedorComun(
-rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
-)
-
--- Tabla Usuario
-CREATE TABLE Usuario(
-usuario VARCHAR(50),
-password CHAR(128),
-rol int,
-email VARCHAR(50) Primary key,
-)
-
--- Tabla Parametros
-CREATE TABLE Parametros(
-arancel DECIMAL(7,2),
-porcentajeExtra INT,
-)
-
--- Tabla Servicio
-CREATE TABLE Servicio(
-idServicio INT IDENTITY(1,1) PRIMARY KEY,
-nombre VARCHAR(50),
-descripcion VARCHAR(150),
-imagen VARCHAR(2083),
-)
-
--- Tabla TipoEvento
-CREATE TABLE TipoEvento(
-	idTipoEvento INT IDENTITY(1,1) PRIMARY KEY,
-	nombre VARCHAR (50),
-	descripción VARCHAR(250)	
-)
-
--- Tabla TipoEventoYServicio
-CREATE TABLE TipoEventoYServicio(
-	idServicio int REFERENCES Servicio (idServicio),
-	idTipoEvento int REFERENCES TipoEvento (idTipoEvento),
-	PRIMARY KEY (idServicio, idTipoEvento)
-)
-
--- Dato de prueba 
-/*
-
-*/
