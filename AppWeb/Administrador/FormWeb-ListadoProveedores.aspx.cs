@@ -50,7 +50,7 @@ namespace AppWeb.Administrador
                     LBInactivo.Text = strEsInactivo;
                 }
 
-                if (!prov.esVip)
+                if (prov.Tipo == "Comun")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Green;
                     string strEsVip = "Es VIP : No";
@@ -63,7 +63,7 @@ namespace AppWeb.Administrador
                     LBVip.Text = strEsVip;
                 }
 
-                if (prov.esVip)
+                if (prov.Tipo == "VIP")
                 {
                     int porcentExt = Proveedor.FindPorcentajeVip(prov.RUT);
                     Extra.Text = "Porcentaje extra: " + porcentExt;

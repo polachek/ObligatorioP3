@@ -23,7 +23,7 @@ namespace Dominio
         public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
         public string Tipo { get; set; }
-        public List<Servicio> listaServicios { get; set; }
+        public List<Servicio> ListaServicios { get; set; }
 
         #endregion
 

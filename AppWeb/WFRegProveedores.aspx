@@ -56,7 +56,7 @@
 
   <div id="regprov-right">
       <h1 class="main-title">Seleccionar los Servicios ofrecidos</h1>
-      <asp:listbox id="ListBoxServicios" runat="server"></asp:listbox>
+      <asp:listbox id="ListBoxServicios" runat="server" SelectionMode="Multiple"></asp:listbox>
       <asp:panel id="PanelCantServicios" runat="server" Visible="false">
           <asp:Label ID="Label7" runat="server" Text="No hay Proveedores registrados en el sistema."></asp:Label>
       </asp:panel>

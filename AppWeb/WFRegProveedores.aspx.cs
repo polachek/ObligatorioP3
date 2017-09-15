@@ -17,31 +17,49 @@ namespace AppWeb
 
         protected void BtnAccion_Click(object sender, EventArgs e)
         {
+            Asignacion.Text = "";
+
             string rut = TxtRut.Text;
             string nomFant = TxtNomFantasia.Text;
             string email = TxtEmail.Text;
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
             string tipo = "";
+            List<Servicio> listaServicios = new List<Servicio>();
 
-            if (CheckBoxVip.Checked)
-            { tipo = "VIP";}else { tipo = "COMUN";}
+            List<Servicio> listaAllServicios = Servicio.FindAll();
 
-            DateTime fechaRegDateTime = DateTime.Now;
-            string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
-
-            if (tipo == "COMUN")
+            int[] posSelec = ListBoxServicios.GetSelectedIndices(); // No agarra esto :(
+            foreach (int pos in posSelec)
             {
-                Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+                listaServicios.Add(listaAllServicios[pos]);
             }
-            else
-            {
-                Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
-            }            
 
-            
+
+            if (listaServicios.Count == 0)
+            {
+                Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
+            }else
+            {
+                Asignacion.Text = "";
+                if (CheckBoxVip.Checked)
+                { tipo = "VIP"; }
+                else { tipo = "COMUN"; }
+
+                DateTime fechaRegDateTime = DateTime.Now;
+                string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
+
+                if (tipo == "COMUN")
+                {
+                    Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
+                    if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+                }
+                else
+                {
+                    Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
+                    if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+                }
+            }
 
         }
 
