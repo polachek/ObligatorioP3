@@ -74,12 +74,13 @@ namespace Dominio
                 cmd.Connection = cn;
                 cmd.Transaction = trn;
                 
-                Usuario miUsuario = new Usuario();
+                Usuario usuarioAInsertar = new Usuario();
 
-                miUsuario.User = MiUsuario.User;
-                miUsuario.Passw = MiUsuario.Passw;
-                miUsuario.Rol = 2;
-                miUsuario.Insertar(cmd);
+                usuarioAInsertar.User = MiUsuario.User;
+                usuarioAInsertar.Passw = MiUsuario.Passw;
+                usuarioAInsertar.Rol = MiUsuario.Rol;
+                usuarioAInsertar.Email = MiUsuario.Email;
+                usuarioAInsertar.Insertar(cmd);
 
            cmd.CommandText=
                    @"INSERT INTO Proveedor 

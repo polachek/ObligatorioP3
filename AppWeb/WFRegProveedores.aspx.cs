@@ -25,18 +25,9 @@ namespace AppWeb
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
             string tipo = "";
-            List<Servicio> listaServicios = new List<Servicio>();
-
-            List<Servicio> listaAllServicios = Servicio.FindAll();
-
-            int[] posSelec = ListBoxServicios.GetSelectedIndices(); // No agarra esto :(
-            foreach (int pos in posSelec)
-            {
-                listaServicios.Add(listaAllServicios[pos]);
-            }
 
 
-            if (listaServicios.Count == 0)
+            if (tipo == "Hola")
             {
                 Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
             }else
@@ -86,7 +77,7 @@ namespace AppWeb
             // Verificaciones de Rut y Email OK
             Asignacion.Text = "";
             string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-            Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada };
+            Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
             p.AgregarUsuario(usu);
 
@@ -108,9 +99,32 @@ namespace AppWeb
             else
             {
                 PanelCantServicios.Visible = false;
-                ListBoxServicios.DataSource = listaServicios;
-                ListBoxServicios.DataBind();
+                GridViewListadoServicios.DataSource = listaServicios;
+                GridViewListadoServicios.DataBind();
             }
+        }
+
+        
+        protected void GridServicios_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            List<Servicio> listaServiciosProveedor = new List<Servicio>();
+
+
+            List<Servicio> listaServicios = Servicio.FindAll();
+
+
+            int fila = int.Parse(e.CommandArgument + "");
+
+            if (e.CommandName == "AgregarServicio")
+            {
+                Servicio serv = listaServicios[fila];
+                listaServiciosProveedor.Add(serv);
+
+                ListBoxServicios.DataSource = listaServiciosProveedor;
+                ListBoxServicios.DataBind();
+
+            }
+
         }
 
     }

@@ -220,6 +220,15 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxVip;
         
         /// <summary>
+        /// Control ListBoxServicios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
+        
+        /// <summary>
         /// Control BtnAccion.
         /// </summary>
         /// <remarks>
@@ -238,13 +247,13 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.Label Asignacion;
         
         /// <summary>
-        /// Control ListBoxServicios.
+        /// Control GridViewListadoServicios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
+        protected global::System.Web.UI.WebControls.GridView GridViewListadoServicios;
         
         /// <summary>
         /// Control PanelCantServicios.

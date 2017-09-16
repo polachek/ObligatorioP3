@@ -3,8 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
  <div class="page-regprov">
-  <h1 class="main-title">Registro de Proveedores</h1>
-  <div ID="wpAltaProveedor">
+  
+  <div ID="wpaltaproveedor">
+      <h1 class="main-title">Registro de Proveedores</h1>
 
     <asp:Panel ID="Panel2" runat="server">
       <asp:Label ID="Label4" runat="server" Text="Rut: "></asp:Label>
@@ -41,10 +42,14 @@
       <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
       <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ForeColor="Tomato" ControlToValidate="TxtPass" ErrorMessage="Su contraseña debe tener un largo mínimo de 6, sin espacios y contener por lo menos una mayúscula" ValidationExpression="^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$"></asp:RegularExpressionValidator>
     </asp:Panel>
-
+    <br />
     <asp:Panel ID="Panel6" runat="server">
       <asp:CheckBox ID="CheckBoxVip" runat="server" Text="Proveedor Vip" />
     </asp:Panel>
+    <br />
+
+    <h2>Servicios Ofrecidos</h2>
+    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox>
 
     <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
 
@@ -56,7 +61,16 @@
 
   <div id="regprov-right">
       <h1 class="main-title">Seleccionar los Servicios ofrecidos</h1>
-      <asp:listbox id="ListBoxServicios" runat="server" SelectionMode="Multiple"></asp:listbox>
+       <asp:GridView ID="GridViewListadoServicios" CssClass="grid_View_Style_1" PagerStyle-CssClass="grid_1_pager"
+ HeaderStyle-CssClass="grid_1_header" RowStyle-CssClass="grid_1_rows" runat="server" AutoGenerateColumns="False" OnRowCommand="GridServicios_RowCommand">
+         <Columns>
+           <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+           <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+           <asp:BoundField DataField="Foto" HeaderText="Foto" />
+           <asp:ButtonField ButtonType="Link" CommandName="AgregarServicio" Text="Agregar Servicio" />
+         </Columns>
+         <SelectedRowStyle CssClass="grid_1_selectedrow" />
+        </asp:GridView>
       <asp:panel id="PanelCantServicios" runat="server" Visible="false">
           <asp:Label ID="Label7" runat="server" Text="No hay Proveedores registrados en el sistema."></asp:Label>
       </asp:panel>

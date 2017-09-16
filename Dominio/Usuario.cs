@@ -13,6 +13,7 @@ namespace Dominio
         public string User { get; set; }
         public string Passw { get; set; }
         public int Rol { get; set; }
+        public string Email { get; set; }
 
         #region Encriptar Pass
         public static string EncriptarPassSHA512(string inputString)
@@ -40,11 +41,12 @@ namespace Dominio
              try
              {
                  cmd.CommandText = @"INSERT INTO Usuario
-                             VALUES(@usuario,@password,@rol)";
+                             VALUES(@usuario,@password,@rol, @email)";
                  cmd.Parameters.AddWithValue("@usuario", this.User);
                  cmd.Parameters.AddWithValue("@password", this.Passw);
                  cmd.Parameters.AddWithValue("@rol", this.Rol);
-                 cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@email", this.Email);
+                cmd.ExecuteNonQuery();
 
 
                  return true;

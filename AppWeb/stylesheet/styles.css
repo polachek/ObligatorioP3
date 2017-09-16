@@ -199,3 +199,24 @@ body{
 	font-weight: 400;
 }
 
+/** REGISTRO PROVEEDORES  **/
+
+.page-regprov #wpaltaproveedor{
+	width: 45%;
+    padding-left: 1%;
+    float: left;
+}
+
+.page-regprov #regprov-right{
+    width: 52%;
+    float: left;
+}
+
+.page-regprov #regprov-right h1{
+	text-align: center;
+}
+
+.page-regprov #regprov-right .grid_View_Style_1{
+    width: 100%;
+}
+
