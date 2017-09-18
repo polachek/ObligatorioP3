@@ -81,6 +81,12 @@ CREATE TABLE TipoEventoYServicio(
 	PRIMARY KEY (idServicio, idTipoEvento)
 )
 
+CREATE TABLE ProveedorServicios(
+	idServicio INT REFERENCES Servicio (idServicio),
+	idProveedor VARCHAR(12) REFERENCES Proveedor,
+	PRIMARY KEY (idServicio, idProveedor)
+)
+
 -- Insertar Servicios
 INSERT INTO Servicio
 VALUES ('Fotografía', 'Fotografía integral para fiestas y eventos', '')
