@@ -220,15 +220,6 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxVip;
         
         /// <summary>
-        /// Control ListBoxServicios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
-        
-        /// <summary>
         /// Control BtnAccion.
         /// </summary>
         /// <remarks>
@@ -256,6 +247,24 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.GridView GridViewListadoServicios;
         
         /// <summary>
+        /// Control BtnSeleccionarServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnSeleccionarServicio;
+        
+        /// <summary>
+        /// Control GridViewSeleccionados.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridViewSeleccionados;
+        
+        /// <summary>
         /// Control PanelCantServicios.
         /// </summary>
         /// <remarks>
@@ -272,5 +281,14 @@ namespace AppWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
+        
+        /// <summary>
+        /// Control Lblprueba.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Lblprueba;
     }
 }
