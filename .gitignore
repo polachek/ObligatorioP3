@@ -122,8 +122,8 @@ WcfAgregarProv/obj/*
 WcfListaProv/bin/*
 WcfListaProv/obj/*
 WcfServicioCatalogoServicios/bin/WcfServicioCatalogoServicios.pdb
-
-Dominio/Conexion.cs
-Dominio/Conexion.cs
 Dominio/Conexion.cs
 WCFCatalogoServicios/bin/Dominio.dll
+
+WCFCatalogoServicios/bin/Dominio.dll
+WCFCatalogoServicios/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

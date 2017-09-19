@@ -191,13 +191,28 @@ namespace Dominio
                 {
                     if (dr.Read())
                     {
-                        /*Proveedor p = new Proveedor
+                        string miTipo = dr["tipo"].ToString();
+
+                        if (miTipo == "COMUN")
                         {
-                            RUT = rut,
-                            NombreFantasia = dr["NombreFantasia"].ToString(),
-                            Email = dr["Email"].ToString(),
-                        };
-                        return p;*/
+                            Proveedor p = new ProveedorComun
+                            {
+                                RUT = rut,
+                                NombreFantasia = dr["NombreFantasia"].ToString(),
+                                Email = dr["Email"].ToString(),
+                            };
+                            return p;
+                        }
+                        else if (miTipo == "VIP")
+                        {
+                            Proveedor p = new ProveedorVIP
+                            {
+                                RUT = rut,
+                                NombreFantasia = dr["NombreFantasia"].ToString(),
+                                Email = dr["Email"].ToString(),
+                            };
+                            return p;
+                        }
                     }
                 }
                 return null;
