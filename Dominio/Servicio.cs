@@ -12,9 +12,10 @@ namespace Dominio
 {
     public class Servicio : IActiveRecord, IEquatable<Servicio>
     {
+        public int IdServicio { get; set; }
         public string Nombre { get; set; }
-        public string Foto { get; set; }
         public string Descripcion { get; set; }
+        public string Foto { get; set; }
         //public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
@@ -35,17 +36,17 @@ namespace Dominio
             throw new NotImplementedException();
         }
 
-        public bool InsertarServicioProveedor(SqlCommand cmd)
+        public bool InsertarServicioProveedor(SqlCommand cmd, string rut, Servicio miserv)
         {
+
             try
-            {
-                /*cmd.CommandText = @"INSERT INTO Usuario
-                             VALUES(@usuario,@password,@rol, @email)";
-                cmd.Parameters.AddWithValue("@usuario", this.User);
-                cmd.Parameters.AddWithValue("@password", this.Passw);
-                cmd.Parameters.AddWithValue("@rol", this.Rol);
-                cmd.Parameters.AddWithValue("@email", this.Email);
-                cmd.ExecuteNonQuery();*/
+            {                
+                cmd.CommandText = @"INSERT INTO provServicios
+                             VALUES(@RUT,@idServicio)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@RUT", rut);
+                cmd.Parameters.AddWithValue("@idServicio", miserv.IdServicio);
+                cmd.ExecuteNonQuery();
 
 
                 return true;
@@ -226,15 +227,19 @@ namespace Dominio
         protected static Servicio CargarDatosDesdeReader(IDataRecord fila)
         {
             Servicio s = null;
+            int idMiServicio = fila.IsDBNull(fila.GetOrdinal("idServicio")) ? 0 : fila.GetInt32(fila.GetOrdinal("idServicio"));
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("nombre")) ? "" : fila.GetString(fila.GetOrdinal("nombre"));
             string desc = fila.IsDBNull(fila.GetOrdinal("descripcion")) ? "" : fila.GetString(fila.GetOrdinal("descripcion"));
+            string miFoto = fila.IsDBNull(fila.GetOrdinal("imagen")) ? "" : fila.GetString(fila.GetOrdinal("imagen"));
 
             if (fila != null)
             {
                 s = new Servicio()
                 {
+                    IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
+                    Foto = miFoto,
                 };
             }
             return s;

@@ -82,12 +82,8 @@ namespace Dominio
                 usuarioAInsertar.Email = MiUsuario.Email;
                 usuarioAInsertar.Insertar(cmd);
 
-                foreach (Servicio miServ in ListaServicios)
-                {
-                    miServ.InsertarServicioProveedor(cmd);
-                }
-
-           cmd.CommandText=
+                
+               cmd.CommandText=
                    @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @fecharegistro, @esInactivo, @tipo);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)";
@@ -101,18 +97,13 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@tipo", this.Tipo);
 
                 cmd.Transaction = trn;
-         cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                
+                foreach (Servicio miServ in ListaServicios)
+                {
+                    miServ.InsertarServicioProveedor(cmd, this.RUT, miServ);
+                }
 
-
-                /*cmd.CommandText = @"INSERT INTO Usuario
-                            VALUES(@usuario,@password,@rol)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
-                cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
-                cmd.Parameters.AddWithValue("@rol", 2);
-                cmd.ExecuteNonQuery();*/
 
                 if (Tipo == "VIP")
                 {

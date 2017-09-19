@@ -3,6 +3,8 @@ Select * From Usuario
 Select * From Proveedor
 Select * From ProveedorVip
 Select * From Servicio
+Select * From provServicios
+
 
 -- Agregar columna a tabla 
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo
@@ -65,6 +67,11 @@ idServicio INT IDENTITY(1,1) PRIMARY KEY,
 nombre VARCHAR(50),
 descripcion VARCHAR(150),
 imagen VARCHAR(2083),
+)
+
+CREATE TABLE provServicios(
+RUT varchar(12) REFERENCES Proveedor,
+idServicio INT REFERENCES Servicio,
 )
 
 -- Tabla TipoEvento
