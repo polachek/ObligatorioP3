@@ -261,16 +261,35 @@ namespace Dominio
             Proveedor p = null;
             if (fila != null)
             {
-                /*p = new Proveedor
+                string miTipo;
+                miTipo = fila.IsDBNull(fila.GetOrdinal("tipo")) ? "" : fila.GetString(fila.GetOrdinal("tipo"));
+
+                if (miTipo == "COMUN")
                 {
-                    RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
-                    NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
-                    Email = fila.IsDBNull(fila.GetOrdinal("Email")) ? "" : fila.GetString(fila.GetOrdinal("Email")),
-                    Telefono = fila.IsDBNull(fila.GetOrdinal("Telefono")) ? "" : fila.GetString(fila.GetOrdinal("Telefono")),
-                    FechaRegistro = fila.GetDateTime(fila.GetOrdinal("fechaRegistro")).ToString("yyyy/MM/dd"),
-                    esInactivo = fila.GetBoolean(fila.GetOrdinal("esInactivo")),
-                    esVip = fila.GetBoolean(fila.GetOrdinal("esVip")),
-                };*/
+                    p = new ProveedorComun
+                    {
+                        RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
+                        NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
+                        Email = fila.IsDBNull(fila.GetOrdinal("Email")) ? "" : fila.GetString(fila.GetOrdinal("Email")),
+                        Telefono = fila.IsDBNull(fila.GetOrdinal("Telefono")) ? "" : fila.GetString(fila.GetOrdinal("Telefono")),
+                        FechaRegistro = fila.GetDateTime(fila.GetOrdinal("fechaRegistro")).ToString("yyyy/MM/dd"),
+                        esInactivo = fila.GetBoolean(fila.GetOrdinal("esInactivo")),
+                        Tipo = miTipo,
+                    };
+                }else if (miTipo == "VIP")
+                {
+                    p = new ProveedorVIP
+                    {
+                        RUT = fila.IsDBNull(fila.GetOrdinal("Rut")) ? "" : fila.GetString(fila.GetOrdinal("Rut")),
+                        NombreFantasia = fila.IsDBNull(fila.GetOrdinal("NombreFantasia")) ? "" : fila.GetString(fila.GetOrdinal("NombreFantasia")),
+                        Email = fila.IsDBNull(fila.GetOrdinal("Email")) ? "" : fila.GetString(fila.GetOrdinal("Email")),
+                        Telefono = fila.IsDBNull(fila.GetOrdinal("Telefono")) ? "" : fila.GetString(fila.GetOrdinal("Telefono")),
+                        FechaRegistro = fila.GetDateTime(fila.GetOrdinal("fechaRegistro")).ToString("yyyy/MM/dd"),
+                        esInactivo = fila.GetBoolean(fila.GetOrdinal("esInactivo")),
+                        Tipo = miTipo,
+                    };
+                }
+
             }
             return p;
         }
@@ -278,7 +297,7 @@ namespace Dominio
         public static int FindPorcentajeVip(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From ProveedorVip WHERE idProveedor = @rut");
+            SqlCommand cmd = new SqlCommand(@"SELECT * From ProveedorVip WHERE rutProveedor = @rut");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@rut", rut);
             try
@@ -291,7 +310,7 @@ namespace Dominio
                     {
                         int porcentajeExtra;
                         {
-                            porcentajeExtra = Convert.ToInt32(dr["porcentajeExtra"]);
+                            porcentajeExtra = Convert.ToInt32(dr["porcentExtraAsign"]);
                         };
                         return porcentajeExtra;
                     }

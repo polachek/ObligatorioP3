@@ -38,6 +38,9 @@ namespace AppWeb.Administrador
                 LBNomFant.Text = "Nombre Fantasia :" + prov.NombreFantasia;
                 LBEmail.Text = "Email :" + prov.Email;
                 LBTelefono.Text = "Telefono :" + prov.Telefono;
+                prov.ListaServicios = Servicio.FindServiciosProveedor(prov.RUT);
+                GridViewServiciosProv.DataSource = prov.ListaServicios;
+                GridViewServiciosProv.DataBind();
 
                 if (!prov.esInactivo) {
                     LBInactivo.ForeColor = System.Drawing.Color.Green;

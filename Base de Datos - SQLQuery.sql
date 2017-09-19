@@ -6,12 +6,25 @@ Select * From Servicio
 Select * From provServicios
 Select * From TipoEvento
 
+SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
+SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
 
 -- Agregar columna a tabla 
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo
+--- Editar campo Tabla
+/*UPDATE Servicio
+SET imagen = '~/images/servicios/wedding-planner.png'
+WHERE idServicio = 3;*/
+
 
 -- Insertar Admin - Clave: Administrador
 insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1, 'guillermollana@gmail.com');
+
+
+SELECT RUT, t.nombre, t.descripcion, t.imagen
+FROM provServicios
+INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
+WHERE RUT = '111111111111'
 
 
 
@@ -59,6 +72,7 @@ CREATE TABLE ProveedorVip(
 rutProveedor varchar(12) PRIMARY KEY REFERENCES Proveedor,
 porcentExtraAsign INT,
 )
+
 
 -- Tabla ProveedorComun
 CREATE TABLE ProveedorComun(
@@ -108,17 +122,17 @@ CREATE TABLE ProveedorServicios(
 
 -- Insertar Servicios
 INSERT INTO Servicio
-VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos', '')
+VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos', '~/images/servicios/fotografia.png')
 
 INSERT INTO Servicio
-VALUES ('Catering', 'Catering para eventos empresariales', '')
+VALUES ('Catering', 'Catering para eventos empresariales', '~/images/servicios/catering.png')
 
 INSERT INTO Servicio
-VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas', '')
+VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas', '~/images/servicios/wedding-planner.png')
 
 --Insertar Tipos de eventos
 INSERT INTO TipoEvento
-VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas')
+VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas', '')
 
 INSERT INTO TipoEvento
 VALUES ('Eventos empresariales', 'Servicios para que su empresa tenga los mejores eventos')

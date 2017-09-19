@@ -66,7 +66,7 @@
          <Columns>
            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-           <asp:BoundField DataField="Foto" HeaderText="Foto" />
+           <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" />
            <asp:ButtonField ButtonType="Link" CommandName="AgregarServicio" Text="Agregar Servicio" />
          </Columns>
          <SelectedRowStyle CssClass="grid_1_selectedrow" />

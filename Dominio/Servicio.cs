@@ -269,6 +269,49 @@ namespace Dominio
             }
             return s;
         }
+
+
+        // FIND SERVICIOS PROVEEDOR
+        public static List<Servicio> FindServiciosProveedor(string rut)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"SELECT t.idServicio, t.nombre, t.descripcion, t.imagen
+FROM provServicios
+INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
+WHERE RUT = @rut";
+            cmd.Parameters.AddWithValue("@rut", rut);
+            cmd.Connection = cn;
+
+
+            List<Servicio> listaServicios = null;
+            try
+            {
+                Conexion.AbrirConexion(cn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    listaServicios = new List<Servicio>();
+                    while (dr.Read())
+                    {
+                        Servicio serv = CargarDatosDesdeReader(dr);
+                        listaServicios.Add(serv);
+                    }
+                }
+                return listaServicios;
+            }
+            catch (SqlException ex)
+            {
+                //
+                System.Diagnostics.Debug.Assert(false, ex.Message);
+                return null;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+            }
+        }
         #endregion
 
     }

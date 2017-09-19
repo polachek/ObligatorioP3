@@ -33,6 +33,15 @@
          <asp:Label ID="LBInactivo" runat="server" Text="Actividad: "></asp:Label>
          <asp:Label ID="LBVip" runat="server" Text="Vip: "></asp:Label>
          <asp:Label ID="Extra" runat="server" Text="Vip: "></asp:Label>
+         <br />
+         <h2>Listado de Servicios que ofrece</h2>
+         <asp:GridView ID="GridViewServiciosProv"  runat="server" AutoGenerateColumns="False">
+          <Columns>
+           <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+           <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+           <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" />
+          </Columns>
+         </asp:GridView>
      </div>
     </asp:Panel>
 
