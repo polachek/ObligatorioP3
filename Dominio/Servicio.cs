@@ -10,12 +10,12 @@ using System.Diagnostics;
 
 namespace Dominio
 {
-    public class Servicio : IActiveRecord
+    public class Servicio : IActiveRecord, IEquatable<Servicio>
     {
         public string Nombre { get; set; }
         public string Foto { get; set; }
         public string Descripcion { get; set; }
-        public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
+        //public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
         {
@@ -23,10 +23,38 @@ namespace Dominio
             return ret;
         }
 
+        public bool Equals(Servicio other)
+        {
+            if (other == null) return false;
+            return (this.Nombre.Equals(other.Nombre));
+        }
+
         #region Acceso a datos
         public bool Insertar()
         {
             throw new NotImplementedException();
+        }
+
+        public bool InsertarServicioProveedor(SqlCommand cmd)
+        {
+            try
+            {
+                /*cmd.CommandText = @"INSERT INTO Usuario
+                             VALUES(@usuario,@password,@rol, @email)";
+                cmd.Parameters.AddWithValue("@usuario", this.User);
+                cmd.Parameters.AddWithValue("@password", this.Passw);
+                cmd.Parameters.AddWithValue("@rol", this.Rol);
+                cmd.Parameters.AddWithValue("@email", this.Email);
+                cmd.ExecuteNonQuery();*/
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return false;
+            }
         }
 
         public bool Eliminar()
@@ -64,7 +92,7 @@ namespace Dominio
                             Nombre = nombreServicio,
                             Descripcion = desc,
                             Foto = foto,
-                            ListaTipoEventos = new List<TipoEvento>()
+                            //ListaTipoEventos = new List<TipoEvento>()
                         };                       
                         return s;
                     }
@@ -226,12 +254,11 @@ namespace Dominio
                     Nombre = nombreServicio,
                     Descripcion = desc,
                     Foto = foto,
-                    ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
+                    //ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
             }
             return s;
         }
-
         #endregion
 
     }

@@ -5,70 +5,55 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Diagnostics;
 
 namespace AppWeb
 {
     public partial class WFRegProveedores : System.Web.UI.Page
     {
-        //Inicializa la lista de servicios seleccionados por el proveedor.
-        List<Servicio> listaServiciosSeleccionados = new List<Servicio>();
+        private static List<Servicio> ListaMiServicios;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) // La primera vez
+            cargarServicios();
+            if (ListaMiServicios == null)
             {
-                cargarServicios();
-                BindGridView();
+                ListaMiServicios = new List<Servicio>();
             }
-            else // Segunda vez y demás
-            {
-
-            }
-
         }
 
         protected void BtnAccion_Click(object sender, EventArgs e)
         {
             Asignacion.Text = "";
 
-            //Obtiene la fecha actual
-            DateTime fechaRegDateTime = DateTime.Now;
-
-            //Declara las variables y las inicializo con los valores del formulario
             string rut = TxtRut.Text;
             string nomFant = TxtNomFantasia.Text;
             string email = TxtEmail.Text;
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
             string tipo = "";
-            bool vip = CheckBoxVip.Checked;
-            string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
-            List<Servicio> listaServicios = new List<Servicio>();
 
-            if (tipo == "Hola")
+
+            if (ListaMiServicios.Count() == 0)
             {
                 Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
-            }
-            else
+            }else
             {
-                //Controla el tipo de proveedor
-                if (vip){ tipo = "VIP"; } else { tipo = "COMUN";}
+                Asignacion.Text = "";
+                if (CheckBoxVip.Checked)
+                { tipo = "VIP"; }
+                else { tipo = "COMUN"; }
 
-                //Construye la instancia con el tipo de proveedor que corresponda
+                DateTime fechaRegDateTime = DateTime.Now;
+                string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
+
                 if (tipo == "COMUN")
                 {
-                    Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                    p.ListaServicios = listaServiciosSeleccionados;
+                    Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
                     if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
                 }
                 else
                 {
-                    Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                    p.ListaServicios = listaServiciosSeleccionados;
+                    Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
                     if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
                 }
             }
@@ -77,16 +62,20 @@ namespace AppWeb
 
         private bool validarRutyEmail(Proveedor prov)
         {
-            bool ret = false;
-            bool existeRut = Proveedor.ExisteRut(prov);
-            bool existeEmail = Proveedor.ExisteEmail(prov);
-            if (existeRut) Asignacion.Text = "Ya existe un Proveedor con ese Rut";
-            if (existeEmail) Asignacion.Text = "Ya existe un Proveedor con ese Email";
-            if (!existeRut && !existeEmail)
+            // Validacion si ya existe un Proveedor con ese Rut o email ingresado
+            if (Proveedor.FindByRUT(prov.RUT) != null)
             {
-                ret = true;
+                Asignacion.Text = "Ya existe un Proveedor con ese Rut";
+                return false;
             }
-            return ret;
+            else if (Proveedor.FindByEmail(prov.Email) != null)
+            {
+                Asignacion.Text = "Ya existe un Proveedor con ese Email";
+                return false;                
+            }else
+            {
+                return true;
+            }
         }
 
         private void insertarProveedor(Proveedor p, string pass)
@@ -98,15 +87,17 @@ namespace AppWeb
 
             p.AgregarUsuario(usu);
 
+            p.ListaServicios = ListaMiServicios;
+
             if (p.Insertar())
             {
-                Asignacion.Text = "El proveedor con RUT: " + p.RUT + " se agregó exitosamente.";
+                Asignacion.Text = "Insertaste a : " + p.RUT;
             }
             else
                 Asignacion.Text = "No";
         }
 
-        private List<Servicio> cargarServicios()
+        private void cargarServicios()
         {
             List<Servicio> listaServicios = Servicio.FindAll();
             if (listaServicios == null || listaServicios.Count == 0)
@@ -116,79 +107,44 @@ namespace AppWeb
             else
             {
                 PanelCantServicios.Visible = false;
-            }
-
-            return listaServicios;
-        }
-
-        //Carga la GridView de servicios con todos los servicios cargados en la BD
-        private void BindGridView()
-        {
-            SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio", cn);
-            cmd.Connection = cn;
-            try
-            {
-                cn.Open();
-                GridViewListadoServicios.DataSource = cmd.ExecuteReader();
+                GridViewListadoServicios.DataSource = listaServicios;
                 GridViewListadoServicios.DataBind();
             }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                throw new Exception("No existe el Proveedor");
-            }
-            finally
-            {
-                cn.Close();
-            }
         }
 
-        //Obtiene los servicios seleccionados en la GridView
-        protected void ObtenerServiciosSeleccionados(object sender, EventArgs e)
+        protected void GridServicios_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            //Cargo los servicios en una lista
-            List<Servicio> listaServicios = cargarServicios();
 
-            //Inicializo una List<String> para agregar valores que vienen de la columna 'Nombre' de la GridView 
-            List<String> listaNombres = new List<String>();
+            List<Servicio> listaServicios = Servicio.FindAll();
 
-            //Creo una DataTable
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[3] {
-                new DataColumn("Nombre"),
-                new DataColumn("Descripción"),
-                new DataColumn("Imagen")
-            });
+            int fila = int.Parse(e.CommandArgument + "");
 
-            //Recorro las filas y si el checkbox está chequeado, agrego el dato de la columna NOMBRE a la lista dt.Rows
-            //Con el método HttpUtility.HtmlDecode obtengo el valor original de la columna nombre (evito conflictos con caracteres especiales)
-            foreach (GridViewRow row in GridViewListadoServicios.Rows)
+            if (e.CommandName == "AgregarServicio")
             {
-                if (row.RowType == DataControlRowType.DataRow)
+                Servicio serv = new Servicio();
+                serv = listaServicios[fila];
+
+                if (serv != null)
                 {
-                    CheckBox chkServicio = (row.Cells[0].FindControl("chkServicio") as CheckBox);
-                    if (chkServicio.Checked)
+                    if (ListaMiServicios.Contains(serv))
                     {
-                        string valor = row.Cells[1].Text;
-                        string nombre = HttpUtility.HtmlDecode(valor);
-                        dt.Rows.Add(nombre);
-                        listaNombres.Add(nombre);
+                        Asignacion.Text = "Servicio ya agregado";
+                    }else
+                    {
+                        Asignacion.Text = "";
+                        ListaMiServicios.Add(serv);
                     }
+                    
                 }
+
+                if (ListaMiServicios.Count() != 0)
+                {
+                    ListBoxServicios.DataSource = ListaMiServicios;
+                    ListBoxServicios.DataBind();
+                }               
+
             }
 
-            //Recorro dt.Rows y, si su valor coinicide con el nombre del servicio, agrego el servicio a la ListaServiciosSeleccionados
-            foreach (string nombre in listaNombres) {
-                foreach (Servicio s in listaServicios) {
-                    if (nombre == s.Nombre) {
-                        listaServiciosSeleccionados.Add(s);
-                    }
-                }
-            }
-
-            //Cargo la GridView de Servicios seleccionados con los servicios seleccionados en la GridViewListadoServicios
-            GridViewSeleccionados.DataSource = dt;
-            GridViewSeleccionados.DataBind();
         }
 
     }

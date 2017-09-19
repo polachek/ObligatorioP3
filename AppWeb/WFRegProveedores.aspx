@@ -48,6 +48,9 @@
     </asp:Panel>
     <br />
 
+    <h2>Servicios Ofrecidos</h2>
+    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox>
+
     <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
 
       
@@ -57,39 +60,20 @@
   </div>
 
   <div id="regprov-right">
-      <h1 class="main-title">Seleccionar servicios ofrecidos</h1>
-        <asp:GridView ID="GridViewListadoServicios" runat="server" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-            AutoGenerateColumns="false">
-            <Columns>
-                <asp:TemplateField>
-                    <ItemTemplate>
-                        <asp:CheckBox ID="chkServicio" runat="server" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="Nombre" HeaderText="Nombre" ItemStyle-Width="150" />
-                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" ItemStyle-Width="150" />
-                <asp:BoundField DataField="Imagen" HeaderText="Imagen" ItemStyle-Width="150" />
-            </Columns>
+      <h1 class="main-title">Seleccionar los Servicios ofrecidos</h1>
+       <asp:GridView ID="GridViewListadoServicios" CssClass="grid_View_Style_1" PagerStyle-CssClass="grid_1_pager"
+ HeaderStyle-CssClass="grid_1_header" RowStyle-CssClass="grid_1_rows" runat="server" AutoGenerateColumns="False" OnRowCommand="GridServicios_RowCommand">
+         <Columns>
+           <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+           <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
+           <asp:BoundField DataField="Foto" HeaderText="Foto" />
+           <asp:ButtonField ButtonType="Link" CommandName="AgregarServicio" Text="Agregar Servicio" />
+         </Columns>
+         <SelectedRowStyle CssClass="grid_1_selectedrow" />
         </asp:GridView>
-        <br />
-        <asp:Button ID="BtnSeleccionarServicio" runat="server" Text="Seleccionar servicios" OnClick="ObtenerServiciosSeleccionados" />
-        <hr />
-        <u>Servicios ofrecidos</u>
-        <br />
-        <asp:GridView ID="GridViewSeleccionados" runat="server" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
-            AutoGenerateColumns="false">
-            <Columns>
-                <asp:BoundField DataField="Nombre" HeaderText="Name" ItemStyle-Width="150" />
-                <asp:BoundField DataField="Imagen" HeaderText="Imagen" ItemStyle-Width="150" />
-            </Columns>
-        </asp:GridView>
-       
       <asp:panel id="PanelCantServicios" runat="server" Visible="false">
           <asp:Label ID="Label7" runat="server" Text="No hay Proveedores registrados en el sistema."></asp:Label>
       </asp:panel>
-      <asp:Label ID="Lblprueba" runat="server">
-
-      </asp:Label>
   </div>
  </div>
 </asp:Content>

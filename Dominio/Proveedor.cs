@@ -40,30 +40,13 @@ namespace Dominio
             return this.RUT.Length == 12 
                 && this.NombreFantasia.Length > 3
                 && this.Email.Length > 3
-                && this.Telefono.Length > 3;
-        }
-
-        public static bool ExisteRut(Proveedor prov)
-        {
-            if (Proveedor.FindByRUT(prov.RUT) != null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool ExisteEmail(Proveedor prov)
-        {
-            if (Proveedor.FindByEmail(prov.Email) != null)
-            {
-                return true;
-            }
-            return false;
+                && this.Telefono.Length > 3
+                 ;
         }
         #endregion
 
         #region Manejo de Usuario
-
+        
         public bool AgregarUsuario(Usuario usu)
         {
             this.MiUsuario = usu;
@@ -74,34 +57,38 @@ namespace Dominio
         #region Acceso a datos
         public bool Insertar()
         {
-            //Validación de datos de entrada
-            if (!this.Validar()) return false;
-
-            //Inicializo variables SQL
             SqlConnection cn = null;
+            if (!this.Validar()) return false;
             SqlTransaction trn = null;
-            SqlCommand cmd = new SqlCommand();
+
             cn = Conexion.CrearConexion();
+
 
             try
             {
+                SqlCommand cmd = new SqlCommand();
+
                 cn.Open();
                 trn = cn.BeginTransaction();
 
                 cmd.Connection = cn;
                 cmd.Transaction = trn;
                 
-                //Insertar usuario para este proveedor
                 Usuario usuarioAInsertar = new Usuario();
+
                 usuarioAInsertar.User = MiUsuario.User;
                 usuarioAInsertar.Passw = MiUsuario.Passw;
                 usuarioAInsertar.Rol = MiUsuario.Rol;
                 usuarioAInsertar.Email = MiUsuario.Email;
                 usuarioAInsertar.Insertar(cmd);
 
-                //Insertar este proveedor
-                cmd.CommandText=
-                    @"INSERT INTO Proveedor 
+                foreach (Servicio miServ in ListaServicios)
+                {
+                    miServ.InsertarServicioProveedor(cmd);
+                }
+
+           cmd.CommandText=
+                   @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @fecharegistro, @esInactivo, @tipo);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)";
                 cmd.Parameters.Clear();
@@ -112,44 +99,30 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@fechaRegistro", this.FechaRegistro);
                 cmd.Parameters.AddWithValue("@esInactivo", this.esInactivo);
                 cmd.Parameters.AddWithValue("@tipo", this.Tipo);
-                cmd.ExecuteNonQuery();              
+
+                cmd.Transaction = trn;
+         cmd.ExecuteNonQuery();
+
+                
+
+
+                /*cmd.CommandText = @"INSERT INTO Usuario
+                            VALUES(@usuario,@password,@rol)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@usuario", MiUsuario.User);
+                cmd.Parameters.AddWithValue("@password", MiUsuario.Passw);
+                cmd.Parameters.AddWithValue("@rol", 2);
+                cmd.ExecuteNonQuery();*/
 
                 if (Tipo == "VIP")
                 {
-                    cmd.CommandText = 
-                            @"INSERT INTO ProveedorVip
+                    cmd.CommandText = @"INSERT INTO ProveedorVip
                             VALUES(@idProveedor,@porcentajeExtra)";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
                     cmd.Parameters.AddWithValue("@porcentajeExtra", 5);
                     cmd.ExecuteNonQuery();
                 }
-
-                /*
-                //Inicializo lista para agregarle los servicios disponibles en la BD
-                cmd.CommandText = @"SELECT * FROM Servicio";
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    foreach (Servicio s in this.ListaServicios)
-                    {
-                        while (dr.Read())
-                        {
-                            string idServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? "" : dr.GetString(dr.GetOrdinal("idServicio"));
-                            string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
-                            if (nombreServicio==s.Nombre) {
-                                cmd.CommandText =
-                                    @"INSERT INTO ProveedorServicios
-                                    VALUES(@idServicio, @idProveedor,)";
-                                cmd.Parameters.Clear();
-                                cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
-                                cmd.Parameters.AddWithValue("@idServicio", idServicio);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                    }
-                }
-                */
 
                 trn.Commit();
                 return true;
