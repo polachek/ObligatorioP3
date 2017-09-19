@@ -12,15 +12,17 @@ namespace Dominio
 {
     public class TipoEvento
     {
-        private string tipo;
+        /*private string tipo;
         private string desc;
+        */
 
-        public TipoEvento(string tipo, string desc)
+        public TipoEvento(string Nombre, string Descripcion)
         {
-            this.tipo = tipo;
-            this.desc = desc;
+            this.Nombre = Nombre;
+            this.Descripcion = Descripcion;
         }
 
+        public int idTipoEvento { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 

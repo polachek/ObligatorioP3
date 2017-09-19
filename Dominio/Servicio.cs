@@ -84,12 +84,14 @@ namespace Dominio
                 if (dr.HasRows)
                     if (dr.Read())
                     {
+                        int miIdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
                         string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
                         string desc = dr.IsDBNull(dr.GetOrdinal("Descripcion")) ? "" : dr.GetString(dr.GetOrdinal("Descripcion"));
                         string foto = dr.IsDBNull(dr.GetOrdinal("imagen")) ? "" : dr.GetString(dr.GetOrdinal("imagen"));
 
                         Servicio s = new Servicio
                         {
+                            IdServicio = miIdServicio,
                             Nombre = nombreServicio,
                             Descripcion = desc,
                             Foto = foto,
@@ -146,7 +148,7 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = @"SELECT s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
+            cmd.CommandText = @"SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento";
@@ -185,7 +187,7 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = @"SELECT t.nombre, t.descripción
+            cmd.CommandText = @"SELECT t.nombre, t.descripcion, t.idTipoEvento
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
@@ -204,8 +206,9 @@ namespace Dominio
                     while (dr.Read())
                     {
                         Servicio s = Servicio.FindByNombre(servicio);
+                        
                         string tipo = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
-                        string desc = dr.IsDBNull(dr.GetOrdinal("descripción")) ? "" : dr.GetString(dr.GetOrdinal("descripción"));
+                        string desc = dr.IsDBNull(dr.GetOrdinal("descripcion")) ? "" : dr.GetString(dr.GetOrdinal("descripcion"));
                         TipoEvento t = new TipoEvento(tipo, desc);
                         listaTipoEvento.Add(t);
                     }
@@ -248,17 +251,19 @@ namespace Dominio
         protected static Servicio CargarDatosDesdeReaderServicioTipo(IDataRecord fila)
         {
             Servicio s = null;
+            int idMiServicio = fila.IsDBNull(fila.GetOrdinal("idServicio")) ? 0 : fila.GetInt32(fila.GetOrdinal("idServicio"));
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("Servicio")) ? "" : fila.GetString(fila.GetOrdinal("Servicio"));
             string desc = fila.IsDBNull(fila.GetOrdinal("Descripción del servicio")) ? "" : fila.GetString(fila.GetOrdinal("Descripción del servicio"));
-            string foto = fila.IsDBNull(fila.GetOrdinal("Foto")) ? "" : fila.GetString(fila.GetOrdinal("Foto"));
+            string miFoto = fila.IsDBNull(fila.GetOrdinal("Foto")) ? "" : fila.GetString(fila.GetOrdinal("Foto"));
 
             if (fila != null)
             {
                 s = new Servicio()
                 {
+                    IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    Foto = foto,
+                    Foto = miFoto,
                     //ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
             }

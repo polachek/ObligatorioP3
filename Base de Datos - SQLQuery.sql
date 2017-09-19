@@ -4,6 +4,7 @@ Select * From Proveedor
 Select * From ProveedorVip
 Select * From Servicio
 Select * From provServicios
+Select * From TipoEvento
 
 
 -- Agregar columna a tabla 
@@ -15,6 +16,17 @@ insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E1
 
 
 -- Seleccionar servicios con tipos de evento asociados a cada servicio
+SELECT t.nombre, t.descripcion, t.idTipoEvento
+                                FROM Servicio AS s 
+                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+                                WHERE s.nombre = 'Fotografia'
+
+SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripcion del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
+                                FROM Servicio AS s 
+                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+
 SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
 FROM Servicio AS s 
 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
@@ -78,7 +90,7 @@ idServicio INT REFERENCES Servicio,
 CREATE TABLE TipoEvento(
 	idTipoEvento INT IDENTITY(1,1) PRIMARY KEY,
 	nombre VARCHAR (50),
-	descripción VARCHAR(250)	
+	descripcion VARCHAR(250)	
 )
 
 -- Tabla TipoEventoYServicio
@@ -96,7 +108,7 @@ CREATE TABLE ProveedorServicios(
 
 -- Insertar Servicios
 INSERT INTO Servicio
-VALUES ('Fotografía', 'Fotografía integral para fiestas y eventos', '')
+VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos', '')
 
 INSERT INTO Servicio
 VALUES ('Catering', 'Catering para eventos empresariales', '')
