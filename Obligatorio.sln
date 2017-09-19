@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfListaProv", "WcfListaPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFCatalogoServicios", "WCFCatalogoServicios\WCFCatalogoServicios.csproj", "{28E9312B-15D3-4B4C-ADDB-98AEAD80E097}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFProveedorDadoRUT", "WCFProveedorDadoRUT\WCFProveedorDadoRUT.csproj", "{46797C4E-F954-4BD6-B5C0-965900CDEDAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{28E9312B-15D3-4B4C-ADDB-98AEAD80E097}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28E9312B-15D3-4B4C-ADDB-98AEAD80E097}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28E9312B-15D3-4B4C-ADDB-98AEAD80E097}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46797C4E-F954-4BD6-B5C0-965900CDEDAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46797C4E-F954-4BD6-B5C0-965900CDEDAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46797C4E-F954-4BD6-B5C0-965900CDEDAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46797C4E-F954-4BD6-B5C0-965900CDEDAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

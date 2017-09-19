@@ -124,7 +124,12 @@ WcfListaProv/obj/*
 WcfServicioCatalogoServicios/bin/WcfServicioCatalogoServicios.pdb
 Dominio/Conexion.cs
 WCFCatalogoServicios/bin/Dominio.dll
-
 WCFCatalogoServicios/bin/Dominio.dll
 WCFCatalogoServicios/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 WCFCatalogoServicios/bin/Dominio.dll
+packages/
+packages/*
+WCFProveedorDadoRUT/bin/
+WCFProveedorDadoRUT/bin/*
+WCFProveedorDadoRUT/obj/
+WCFProveedorDadoRUT/obj/*
