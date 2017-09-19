@@ -92,12 +92,16 @@ CREATE TABLE Servicio(
 idServicio INT IDENTITY(1,1) PRIMARY KEY,
 nombre VARCHAR(50),
 descripcion VARCHAR(150),
-imagen VARCHAR(2083),
+
 )
 
-CREATE TABLE provServicios(
-RUT varchar(12) REFERENCES Proveedor,
-idServicio INT REFERENCES Servicio,
+CREATE TABLE ProveedorServicios(
+	idServicio INT REFERENCES Servicio (idServicio),
+	rutProveedor VARCHAR(12) REFERENCES Proveedor,
+	PRIMARY KEY (idServicio, rutProveedor),
+	nombre VARCHAR(50),
+	descripcion VARCHAR(150),
+	imagen VARCHAR(2083),
 )
 
 -- Tabla TipoEvento
@@ -114,25 +118,21 @@ CREATE TABLE TipoEventoYServicio(
 	PRIMARY KEY (idServicio, idTipoEvento)
 )
 
-CREATE TABLE ProveedorServicios(
-	idServicio INT REFERENCES Servicio (idServicio),
-	idProveedor VARCHAR(12) REFERENCES Proveedor,
-	PRIMARY KEY (idServicio, idProveedor)
-)
+
 
 -- Insertar Servicios
 INSERT INTO Servicio
-VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos', '~/images/servicios/fotografia.png')
+VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos')
 
 INSERT INTO Servicio
-VALUES ('Catering', 'Catering para eventos empresariales', '~/images/servicios/catering.png')
+VALUES ('Catering', 'Catering para eventos empresariales')
 
 INSERT INTO Servicio
-VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas', '~/images/servicios/wedding-planner.png')
+VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas')
 
 --Insertar Tipos de eventos
 INSERT INTO TipoEvento
-VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas', '')
+VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas')
 
 INSERT INTO TipoEvento
 VALUES ('Eventos empresariales', 'Servicios para que su empresa tenga los mejores eventos')

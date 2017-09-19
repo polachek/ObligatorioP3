@@ -38,7 +38,6 @@ namespace WCFCatalogoServicios
                         IdServicio = s.IdServicio,
                         Servicio = s.Nombre,
                         Descripcion = s.Descripcion,
-                        Foto = s.Foto,
                         miTipoEvento = miListaString,
                     }
                    );
@@ -56,7 +55,6 @@ namespace WCFCatalogoServicios
                         IdServicio = s.IdServicio,
                         Servicio = s.Nombre,
                         Descripcion = s.Descripcion,
-                        Foto = s.Foto,
                         miTipoEvento = miListaString,
                     }
                    );

@@ -66,7 +66,6 @@
          <Columns>
            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-           <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" />
            <asp:ButtonField ButtonType="Link" CommandName="AgregarServicio" Text="Agregar Servicio" />
          </Columns>
          <SelectedRowStyle CssClass="grid_1_selectedrow" />
@@ -74,6 +73,13 @@
       <asp:panel id="PanelCantServicios" runat="server" Visible="false">
           <asp:Label ID="Label7" runat="server" Text="No hay Proveedores registrados en el sistema."></asp:Label>
       </asp:panel>
+
+      <asp:Panel ID="PanelAsignarServicio" runat="server" Visible="false">
+          <asp:TextBox ID="ServNombre" runat="server" ReadOnly="true"></asp:TextBox>
+          <asp:TextBox ID="ServDesc" runat="server"></asp:TextBox>
+          <asp:FileUpload ID="ServFotoUpload" runat="server" />
+      </asp:Panel>
+
   </div>
  </div>
 </asp:Content>

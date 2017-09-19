@@ -127,11 +127,15 @@ namespace AppWeb
 
             if (e.CommandName == "AgregarServicio")
             {
+                PanelAsignarServicio.Visible = true;
+
+
                 Servicio serv = new Servicio();
                 serv = listaServicios[fila];
 
                 if (serv != null)
                 {
+                    ServNombre.Text = serv.Nombre;
                     if (ListaMiServicios.Contains(serv))
                     {
                         Asignacion.Text = "Servicio ya agregado";

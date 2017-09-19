@@ -121,7 +121,7 @@ namespace Dominio
 
                 foreach (Servicio miServ in ListaServicios)
                 {
-                    miServ.InsertarServicioProveedor(cmd, this.RUT, miServ);
+                    //miServ.InsertarServicioProveedor(cmd, this.RUT, miServ);
                 }
 
 

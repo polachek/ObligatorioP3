@@ -50,6 +50,7 @@
     <Compile Include="ProveedorComun.cs" />
     <Compile Include="ProveedorVIP.cs" />
     <Compile Include="Servicio.cs" />
+    <Compile Include="ServicioProveedor.cs" />
     <Compile Include="TipoEvento.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>

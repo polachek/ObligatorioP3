@@ -34,9 +34,6 @@ namespace WCFCatalogoServicios
         public string Descripcion { get; set; }
 
         [DataMember]
-        public string Foto { get; set; }
-
-        [DataMember]
         public List<String> miTipoEvento { get; set; }
     }
 

@@ -15,7 +15,6 @@ namespace Dominio
         public int IdServicio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public string Foto { get; set; }
         //public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
@@ -34,28 +33,6 @@ namespace Dominio
         public bool Insertar()
         {
             throw new NotImplementedException();
-        }
-
-        public bool InsertarServicioProveedor(SqlCommand cmd, string rut, Servicio miserv)
-        {
-
-            try
-            {                
-                cmd.CommandText = @"INSERT INTO provServicios
-                             VALUES(@RUT,@idServicio)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@RUT", rut);
-                cmd.Parameters.AddWithValue("@idServicio", miserv.IdServicio);
-                cmd.ExecuteNonQuery();
-
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
-                return false;
-            }
         }
 
         public bool Eliminar()
@@ -87,14 +64,12 @@ namespace Dominio
                         int miIdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
                         string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
                         string desc = dr.IsDBNull(dr.GetOrdinal("Descripcion")) ? "" : dr.GetString(dr.GetOrdinal("Descripcion"));
-                        string foto = dr.IsDBNull(dr.GetOrdinal("imagen")) ? "" : dr.GetString(dr.GetOrdinal("imagen"));
 
                         Servicio s = new Servicio
                         {
                             IdServicio = miIdServicio,
                             Nombre = nombreServicio,
                             Descripcion = desc,
-                            Foto = foto,
                             //ListaTipoEventos = new List<TipoEvento>()
                         };                       
                         return s;
@@ -148,7 +123,7 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
 
-            cmd.CommandText = @"SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
+            cmd.CommandText = @"SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripción del servicio', t.nombre as 'Tipo de evento'
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento";
@@ -233,7 +208,6 @@ namespace Dominio
             int idMiServicio = fila.IsDBNull(fila.GetOrdinal("idServicio")) ? 0 : fila.GetInt32(fila.GetOrdinal("idServicio"));
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("nombre")) ? "" : fila.GetString(fila.GetOrdinal("nombre"));
             string desc = fila.IsDBNull(fila.GetOrdinal("descripcion")) ? "" : fila.GetString(fila.GetOrdinal("descripcion"));
-            string miFoto = fila.IsDBNull(fila.GetOrdinal("imagen")) ? "" : fila.GetString(fila.GetOrdinal("imagen"));
 
             if (fila != null)
             {
@@ -242,7 +216,6 @@ namespace Dominio
                     IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    Foto = miFoto,
                 };
             }
             return s;
@@ -254,7 +227,6 @@ namespace Dominio
             int idMiServicio = fila.IsDBNull(fila.GetOrdinal("idServicio")) ? 0 : fila.GetInt32(fila.GetOrdinal("idServicio"));
             string nombreServicio = fila.IsDBNull(fila.GetOrdinal("Servicio")) ? "" : fila.GetString(fila.GetOrdinal("Servicio"));
             string desc = fila.IsDBNull(fila.GetOrdinal("Descripción del servicio")) ? "" : fila.GetString(fila.GetOrdinal("Descripción del servicio"));
-            string miFoto = fila.IsDBNull(fila.GetOrdinal("Foto")) ? "" : fila.GetString(fila.GetOrdinal("Foto"));
 
             if (fila != null)
             {
@@ -263,7 +235,6 @@ namespace Dominio
                     IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    Foto = miFoto,
                     //ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
             }
