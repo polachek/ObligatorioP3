@@ -43,10 +43,30 @@ namespace Dominio
                 && this.Telefono.Length > 3
                  ;
         }
+
+        public bool ExisteRut(Proveedor prov)
+        {
+            bool ret = false;
+            if (FindByRUT(prov.RUT) != null)
+            {
+                ret = true;
+            }
+            return ret;
+        }
+
+        public bool ExisteEmail(Proveedor prov)
+        {
+            bool ret = false;
+            if (FindByEmail(prov.Email) != null)
+            {
+                ret = true;
+            }
+            return ret;
+        }
         #endregion
 
         #region Manejo de Usuario
-        
+
         public bool AgregarUsuario(Usuario usu)
         {
             this.MiUsuario = usu;

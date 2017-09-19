@@ -62,20 +62,16 @@ namespace AppWeb
 
         private bool validarRutyEmail(Proveedor prov)
         {
-            // Validacion si ya existe un Proveedor con ese Rut o email ingresado
-            if (Proveedor.FindByRUT(prov.RUT) != null)
+            bool ret = false;
+            bool existeRut = prov.ExisteRut(prov);
+            bool existeEmail = prov.ExisteEmail(prov);
+            if (existeRut) Asignacion.Text = "Ya existe un Proveedor con ese Rut";
+            if (existeEmail) Asignacion.Text = "Ya existe un Proveedor con ese Email";
+            if (!existeRut && !existeEmail)
             {
-                Asignacion.Text = "Ya existe un Proveedor con ese Rut";
-                return false;
+                ret = true;
             }
-            else if (Proveedor.FindByEmail(prov.Email) != null)
-            {
-                Asignacion.Text = "Ya existe un Proveedor con ese Email";
-                return false;                
-            }else
-            {
-                return true;
-            }
+            return ret;
         }
 
         private void insertarProveedor(Proveedor p, string pass)

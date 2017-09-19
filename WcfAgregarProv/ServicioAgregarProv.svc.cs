@@ -13,16 +13,15 @@ namespace WcfAgregarProv
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioAgregarProv : IAgregarProv
     {
-        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, double arancel, string fechaRegistro, bool esInactivo, bool esVip, string pass)
+        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, string fechaRegistro, bool esInactivo, bool esVip, string pass)
         {
             // Construyo un proveedor con los parámetros que llegan desde el servicio
-            Proveedor p = new Proveedor()
+            Proveedor p = new ProveedorComun()
             {
                 RUT = rut,
                 NombreFantasia = nombreFantasia,
                 Email = email,
                 Telefono = tel,
-                Arancelll = arancel,
                 FechaRegistro = fechaRegistro,
                 esInactivo = esInactivo,
                 esVip = esVip
