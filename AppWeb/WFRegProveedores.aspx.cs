@@ -49,29 +49,39 @@ namespace AppWeb
                 if (tipo == "COMUN")
                 {
                     Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+                    if (p.ExisteRut(p))
+                    {
+                        Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
+                    }
+                    else if (p.ExisteEmail(p))
+                    {
+                        Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
+                    }
+                    else
+                    {
+                        Asignacion.Text = "";
+                        insertarProveedor(p, pass); 
+                    }
                 }
                 else
                 {
                     Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (validarRutyEmail(p)) { insertarProveedor(p, pass); }
+                    if (p.ExisteRut(p))
+                    {
+                        Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
+                    }
+                    else if (p.ExisteEmail(p))
+                    {
+                        Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
+                    }
+                    else
+                    {
+                        Asignacion.Text = "";
+                        insertarProveedor(p, pass);
+                    }
                 }
             }
 
-        }
-
-        private bool validarRutyEmail(Proveedor prov)
-        {
-            bool ret = false;
-            bool existeRut = prov.ExisteRut(prov);
-            bool existeEmail = prov.ExisteEmail(prov);
-            if (existeRut) Asignacion.Text = "Ya existe un Proveedor con ese Rut";
-            if (existeEmail) Asignacion.Text = "Ya existe un Proveedor con ese Email";
-            if (!existeRut && !existeEmail)
-            {
-                ret = true;
-            }
-            return ret;
         }
 
         private void insertarProveedor(Proveedor p, string pass)
