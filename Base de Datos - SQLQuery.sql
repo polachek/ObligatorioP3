@@ -1,54 +1,25 @@
--- Consultas
-Select * From Usuario
-Select * From Proveedor
-Select * From ProveedorVip
-Select * From Servicio
-
-Select * From ProveedorComun
-Select * From TipoEvento
-Select * From ProveedorServicios
-SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
-SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
-
-
--- Agregar columna a tabla 
---Alter table NombreTabla add NombreAtributo TipoDatoAtributo
---- Editar campo Tabla
-/*UPDATE Servicio
-SET imagen = '~/images/servicios/wedding-planner.png'
-WHERE idServicio = 3;*/
-
-
--- Insertar Admin - Clave: Administrador
-insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1, 'guillermollana@gmail.com');
-
-
-SELECT RUT, t.nombre, t.descripcion, t.imagen
-FROM provServicios
-INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
-WHERE RUT = '111111111111'
-
-
-
--- Seleccionar servicios con tipos de evento asociados a cada servicio
-SELECT t.nombre, t.descripcion, t.idTipoEvento
-                                FROM Servicio AS s 
-                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
-                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-                                WHERE s.nombre = 'Fotografia'
-
-SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripcion del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
-                                FROM Servicio AS s 
-                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
-                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-
-SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
-FROM Servicio AS s 
-INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
-INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/*                      CREACIÓN DE BASE DE DATOS							*/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
 
 -- Crear la DataBase
 CREATE DATABASE ObligatorioP3
+
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/*							CREACIÓN DE TABLAS								*/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
 
 -- Tabla Usuario
 CREATE TABLE Usuario(
@@ -120,7 +91,19 @@ CREATE TABLE TipoEventoYServicio(
 	PRIMARY KEY (idServicio, idTipoEvento)
 )
 
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/*							INSERTAR DATOS									*/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
 
+
+-- Insertar Admin - Clave: Administrador
+insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1, 'guillermollana@gmail.com');
 
 -- Insertar Servicios
 INSERT INTO Servicio
@@ -162,3 +145,59 @@ VALUES (2,2)
 --Wedding planner y boda
 INSERT INTO TipoEventoYServicio
 VALUES (3,1)
+
+
+-- Agregar columna a tabla 
+--Alter table NombreTabla add NombreAtributo TipoDatoAtributo
+--- Editar campo Tabla
+/*UPDATE Servicio
+SET imagen = '~/images/servicios/wedding-planner.png'
+WHERE idServicio = 3;*/
+
+
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/*								CONSULTAS									*/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+
+Select * From Usuario
+Select * From Proveedor
+Select * From ProveedorVip
+Select * From Servicio
+
+Select * From ProveedorComun
+Select * From TipoEvento
+Select * From ProveedorServicios
+SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
+SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
+
+SELECT RUT, t.nombre, t.descripcion, t.imagen
+FROM provServicios
+INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
+WHERE RUT = '111111111111'
+
+-- Seleccionar servicios con tipos de evento asociados a cada servicio
+SELECT t.nombre, t.descripcion, t.idTipoEvento
+                                FROM Servicio AS s 
+                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+                                WHERE s.nombre = 'Fotografia'
+
+SELECT s.IdServicio AS IdServicio, s.nombre AS Servicio, s.descripcion AS 'Descripcion del servicio', s.imagen as 'Foto', t.nombre as 'Tipo de evento'
+                                FROM Servicio AS s 
+                                INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+                                INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+
+SELECT s.nombre, s.descripcion, s.imagen, t.nombre 
+FROM Servicio AS s 
+INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
+INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
+
+
+
+
