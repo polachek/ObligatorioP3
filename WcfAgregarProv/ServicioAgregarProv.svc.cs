@@ -64,7 +64,6 @@ namespace WcfAgregarProv
                 ret = true;
             }
 
-
             return ret;
         }
 

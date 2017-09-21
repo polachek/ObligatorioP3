@@ -83,7 +83,6 @@ namespace Dominio
 
             cn = Conexion.CrearConexion();
 
-
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -101,10 +100,9 @@ namespace Dominio
                 usuarioAInsertar.Rol = MiUsuario.Rol;
                 usuarioAInsertar.Email = MiUsuario.Email;
                 usuarioAInsertar.Insertar(cmd);
-
                 
-               cmd.CommandText=
-                   @"INSERT INTO Proveedor 
+                cmd.CommandText=
+                    @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @fecharegistro, @esInactivo, @tipo);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)";
                 cmd.Parameters.Clear();
@@ -119,30 +117,25 @@ namespace Dominio
                 cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
 
+                //Se implementó condición para lista de servicios igual null para evitar conflicto al cargar wcf con proveedor nulo
                 if (ListaServicios == null)
                 {
 
                 }else if (ListaServicios.Count() > 0)
+                {
+                    foreach (ServicioProveedor miServ in ListaServicios)
                     {
-                        foreach (ServicioProveedor miServ in ListaServicios)
-                        {
-                            miServ.InsertarServicioProveedor(cmd, miServ);
-                        }
+                        miServ.InsertarServicioProveedor(cmd, miServ);
                     }
-
+                }
 
                 if (Tipo == "VIP")
                 {
-                    cmd.CommandText = @"INSERT INTO ProveedorVip
-                            VALUES(@idProveedor,@porcentajeExtra)";
-                    cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
-                    cmd.Parameters.AddWithValue("@porcentajeExtra", 5);
-                    cmd.ExecuteNonQuery();
+                    ProveedorVIP.Insertar(cmd, this.RUT);
                 }else if (Tipo == "COMUN")
                 {
                     cmd.CommandText =
-                   @"INSERT INTO ProveedorComun 
+                    @"INSERT INTO ProveedorComun 
                     VALUES (@rutProveedor);";
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@rutProveedor", this.RUT);
@@ -187,6 +180,64 @@ namespace Dominio
         public bool Modificar()
         {
             throw new NotImplementedException();
+        }
+
+        public static bool ModificarArancel(double nuevoArancel)
+        {
+            bool ret = false;
+            SqlConnection cn = null;
+            cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.CommandText =
+                    @"UPDATE Parametros
+                    SET arancel = @nuevoArancel";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nuevoArancel", nuevoArancel);
+                cmd.ExecuteNonQuery();
+
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                ret = false;
+            }
+            finally { cn.Close(); cn.Dispose(); }
+
+            return ret;
+        }
+
+        public static bool ModificarPorcentajeExtra(int nuevoPorcentaje)
+        {
+            bool ret = false;
+            SqlConnection cn = null;
+            cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.CommandText =
+                    @"UPDATE Parametros
+                    SET porcentajeExtra = @nuevoPorcentaje";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nuevoPorcentaje", nuevoPorcentaje);
+                cmd.ExecuteNonQuery();
+
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                ret = false;
+            }
+            finally { cn.Close(); cn.Dispose(); }
+
+            return ret;
         }
         #endregion
 

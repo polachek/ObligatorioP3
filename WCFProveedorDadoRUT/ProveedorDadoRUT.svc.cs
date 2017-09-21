@@ -11,6 +11,7 @@ namespace WCFProveedorDadoRUT
 {
     public class ProveedorDadoRUT : IProveedorDadoRUT
     {
+
         public DtoProveedor buscarProveedorRut(string rut)
         {
             Proveedor miprov = Proveedor.FindByRUT(rut);

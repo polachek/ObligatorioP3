@@ -136,3 +136,4 @@ WCFProveedorDadoRUT/obj/*
 AppWeb/images/servicios-proveedor/*
 WCFCatalogoServicios/bin/Dominio.dll
 WCFCatalogoServicios/bin/*
+AppWeb/AppWeb.csproj.user

@@ -12,7 +12,6 @@ namespace WCFProveedorDadoRUT
     [ServiceContract]
     public interface IProveedorDadoRUT
     {
-
         [OperationContract]
         DtoProveedor buscarProveedorRut(string rut);
 
