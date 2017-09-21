@@ -3,11 +3,13 @@ Select * From Usuario
 Select * From Proveedor
 Select * From ProveedorVip
 Select * From Servicio
-Select * From provServicios
-Select * From TipoEvento
 
+Select * From ProveedorComun
+Select * From TipoEvento
+Select * From ProveedorServicios
 SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
 SELECT * From ProveedorVip WHERE rutProveedor = '111111111111'
+
 
 -- Agregar columna a tabla 
 --Alter table NombreTabla add NombreAtributo TipoDatoAtributo

@@ -29,7 +29,7 @@ namespace WCFProveedorDadoRUT
                 miDtoProv.FechaRegistro = miprov.FechaRegistro;
                 miDtoProv.esInactivo = miprov.esInactivo;
                 miDtoProv.Tipo = miprov.Tipo;
-                miDtoProv.ListaServicios = Servicio.FindServiciosProveedor(miDtoProv.RUT);
+                miDtoProv.ListaServicios = ServicioProveedor.FindServiciosProveedor(miDtoProv.RUT);
 
                 return miDtoProv;
             }

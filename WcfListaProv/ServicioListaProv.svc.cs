@@ -22,8 +22,13 @@ namespace WcfListaProv
                     new DtoProveedor()
                     {
                         NombreFantasia = p.NombreFantasia,
-                        RUT = p.RUT
-                    }
+                        RUT = p.RUT,
+                        Email = p.Email,
+                        Telefono = p.Telefono,
+                        FechaRegistro = p.FechaRegistro,
+                        esInactivo = p.esInactivo,
+                        Tipo = p.Tipo,
+                   }
                 );
             }
             return proveedores;

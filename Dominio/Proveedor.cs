@@ -23,7 +23,7 @@ namespace Dominio
         public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
         public string Tipo { get; set; }
-        public List<Servicio> ListaServicios { get; set; }
+        public List<ServicioProveedor> ListaServicios { get; set; }
 
         #endregion
 
@@ -44,20 +44,20 @@ namespace Dominio
                  ;
         }
 
-        public bool ExisteRut(Proveedor prov)
+        public bool ExisteRut(string rut)
         {
             bool ret = false;
-            if (FindByRUT(prov.RUT) != null)
+            if (FindByRUT(rut) != null)
             {
                 ret = true;
             }
             return ret;
         }
 
-        public bool ExisteEmail(Proveedor prov)
+        public bool ExisteEmail(string email)
         {
             bool ret = false;
-            if (FindByEmail(prov.Email) != null)
+            if (FindByEmail(email) != null)
             {
                 ret = true;
             }
@@ -119,10 +119,16 @@ namespace Dominio
                 cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
 
-                foreach (Servicio miServ in ListaServicios)
+                if (ListaServicios == null)
                 {
-                    //miServ.InsertarServicioProveedor(cmd, this.RUT, miServ);
-                }
+
+                }else if (ListaServicios.Count() > 0)
+                    {
+                        foreach (ServicioProveedor miServ in ListaServicios)
+                        {
+                            miServ.InsertarServicioProveedor(cmd, miServ);
+                        }
+                    }
 
 
                 if (Tipo == "VIP")
@@ -132,6 +138,14 @@ namespace Dominio
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
                     cmd.Parameters.AddWithValue("@porcentajeExtra", 5);
+                    cmd.ExecuteNonQuery();
+                }else if (Tipo == "COMUN")
+                {
+                    cmd.CommandText =
+                   @"INSERT INTO ProveedorComun 
+                    VALUES (@rutProveedor);";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@rutProveedor", this.RUT);
                     cmd.ExecuteNonQuery();
                 }
 
@@ -200,6 +214,10 @@ namespace Dominio
                                 RUT = rut,
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = dr["Email"].ToString(),
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -210,6 +228,10 @@ namespace Dominio
                                 RUT = rut,
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = dr["Email"].ToString(),
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -220,7 +242,7 @@ namespace Dominio
             catch (Exception ex)
             {
 
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
 
             }
             finally { cn.Close(); cn.Dispose(); }
@@ -248,6 +270,10 @@ namespace Dominio
                                 RUT = dr["rut"].ToString(),
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = email,
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -258,6 +284,10 @@ namespace Dominio
                                 RUT = dr["rut"].ToString(),
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = email,
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -266,7 +296,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
             }
             finally { cn.Close(); cn.Dispose(); }
         }
@@ -370,7 +400,7 @@ namespace Dominio
             catch (Exception ex)
             {
 
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
 
             }
             finally { cn.Close(); cn.Dispose(); }

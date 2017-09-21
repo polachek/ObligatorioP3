@@ -43,7 +43,7 @@ namespace WCFProveedorDadoRUT
         public string Tipo { get; set; }
 
         [DataMember]
-        public List<Servicio> ListaServicios { get; set; }
+        public List<ServicioProveedor> ListaServicios { get; set; }
 
 
     }

@@ -25,6 +25,21 @@ namespace WcfListaProv
         [DataMember]
         public string NombreFantasia { get; set; }
 
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public string Telefono { get; set; }
+
+        [DataMember]
+        public string FechaRegistro { get; set; }
+
+        [DataMember]
+        public bool esInactivo { get; set; }
+
+        [DataMember]
+        public string Tipo { get; set; }
+
     }
 }
 

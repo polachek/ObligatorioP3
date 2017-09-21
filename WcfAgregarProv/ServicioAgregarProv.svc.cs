@@ -13,13 +13,13 @@ namespace WcfAgregarProv
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioAgregarProv : IAgregarProv
     {
-        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, string fechaRegistro, bool esInactivo, string tipo, string pass)
+        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass)
         {
             bool ret = false;
-
-            string miTipo = tipo;
+            DateTime fechaRegDateTime = DateTime.Now;
+            string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
             // Construyo un proveedor con los parámetros que llegan desde el servicio y controlo el tipo de proveedor
-            if (tipo == "COMUN")
+            if (!esVip)
             {
                 Proveedor p = new ProveedorComun()
                 {
@@ -29,19 +29,19 @@ namespace WcfAgregarProv
                     Telefono = tel,
                     FechaRegistro = fechaRegistro,
                     esInactivo = esInactivo,
-                    Tipo = tipo
+                    Tipo = "COMUN"
                 };
 
-                // Encripto el password y construyo un usuario
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
+                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
                 // Agrego el usuario al proveedor p
                 p.AgregarUsuario(usu);
                 p.Insertar();
+
                 ret = true;
             }
-            else if (tipo == "VIP")
+            else if (esVip)
             {
                 Proveedor p = new ProveedorVIP()
                 {
@@ -51,20 +51,22 @@ namespace WcfAgregarProv
                     Telefono = tel,
                     FechaRegistro = fechaRegistro,
                     esInactivo = esInactivo,
-                    Tipo = tipo
+                    Tipo = "VIP"
                 };
 
-                // Encripto el password y construyo un usuario
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
+                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
                 // Agrego el usuario al proveedor p
                 p.AgregarUsuario(usu);
                 p.Insertar();
+
                 ret = true;
             }
 
+
             return ret;
         }
-    }
+
+   }
 }

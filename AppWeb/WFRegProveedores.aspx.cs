@@ -5,19 +5,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using System.IO;
 
 namespace AppWeb
 {
     public partial class WFRegProveedores : System.Web.UI.Page
     {
-        private static List<Servicio> ListaMiServicios;
+        private static List<ServicioProveedor> ListaMiServicios;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarServicios();
             if (ListaMiServicios == null)
             {
-                ListaMiServicios = new List<Servicio>();
+                ListaMiServicios = new List<ServicioProveedor>();
             }
         }
 
@@ -36,7 +37,12 @@ namespace AppWeb
             if (ListaMiServicios.Count() == 0)
             {
                 Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
-            }else
+            }
+            else if (pass == "")
+            {
+                Asignacion.Text = "Es necesario asignar una contraseña al usuario";
+            }
+            else
             {
                 Asignacion.Text = "";
                 if (CheckBoxVip.Checked)
@@ -49,11 +55,11 @@ namespace AppWeb
                 if (tipo == "COMUN")
                 {
                     Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p))
+                    if (p.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p))
+                    else if (p.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }
@@ -63,14 +69,14 @@ namespace AppWeb
                         insertarProveedor(p, pass); 
                     }
                 }
-                else
+                else if (tipo == "VIP")
                 {
                     Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p))
+                    if (p.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p))
+                    else if (p.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }
@@ -98,9 +104,25 @@ namespace AppWeb
             if (p.Insertar())
             {
                 Asignacion.Text = "Insertaste a : " + p.RUT;
+                limpiarForm();
             }
             else
                 Asignacion.Text = "No";
+        }
+
+        private void limpiarForm()
+        {
+            TxtRut.Text = "";
+            TxtNomFantasia.Text = "";
+            TxtEmail.Text = "";
+            TxtTel.Text = "";
+            TxtPass.Text = "";
+            CheckBoxVip.Checked = false;
+            ListaMiServicios.Clear();
+            ListBoxServicios.Items.Clear();
+            ListBoxServicios.DataSource = null;
+            ListBoxServicios.DataBind();
+
         }
 
         private void cargarServicios()
@@ -120,7 +142,6 @@ namespace AppWeb
 
         protected void GridServicios_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             List<Servicio> listaServicios = Servicio.FindAll();
 
             int fila = int.Parse(e.CommandArgument + "");
@@ -129,30 +150,57 @@ namespace AppWeb
             {
                 PanelAsignarServicio.Visible = true;
 
-
                 Servicio serv = new Servicio();
                 serv = listaServicios[fila];
+                HiddeIdServicio.Value = serv.IdServicio.ToString();
 
-                if (serv != null)
-                {
-                    ServNombre.Text = serv.Nombre;
-                    if (ListaMiServicios.Contains(serv))
-                    {
-                        Asignacion.Text = "Servicio ya agregado";
-                    }else
-                    {
-                        Asignacion.Text = "";
-                        ListaMiServicios.Add(serv);
-                    }
-                    
-                }
+                if (serv != null) { ServNombre.Text = serv.Nombre; }
+            }
+        }
 
-                if (ListaMiServicios.Count() != 0)
-                {
-                    ListBoxServicios.DataSource = ListaMiServicios;
-                    ListBoxServicios.DataBind();
-                }               
+        protected void BtnAsigServAccion_Click(object sender, EventArgs e)
+        {
+            ServicioProveedor servProv = new ServicioProveedor();
 
+            servProv.Nombre = ServNombre.Text;
+            servProv.IdServicio = int.Parse(HiddeIdServicio.Value);
+            servProv.RutProveedor = TxtRut.Text;
+            servProv.Descripcion = ServDesc.Text;
+            string ruta = Server.MapPath("~/images/servicios-proveedor/");
+
+            if (ServFotoUpload.HasFile)
+            {
+                string[] partesNombre = ServFotoUpload.FileName.Split('.');
+                string extension = partesNombre[partesNombre.Length - 1];
+                string nombreArch = string.Format("Rut_{0}__ServicioID_{1}.{2}", servProv.RutProveedor, servProv.IdServicio, extension);
+
+                if (!Directory.Exists(ruta))
+                    Directory.CreateDirectory(ruta);
+
+                ServFotoUpload.SaveAs(ruta + nombreArch);
+
+                servProv.Foto = "~/images/servicios-proveedor/" + nombreArch;
+            }
+
+
+            if (ListaMiServicios.Contains(servProv))
+            {
+                Asignacion.Text = "Servicio ya agregado";
+            }
+            else
+            {
+                Asignacion.Text = "";
+                ListaMiServicios.Add(servProv);
+
+                ServNombre.Text = "";
+                ServDesc.Text = "";
+                PanelAsignarServicio.Visible = false;
+            }
+
+            if (ListaMiServicios.Count() != 0)
+            {
+                ListBoxServicios.DataSource = ListaMiServicios;
+                ListBoxServicios.DataBind();
             }
 
         }

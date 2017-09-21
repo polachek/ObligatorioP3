@@ -38,7 +38,7 @@ namespace AppWeb.Administrador
                 LBNomFant.Text = "Nombre Fantasia :" + prov.NombreFantasia;
                 LBEmail.Text = "Email :" + prov.Email;
                 LBTelefono.Text = "Telefono :" + prov.Telefono;
-                prov.ListaServicios = Servicio.FindServiciosProveedor(prov.RUT);
+                prov.ListaServicios = ServicioProveedor.FindServiciosProveedor(prov.RUT);
                 GridViewServiciosProv.DataSource = prov.ListaServicios;
                 GridViewServiciosProv.DataBind();
 
@@ -53,13 +53,13 @@ namespace AppWeb.Administrador
                     LBInactivo.Text = strEsInactivo;
                 }
 
-                if (prov.Tipo == "Comun")
+                if (prov.Tipo == "COMUN")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Green;
                     string strEsVip = "Es VIP : No";
                     LBVip.Text = strEsVip;
                 }
-                else
+                else if(prov.Tipo == "VIP")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Red;
                     string strEsVip = "Es VIP : Si";

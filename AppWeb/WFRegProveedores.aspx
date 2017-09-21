@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
  <div class="page-regprov">
   
-  <div ID="wpaltaproveedor">
+  <div id="wpaltaproveedor">
       <h1 class="main-title">Registro de Proveedores</h1>
 
     <asp:Panel ID="Panel2" runat="server">
@@ -39,7 +39,6 @@
     <asp:Panel ID="Panel5" runat="server">
       <asp:Label ID="Label5" runat="server" Text="Contraseña para su Usuario: "></asp:Label>
       <asp:TextBox ID="TxtPass" runat="server" TextMode="Password"></asp:TextBox>
-      <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
       <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ForeColor="Tomato" ControlToValidate="TxtPass" ErrorMessage="Su contraseña debe tener un largo mínimo de 6, sin espacios y contener por lo menos una mayúscula" ValidationExpression="^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$"></asp:RegularExpressionValidator>
     </asp:Panel>
     <br />
@@ -49,10 +48,10 @@
     <br />
 
     <h2>Servicios Ofrecidos</h2>
-    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox>
+    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox><br />
+    <br />
 
     <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
-
       
     <br />
     <br />
@@ -75,9 +74,16 @@
       </asp:panel>
 
       <asp:Panel ID="PanelAsignarServicio" runat="server" Visible="false">
-          <asp:TextBox ID="ServNombre" runat="server" ReadOnly="true"></asp:TextBox>
-          <asp:TextBox ID="ServDesc" runat="server"></asp:TextBox>
-          <asp:FileUpload ID="ServFotoUpload" runat="server" />
+          <h2>Asignación de Servicio</h2>
+          <asp:HiddenField ID="HiddeIdServicio" runat="server" />
+          <asp:TextBox ID="ServNombre" runat="server" ReadOnly="true"></asp:TextBox><br />
+          <asp:TextBox ID="ServDesc" runat="server"></asp:TextBox><br />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="ServDesc" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ForeColor="Tomato" ControlToValidate="ServDesc" ErrorMessage="Mínimo 3 caracteres y máximo 50" ValidationExpression="^[a-zA-Z](\s?[a-zA-Z]){3,50}$"></asp:RegularExpressionValidator>
+          <asp:FileUpload ID="ServFotoUpload" runat="server" /><br />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="ServFotoUpload" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
+          <br />
+          <asp:Button ID="BtnAsigServ" CssClass="boton_personalizado" runat="server" Text="Asignar Servicio" OnClick="BtnAsigServAccion_Click" />
       </asp:Panel>
 
   </div>

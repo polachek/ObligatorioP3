@@ -283,6 +283,15 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.Panel PanelAsignarServicio;
         
         /// <summary>
+        /// Control HiddeIdServicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddeIdServicio;
+        
+        /// <summary>
         /// Control ServNombre.
         /// </summary>
         /// <remarks>
@@ -301,6 +310,15 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.TextBox ServDesc;
         
         /// <summary>
+        /// Control RegularExpressionValidator6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
+        
+        /// <summary>
         /// Control ServFotoUpload.
         /// </summary>
         /// <remarks>
@@ -308,5 +326,14 @@ namespace AppWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload ServFotoUpload;
+        
+        /// <summary>
+        /// Control BtnAsigServ.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnAsigServ;
     }
 }

@@ -133,3 +133,6 @@ WCFProveedorDadoRUT/bin/
 WCFProveedorDadoRUT/bin/*
 WCFProveedorDadoRUT/obj/
 WCFProveedorDadoRUT/obj/*
+AppWeb/images/servicios-proveedor/*
+WCFCatalogoServicios/bin/Dominio.dll
+WCFCatalogoServicios/bin/*

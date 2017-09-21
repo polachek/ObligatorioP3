@@ -13,6 +13,6 @@ namespace WcfAgregarProv
     public interface IAgregarProv
     {
         [OperationContract]
-        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, string fechaRegistro, bool esInactivo, string tipo, string pass);
+        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
     }
 }

@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Dominio
 {
-    public class Servicio : IActiveRecord, IEquatable<Servicio>
+    public class Servicio : IActiveRecord
     {
         public int IdServicio { get; set; }
         public string Nombre { get; set; }
@@ -78,7 +78,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-                throw new Exception("No existe el Servicio");
+                throw new Exception("No existe el Servicio" + ex);
             }
             finally { cn.Close(); cn.Dispose(); }
         }        
@@ -235,53 +235,9 @@ namespace Dominio
                     IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    //ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
             }
             return s;
-        }
-
-
-        // FIND SERVICIOS PROVEEDOR
-        public static List<Servicio> FindServiciosProveedor(string rut)
-        {
-            SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"SELECT t.idServicio, t.nombre, t.descripcion, t.imagen
-FROM provServicios
-INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
-WHERE RUT = @rut";
-            cmd.Parameters.AddWithValue("@rut", rut);
-            cmd.Connection = cn;
-
-
-            List<Servicio> listaServicios = null;
-            try
-            {
-                Conexion.AbrirConexion(cn);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    listaServicios = new List<Servicio>();
-                    while (dr.Read())
-                    {
-                        Servicio serv = CargarDatosDesdeReader(dr);
-                        listaServicios.Add(serv);
-                    }
-                }
-                return listaServicios;
-            }
-            catch (SqlException ex)
-            {
-                //
-                System.Diagnostics.Debug.Assert(false, ex.Message);
-                return null;
-            }
-            finally
-            {
-                Conexion.CerrarConexion(cn);
-            }
         }
         #endregion
 
