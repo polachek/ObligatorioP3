@@ -141,3 +141,15 @@ AppWeb/AppWeb.csproj.user
 WCFDesactivarProv/bin/*
 WCFCatalogoServicios/obj/*
 Dominio/Conexion.cs
+!AppWeb/images/servicios-proveedor/Rut_999999999991__ServicioID_1.jpg
+!AppWeb/images/servicios-proveedor/Rut_999999999992__ServicioID_2.jpg
+!AppWeb/images/servicios-proveedor/Rut_999999999992__ServicioID_3.jpg
+WCFGuardarProvTxt/obj/
+WCFGuardarProvTxt/obj/*
+WCFGuardarProvTxt/bin/
+WCFGuardarProvTxt/bin/*
+WcfServiceModificarParametros/obj/
+WcfServiceModificarParametros/obj/*
+WcfServiceModificarParametros/bin/
+WcfServiceModificarParametros/bin/*
+

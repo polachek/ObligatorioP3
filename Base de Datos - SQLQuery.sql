@@ -186,7 +186,7 @@ WHERE idServicio = 3;*/
 /****************************************************************************/
 /****************************************************************************/
 /****************************************************************************/
-
+/*
 Select * From Usuario
 Select * From Proveedor
 Select * From ProveedorVip
@@ -222,6 +222,39 @@ INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
 
 SELECT *
 FROM Parametros
+*/
 
 
 
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/*							DATOS DE PRUEBA 								*/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+/****************************************************************************/
+
+-- Proveedor Test 1
+INSERT INTO Usuario 
+VALUES('999999999991','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 2, 'provtest1@provtest.com');
+
+INSERT INTO Proveedor 
+VALUES ('999999999991', 'Proveedor Prueba Uno', 'provtest1@provtest.com', '099999991', '2017-09-21', 0, 'COMUN') SELECT CAST (SCOPE_IDENTITY() AS INT);
+
+INSERT INTO ProveedorServicios VALUES(1, '999999999991', 'Fotografia', 'Proveedor Test 1 descripcion servicio Fotografia', '~/images/servicios-proveedor/Rut_999999999991__ServicioID_1.jpg');
+
+INSERT INTO ProveedorComun VALUES ('999999999991');
+
+-- Proveedor Test 2
+INSERT INTO Usuario 
+VALUES('999999999992','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 2, 'provtest2@provtest.com');
+
+INSERT INTO Proveedor 
+VALUES ('999999999992', 'Proveedor Prueba Dos', 'provtest2@provtest.com', '099999992', '2017-09-21', 0, 'VIP') SELECT CAST (SCOPE_IDENTITY() AS INT);
+
+INSERT INTO ProveedorServicios VALUES(2, '999999999992', 'Catering', 'Proveedor Test 2 descripcion servicio Catering', '~/images/servicios-proveedor/Rut_999999999992__ServicioID_2.jpg');
+INSERT INTO ProveedorServicios VALUES(3, '999999999992', 'Wedding planner', 'Proveedor Test 2 descripcion servicio Wedding planner', '~/images/servicios-proveedor/Rut_999999999992__ServicioID_3.jpg');
+
+INSERT INTO ProveedorVip VALUES('999999999992',20)

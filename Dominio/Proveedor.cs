@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dominio
 {
@@ -275,6 +276,40 @@ namespace Dominio
                 throw new Exception("No existe el Proveedor" + ex);
             }
             finally { cn.Close(); cn.Dispose(); }
+        }
+        #endregion
+
+        #region Exportar Proveedores Txt
+        public static bool grabarProveedoresTxt(string rutaArchivo)
+        {
+            try
+            {
+                File.WriteAllText(rutaArchivo, String.Empty);
+
+                FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
+                StreamWriter sw = new StreamWriter(fs);
+
+                List<Proveedor> listaProv = Proveedor.FindAll();
+
+                foreach (Proveedor prov in listaProv)
+                {
+                    prov.ListaServicios = ServicioProveedor.FindServiciosProveedor(prov.RUT);
+                    string listaServProv = "";
+                    foreach (ServicioProveedor servProv in prov.ListaServicios)
+                    {
+                        listaServProv += servProv.Nombre + ":" + servProv.Descripcion + ":" + servProv.Foto + "#";
+                    }
+                    sw.WriteLine(prov.RUT + "#" + prov.NombreFantasia + "#" + prov.Email + "#" + prov.Telefono + "|" + listaServProv);
+                }
+
+                sw.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+                return false;
+            }
         }
         #endregion
 
