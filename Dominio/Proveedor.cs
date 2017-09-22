@@ -239,6 +239,43 @@ namespace Dominio
 
             return ret;
         }
+
+        public bool DesactivarProv()
+        {
+            bool ret = false;
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Rut = @rut");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@rut", this.RUT);
+            try
+            {
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        dr.Close();
+                        cmd.CommandText = @"UPDATE Proveedor SET esInactivo = 1 WHERE RUT = @rut;";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@rut", this.RUT);
+                        cmd.ExecuteNonQuery();
+                        ret = true;
+                    }
+                }
+                else
+                {
+                    ret = false;
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("No existe el Proveedor" + ex);
+            }
+            finally { cn.Close(); cn.Dispose(); }
+        }
         #endregion
 
         #region Finders

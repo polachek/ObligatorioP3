@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="WCFDesactivarProv.DesactivarProv" CodeBehind="DesactivarProv.svc.cs" %>

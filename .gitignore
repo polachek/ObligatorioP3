@@ -60,6 +60,7 @@ packages/Microsoft.Net.Compilers.1.0.0/tools/System.Reflection.Metadata.dll
 packages/Microsoft.Net.Compilers.1.0.0/tools/vbc.exe
 packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe
 packages/Microsoft.Net.Compilers.1.0.0/tools/VBCSCompiler.exe.config
+packages/*
 .vs/config/applicationhost.config
 .vs/
 AppWeb/obj/Debug/build.force
@@ -137,3 +138,6 @@ AppWeb/images/servicios-proveedor/*
 WCFCatalogoServicios/bin/Dominio.dll
 WCFCatalogoServicios/bin/*
 AppWeb/AppWeb.csproj.user
+WCFDesactivarProv/bin/*
+WCFCatalogoServicios/obj/*
+Dominio/Conexion.cs
