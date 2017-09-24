@@ -22,8 +22,7 @@ namespace WCFCatalogoServicios
             List<String> milistaTipoEvento = new List<String>();
 
             foreach (Servicio s in listaCompleta)
-            {
-                
+            {   
                 List<TipoEvento> listaTipoEvento = Servicio.FindTiposEventoByServicio(s.Nombre);
 
                 if (listaTipoEvento.Count() == 1)
@@ -33,13 +32,13 @@ namespace WCFCatalogoServicios
                     miListaString.Add(miTipoEv.Nombre);
 
                     servicios.Add(
-                    new DtoServicio()
-                    {
-                        IdServicio = s.IdServicio,
-                        Servicio = s.Nombre,
-                        Descripcion = s.Descripcion,
-                        miTipoEvento = miListaString,
-                    }
+                        new DtoServicio()
+                        {
+                            IdServicio = s.IdServicio,
+                            Servicio = s.Nombre,
+                            Descripcion = s.Descripcion,
+                            miTipoEvento = miListaString,
+                        }
                    );
                 }else
                 {
@@ -50,17 +49,15 @@ namespace WCFCatalogoServicios
                     }
 
                     servicios.Add(
-                    new DtoServicio()
-                    {
-                        IdServicio = s.IdServicio,
-                        Servicio = s.Nombre,
-                        Descripcion = s.Descripcion,
-                        miTipoEvento = miListaString,
-                    }
+                        new DtoServicio()
+                        {
+                            IdServicio = s.IdServicio,
+                            Servicio = s.Nombre,
+                            Descripcion = s.Descripcion,
+                            miTipoEvento = miListaString,
+                        }
                    );
                 }
-
-                
             }
             return servicios;
         }

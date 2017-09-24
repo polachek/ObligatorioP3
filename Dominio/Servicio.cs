@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dominio
 {
@@ -15,7 +16,7 @@ namespace Dominio
         public int IdServicio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        //public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
+        public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
         {
@@ -46,8 +47,45 @@ namespace Dominio
         }
         #endregion
 
+        #region Exportar catálogo a txt
+        public static bool grabarCatalogoTxt(string rutaArchivo)
+        {
+            try
+            {
+                File.WriteAllText(rutaArchivo, String.Empty);
+
+                FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
+                StreamWriter sw = new StreamWriter(fs);
+
+                List<Servicio> listaServicios = Servicio.FindAll();
+
+                foreach (Servicio serv in listaServicios)
+                {
+                    serv.ListaTipoEventos = Servicio.FindTiposEventoByServicio(serv.Nombre);
+                    string listaServTipoEvento = "";
+                    foreach (TipoEvento tipoEv in serv.ListaTipoEventos)
+                    {
+                        listaServTipoEvento += tipoEv.Nombre +":";
+                    }
+                    int largo = listaServTipoEvento.Length;
+                    string tiposDeEventoPorServicio = listaServTipoEvento.Substring(0,largo-1);
+                    sw.WriteLine(serv.Nombre + "#" + tiposDeEventoPorServicio);
+                }
+
+                sw.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+                return false;
+            }
+        }
+
+        #endregion
+
         #region Finders
-        
+
         public static Servicio FindByNombre(string nombre)
         {
             SqlConnection cn = Conexion.CrearConexion();

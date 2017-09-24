@@ -13,7 +13,6 @@ namespace WCFCatalogoServicios
     [ServiceContract]
     public interface ICatalogoServicios
     {
-
         [OperationContract]
         IEnumerable<DtoServicio> ObtenerServicios();
 

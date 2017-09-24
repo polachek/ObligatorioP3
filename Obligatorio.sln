@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFDesactivarProv", "WCFDes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFGuardarProvTxt", "WCFGuardarProvTxt\WCFGuardarProvTxt.csproj", "{8B8FFC70-0876-465D-B7BB-1AA773A7B4CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfGuardarCatalogoTxt", "WcfGuardarCatalogoTxt\WcfGuardarCatalogoTxt.csproj", "{261CB9FF-DE26-471E-9470-10F41C847A1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8B8FFC70-0876-465D-B7BB-1AA773A7B4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B8FFC70-0876-465D-B7BB-1AA773A7B4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B8FFC70-0876-465D-B7BB-1AA773A7B4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
