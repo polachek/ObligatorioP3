@@ -259,38 +259,70 @@ VALUES ('Alquiler de carpas y gazebos', 'Servicios para celebrar los momentos má
 --Insertar Tipos de eventos y servicios
 --Fotografia y Boda
 INSERT INTO TipoEventoYServicio
-VALUES (1,1002)
+VALUES (1,1)
 
 --Fotografia y eventos empresariales
 INSERT INTO TipoEventoYServicio
-VALUES (1,1003)
+VALUES (1,2)
 
 --Fotografia y Fiesta de 15
 INSERT INTO TipoEventoYServicio
-VALUES (1,1004)
+VALUES (1,3)
 
 --Fotografia y Cumpleaños infantiles
 INSERT INTO TipoEventoYServicio
-VALUES (1,1005)
+VALUES (1,4)
 
 --Fotografia y Divorcios
 INSERT INTO TipoEventoYServicio
-VALUES (1,1006)
+VALUES (1,5)
 
 --Catering y eventos empresariales
 INSERT INTO TipoEventoYServicio
-VALUES (2,1003)
+VALUES (2,2)
 
 --Catering y cumpleaños infantiles
 INSERT INTO TipoEventoYServicio
-VALUES (2,1005)
+VALUES (2,4)
 
 --Catering y cumpleaños Fiesta de 15
 INSERT INTO TipoEventoYServicio
-VALUES (2,1004)
+VALUES (2,3)
 
 --Wedding planner y boda
 INSERT INTO TipoEventoYServicio
-VALUES (3,1002)
+VALUES (3,1)
+
+--Salón de fiesta y boda
+INSERT INTO TipoEventoYServicio
+VALUES (4,1)
+
+--Salón de fiesta y eventos empresariales
+INSERT INTO TipoEventoYServicio
+VALUES (4,2)
+
+--Salón de fiesta y cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (4,4)
+
+--Servicios de pizzas y chivitos y boda
+INSERT INTO TipoEventoYServicio
+VALUES (5,1)
+
+--Servicios de pizzas y cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (5,3)
+
+--Servicios de pizzas y cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (5,4)
+
+--Servicios de mozos y boda
+INSERT INTO TipoEventoYServicio
+VALUES (6,1)
+
+--Servicios de animadores y cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (7,4)
 
 /****************************************************************************/

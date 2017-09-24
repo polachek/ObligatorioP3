@@ -50,8 +50,7 @@ namespace Dominio
         #region Exportar catálogo a txt
         public static bool grabarCatalogoTxt(string rutaArchivo)
         {
-            try
-            {
+
                 File.WriteAllText(rutaArchivo, String.Empty);
 
                 FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
@@ -65,21 +64,16 @@ namespace Dominio
                     string listaServTipoEvento = "";
                     foreach (TipoEvento tipoEv in serv.ListaTipoEventos)
                     {
-                        listaServTipoEvento += tipoEv.Nombre +":";
+                        listaServTipoEvento += tipoEv.Nombre + ":";
                     }
                     int largo = listaServTipoEvento.Length;
-                    string tiposDeEventoPorServicio = listaServTipoEvento.Substring(0,largo-1);
+                    string tiposDeEventoPorServicio = listaServTipoEvento.Substring(0, largo - 1);
                     sw.WriteLine(serv.Nombre + "#" + tiposDeEventoPorServicio);
                 }
 
                 sw.Close();
                 return true;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("An error occurred: '{0}'", e);
-                return false;
-            }
+            
         }
 
         #endregion
@@ -89,7 +83,7 @@ namespace Dominio
         public static Servicio FindByNombre(string nombre)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio WHERE Nombre = @nombre");
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio WHERE nombre like '@nombre'");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@nombre", nombre);
             try
@@ -204,7 +198,7 @@ namespace Dominio
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-                                WHERE s.nombre = @servicio";
+                                WHERE s.nombre like @servicio";
 
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@servicio", servicio);

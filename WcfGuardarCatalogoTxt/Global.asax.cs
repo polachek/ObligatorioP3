@@ -39,8 +39,8 @@ protected void Application_Start(object sender, EventArgs e)
             bool ret = false;
 
             string parametros = HttpRuntime.AppDomainAppPath + @"config\catalogo.txt";
-                        
-            if (Servicio.grabarCatalogoTxt(parametros))
+            bool grabado = Servicio.grabarCatalogoTxt(parametros);
+            if (grabado)
             {
                 ret = true;
             }else
