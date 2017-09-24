@@ -105,58 +105,6 @@ CREATE TABLE TipoEventoYServicio(
 -- Insertar Admin - Clave: Administrador
 insert into Usuario Values('admin','750F9277BEF0489D9D309F267435F5874F4D173EA0E178F513D43EB86B7CA296DE51669E1BD167EC50F81D7AEF7DE10FF3F682028BE02D7815839DB33D6EB3D0', 1, 'guillermollana@gmail.com');
 
-/****************************************************************************/
-
--- Insertar Servicios
-INSERT INTO Servicio
-VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos')
-
-INSERT INTO Servicio
-VALUES ('Catering', 'Catering para eventos empresariales')
-
-INSERT INTO Servicio
-VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas')
-
-/****************************************************************************/
-
---Insertar Tipos de eventos
-INSERT INTO TipoEvento
-VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas')
-
-INSERT INTO TipoEvento
-VALUES ('Eventos empresariales', 'Servicios para que su empresa tenga los mejores eventos')
-
-INSERT INTO TipoEvento
-VALUES ('Fiesta de 15', 'Todo lo que necesitas para celebrar los quince años.')
-
-/****************************************************************************/
-
---Insertar Tipos de eventos y servicios
--- Fotografia y Boda
-INSERT INTO TipoEventoYServicio
-VALUES (1,1)
-
---Fotografia y eventos empresariales
-INSERT INTO TipoEventoYServicio
-VALUES (1,2)
-
---Fotografia y Fiesta de 15
-INSERT INTO TipoEventoYServicio
-VALUES (1,3)
-
---Catering y eventos empresariales
-INSERT INTO TipoEventoYServicio
-VALUES (2,2)
-
---Wedding planner y boda
-INSERT INTO TipoEventoYServicio
-VALUES (3,1)
-
-/****************************************************************************/
-
-
-
-
 
 /****************************************************************************/
 /****************************************************************************/
@@ -258,3 +206,91 @@ INSERT INTO ProveedorServicios VALUES(2, '999999999992', 'Catering', 'Proveedor 
 INSERT INTO ProveedorServicios VALUES(3, '999999999992', 'Wedding planner', 'Proveedor Test 2 descripcion servicio Wedding planner', '~/images/servicios-proveedor/Rut_999999999992__ServicioID_3.jpg');
 
 INSERT INTO ProveedorVip VALUES('999999999992',20)
+
+
+/****************************************************************************/
+
+-- Insertar Servicios
+INSERT INTO Servicio
+VALUES ('Fotografia', 'Fotografia integral para fiestas y eventos')
+
+INSERT INTO Servicio
+VALUES ('Catering', 'Catering para eventos empresariales')
+
+INSERT INTO Servicio
+VALUES ('Wedding planner', 'Para que tu boda sea tal cual la imaginas')
+
+INSERT INTO Servicio
+VALUES ('Salón de fiestas', 'Salones para todo tipo de eventos: bodas, fiestas de quince, empresariales.')
+
+INSERT INTO Servicio
+VALUES ('Catering de pizzas y chivitos.', 'El catering más rico.')
+
+INSERT INTO Servicio
+VALUES ('Mozos y asadores', 'Servicio de mozos y asadores. ')
+
+INSERT INTO Servicio
+VALUES ('Animadores', 'El servicio de animadores más divertido y original del condado.')
+
+/****************************************************************************/
+
+--Insertar Tipos de eventos
+INSERT INTO TipoEvento
+VALUES ('Boda', 'Servicios para ceremonias religiosas, registro civil y fiestas')
+
+INSERT INTO TipoEvento
+VALUES ('Eventos empresariales', 'Servicios para eventos empresariales')
+
+INSERT INTO TipoEvento
+VALUES ('Fiesta de 15', 'Servicios para fiestas de quince')
+
+INSERT INTO TipoEvento
+VALUES ('Cumpleaños infantiles', 'Servicios para cumpleaños infantiles')
+
+INSERT INTO TipoEvento
+VALUES ('Divorcios', 'Servicios para celebrar los momentos más felices de la vida.')
+
+INSERT INTO TipoEvento
+VALUES ('Alquiler de carpas y gazebos', 'Servicios para celebrar los momentos más felices de la vida.')
+
+
+/****************************************************************************/
+
+--Insertar Tipos de eventos y servicios
+--Fotografia y Boda
+INSERT INTO TipoEventoYServicio
+VALUES (1,1002)
+
+--Fotografia y eventos empresariales
+INSERT INTO TipoEventoYServicio
+VALUES (1,1003)
+
+--Fotografia y Fiesta de 15
+INSERT INTO TipoEventoYServicio
+VALUES (1,1004)
+
+--Fotografia y Cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (1,1005)
+
+--Fotografia y Divorcios
+INSERT INTO TipoEventoYServicio
+VALUES (1,1006)
+
+--Catering y eventos empresariales
+INSERT INTO TipoEventoYServicio
+VALUES (2,1003)
+
+--Catering y cumpleaños infantiles
+INSERT INTO TipoEventoYServicio
+VALUES (2,1005)
+
+--Catering y cumpleaños Fiesta de 15
+INSERT INTO TipoEventoYServicio
+VALUES (2,1004)
+
+--Wedding planner y boda
+INSERT INTO TipoEventoYServicio
+VALUES (3,1002)
+
+/****************************************************************************/
