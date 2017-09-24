@@ -153,3 +153,4 @@ WcfServiceModificarParametros/obj/*
 WcfServiceModificarParametros/bin/
 WcfServiceModificarParametros/bin/*
 
+WcfGuardarCatalogoTxt/config/catalogo.txt
