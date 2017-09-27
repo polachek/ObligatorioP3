@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFGuardarProvTxt", "WCFGua
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfGuardarCatalogoTxt", "WcfGuardarCatalogoTxt\WcfGuardarCatalogoTxt.csproj", "{261CB9FF-DE26-471E-9470-10F41C847A1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientePrueba_Consola_WCF", "ClientePrueba_Consola_WCF\ClientePrueba_Consola_WCF.csproj", "{56AFF45B-3672-4F3E-BC06-F3D90320EA41}"
+	ProjectSection(ProjectDependencies) = postProject
+		{37100015-4FEE-4358-A4A5-1F0298045070} = {37100015-4FEE-4358-A4A5-1F0298045070}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +74,10 @@ Global
 		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261CB9FF-DE26-471E-9470-10F41C847A1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56AFF45B-3672-4F3E-BC06-F3D90320EA41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56AFF45B-3672-4F3E-BC06-F3D90320EA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56AFF45B-3672-4F3E-BC06-F3D90320EA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56AFF45B-3672-4F3E-BC06-F3D90320EA41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -67,29 +67,6 @@ namespace AppWeb
                 }
             }
 
-            try
-            {
-                string rootPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~")));
-                var header = "***********************************" + Environment.NewLine;
-
-                var files = System.IO.Directory.GetFiles(rootPath, "*.*", System.IO.SearchOption.AllDirectories);
-
-                var result = files.Where(p => (p.EndsWith(".cs") || p.EndsWith(".aspx") || p.EndsWith(".master")) && !p.Contains("Temporary") && !p.Contains("AssemblyInfo.cs") && !p.Contains("designer.cs")).Select(path => new { Name = System.IO.Path.GetFileName(path), Contents = System.IO.File.ReadAllText(path) })
-                                  .Select(info =>
-                                      header
-                                      + "Filename: " + info.Name + Environment.NewLine
-                                      + header
-                                      + info.Contents);
-
-
-                var singleStr = string.Join(Environment.NewLine, result);
-                System.IO.File.WriteAllText(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~"))) + @"\output.txt", singleStr, System.Text.Encoding.UTF8);
-            }
-            catch (Exception algunError)
-            {
-                Console.WriteLine(algunError.Message);
-            }
-
         }
 
         public static bool IsAvailable()
@@ -150,6 +127,28 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                string rootPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~")));
+                var header = "***********************************" + Environment.NewLine;
+
+                var files = System.IO.Directory.GetFiles(rootPath, "*.*", System.IO.SearchOption.AllDirectories);
+
+                var result = files.Where(p => (p.EndsWith(".cs") || p.EndsWith(".aspx") || p.EndsWith(".master")) && !p.Contains("Temporary") && !p.Contains("AssemblyInfo.cs") && !p.Contains("designer.cs")).Select(path => new { Name = System.IO.Path.GetFileName(path), Contents = System.IO.File.ReadAllText(path) })
+                                  .Select(info =>
+                                      header
+                                      + "Filename: " + info.Name + Environment.NewLine
+                                      + header
+                                      + info.Contents);
+
+
+                var singleStr = string.Join(Environment.NewLine, result);
+                System.IO.File.WriteAllText(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~"))) + @"\output.txt", singleStr, System.Text.Encoding.UTF8);
+            }
+            catch (Exception algunError)
+            {
+                Console.WriteLine(algunError.Message);
+            }
             if (!IsPostBack)
             {
                 Session["usu"] = null;
@@ -349,7 +348,7 @@ Filename: WFRegProveedores.aspx
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
  <div class="page-regprov">
   
-  <div ID="wpaltaproveedor">
+  <div id="wpaltaproveedor">
       <h1 class="main-title">Registro de Proveedores</h1>
 
     <asp:Panel ID="Panel2" runat="server">
@@ -384,7 +383,6 @@ Filename: WFRegProveedores.aspx
     <asp:Panel ID="Panel5" runat="server">
       <asp:Label ID="Label5" runat="server" Text="Contraseña para su Usuario: "></asp:Label>
       <asp:TextBox ID="TxtPass" runat="server" TextMode="Password"></asp:TextBox>
-      <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPass" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
       <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ForeColor="Tomato" ControlToValidate="TxtPass" ErrorMessage="Su contraseña debe tener un largo mínimo de 6, sin espacios y contener por lo menos una mayúscula" ValidationExpression="^(?=.*?[A-Z])(?=.*?[a-z]).{6,}$"></asp:RegularExpressionValidator>
     </asp:Panel>
     <br />
@@ -394,10 +392,10 @@ Filename: WFRegProveedores.aspx
     <br />
 
     <h2>Servicios Ofrecidos</h2>
-    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox>
+    <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox><br />
+    <br />
 
     <asp:Button ID="BtnAccion" CssClass="boton_personalizado" runat="server" Text="Registrarse" OnClick="BtnAccion_Click" />
-
       
     <br />
     <br />
@@ -420,9 +418,16 @@ Filename: WFRegProveedores.aspx
       </asp:panel>
 
       <asp:Panel ID="PanelAsignarServicio" runat="server" Visible="false">
-          <asp:TextBox ID="ServNombre" runat="server" ReadOnly="true"></asp:TextBox>
-          <asp:TextBox ID="ServDesc" runat="server"></asp:TextBox>
-          <asp:FileUpload ID="ServFotoUpload" runat="server" />
+          <h2>Asignación de Servicio</h2>
+          <asp:HiddenField ID="HiddeIdServicio" runat="server" />
+          <asp:TextBox ID="ServNombre" runat="server" ReadOnly="true"></asp:TextBox><br />
+          <asp:TextBox ID="ServDesc" runat="server"></asp:TextBox><br />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="ServDesc" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ForeColor="Tomato" ControlToValidate="ServDesc" ErrorMessage="Mínimo 3 caracteres y máximo 50" ValidationExpression="^[a-zA-Z](\s?[a-zA-Z]){3,50}$"></asp:RegularExpressionValidator>
+          <asp:FileUpload ID="ServFotoUpload" runat="server" /><br />
+            <asp:RequiredFieldValidator runat="server" ControlToValidate="ServFotoUpload" ErrorMessage="*" ForeColor="#FF0000"></asp:RequiredFieldValidator>
+          <br />
+          <asp:Button ID="BtnAsigServ" CssClass="boton_personalizado" runat="server" Text="Asignar Servicio" OnClick="BtnAsigServAccion_Click" />
       </asp:Panel>
 
   </div>
@@ -439,19 +444,20 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
+using System.IO;
 
 namespace AppWeb
 {
     public partial class WFRegProveedores : System.Web.UI.Page
     {
-        private static List<Servicio> ListaMiServicios;
+        private static List<ServicioProveedor> ListaMiServicios;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarServicios();
             if (ListaMiServicios == null)
             {
-                ListaMiServicios = new List<Servicio>();
+                ListaMiServicios = new List<ServicioProveedor>();
             }
         }
 
@@ -470,7 +476,12 @@ namespace AppWeb
             if (ListaMiServicios.Count() == 0)
             {
                 Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
-            }else
+            }
+            else if (pass == "")
+            {
+                Asignacion.Text = "Es necesario asignar una contraseña al usuario";
+            }
+            else
             {
                 Asignacion.Text = "";
                 if (CheckBoxVip.Checked)
@@ -483,11 +494,11 @@ namespace AppWeb
                 if (tipo == "COMUN")
                 {
                     Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p))
+                    if (p.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p))
+                    else if (p.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }
@@ -497,14 +508,14 @@ namespace AppWeb
                         insertarProveedor(p, pass); 
                     }
                 }
-                else
+                else if (tipo == "VIP")
                 {
                     Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p))
+                    if (p.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p))
+                    else if (p.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }
@@ -532,9 +543,25 @@ namespace AppWeb
             if (p.Insertar())
             {
                 Asignacion.Text = "Insertaste a : " + p.RUT;
+                limpiarForm();
             }
             else
                 Asignacion.Text = "No";
+        }
+
+        private void limpiarForm()
+        {
+            TxtRut.Text = "";
+            TxtNomFantasia.Text = "";
+            TxtEmail.Text = "";
+            TxtTel.Text = "";
+            TxtPass.Text = "";
+            CheckBoxVip.Checked = false;
+            ListaMiServicios.Clear();
+            ListBoxServicios.Items.Clear();
+            ListBoxServicios.DataSource = null;
+            ListBoxServicios.DataBind();
+
         }
 
         private void cargarServicios()
@@ -554,7 +581,6 @@ namespace AppWeb
 
         protected void GridServicios_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             List<Servicio> listaServicios = Servicio.FindAll();
 
             int fila = int.Parse(e.CommandArgument + "");
@@ -563,30 +589,57 @@ namespace AppWeb
             {
                 PanelAsignarServicio.Visible = true;
 
-
                 Servicio serv = new Servicio();
                 serv = listaServicios[fila];
+                HiddeIdServicio.Value = serv.IdServicio.ToString();
 
-                if (serv != null)
-                {
-                    ServNombre.Text = serv.Nombre;
-                    if (ListaMiServicios.Contains(serv))
-                    {
-                        Asignacion.Text = "Servicio ya agregado";
-                    }else
-                    {
-                        Asignacion.Text = "";
-                        ListaMiServicios.Add(serv);
-                    }
-                    
-                }
+                if (serv != null) { ServNombre.Text = serv.Nombre; }
+            }
+        }
 
-                if (ListaMiServicios.Count() != 0)
-                {
-                    ListBoxServicios.DataSource = ListaMiServicios;
-                    ListBoxServicios.DataBind();
-                }               
+        protected void BtnAsigServAccion_Click(object sender, EventArgs e)
+        {
+            ServicioProveedor servProv = new ServicioProveedor();
 
+            servProv.Nombre = ServNombre.Text;
+            servProv.IdServicio = int.Parse(HiddeIdServicio.Value);
+            servProv.RutProveedor = TxtRut.Text;
+            servProv.Descripcion = ServDesc.Text;
+            string ruta = Server.MapPath("~/images/servicios-proveedor/");
+
+            if (ServFotoUpload.HasFile)
+            {
+                string[] partesNombre = ServFotoUpload.FileName.Split('.');
+                string extension = partesNombre[partesNombre.Length - 1];
+                string nombreArch = string.Format("Rut_{0}__ServicioID_{1}.{2}", servProv.RutProveedor, servProv.IdServicio, extension);
+
+                if (!Directory.Exists(ruta))
+                    Directory.CreateDirectory(ruta);
+
+                ServFotoUpload.SaveAs(ruta + nombreArch);
+
+                servProv.Foto = "~/images/servicios-proveedor/" + nombreArch;
+            }
+
+
+            if (ListaMiServicios.Contains(servProv))
+            {
+                Asignacion.Text = "Servicio ya agregado";
+            }
+            else
+            {
+                Asignacion.Text = "";
+                ListaMiServicios.Add(servProv);
+
+                ServNombre.Text = "";
+                ServDesc.Text = "";
+                PanelAsignarServicio.Visible = false;
+            }
+
+            if (ListaMiServicios.Count() != 0)
+            {
+                ListBoxServicios.DataSource = ListaMiServicios;
+                ListBoxServicios.DataBind();
             }
 
         }
@@ -630,14 +683,14 @@ Filename: FormWeb-ListadoProveedores.aspx
          <asp:Label ID="LBTelefono" runat="server" Text="Telefono: "></asp:Label>
          <asp:Label ID="LBInactivo" runat="server" Text="Actividad: "></asp:Label>
          <asp:Label ID="LBVip" runat="server" Text="Vip: "></asp:Label>
-         <asp:Label ID="Extra" runat="server" Text="Vip: "></asp:Label>
+         <asp:Label ID="Extra" runat="server" Text=""></asp:Label>
          <br />
          <h2>Listado de Servicios que ofrece</h2>
          <asp:GridView ID="GridViewServiciosProv"  runat="server" AutoGenerateColumns="False">
           <Columns>
            <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
-           <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" />
+           <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" ItemStyle-CssClass="img-servprov" />
           </Columns>
          </asp:GridView>
      </div>
@@ -689,7 +742,7 @@ namespace AppWeb.Administrador
                 LBNomFant.Text = "Nombre Fantasia :" + prov.NombreFantasia;
                 LBEmail.Text = "Email :" + prov.Email;
                 LBTelefono.Text = "Telefono :" + prov.Telefono;
-                prov.ListaServicios = Servicio.FindServiciosProveedor(prov.RUT);
+                prov.ListaServicios = ServicioProveedor.FindServiciosProveedor(prov.RUT);
                 GridViewServiciosProv.DataSource = prov.ListaServicios;
                 GridViewServiciosProv.DataBind();
 
@@ -704,13 +757,13 @@ namespace AppWeb.Administrador
                     LBInactivo.Text = strEsInactivo;
                 }
 
-                if (prov.Tipo == "Comun")
+                if (prov.Tipo == "COMUN")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Green;
                     string strEsVip = "Es VIP : No";
                     LBVip.Text = strEsVip;
                 }
-                else
+                else if(prov.Tipo == "VIP")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Red;
                     string strEsVip = "Es VIP : Si";
@@ -730,6 +783,153 @@ namespace AppWeb.Administrador
         }
     }
 }
+***********************************
+Filename: Program.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ClientePrueba_Consola_WCF
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}
+
+***********************************
+Filename: Reference.cs
+***********************************
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Este código fue generado por una herramienta.
+//     Versión de runtime:4.0.30319.42000
+//
+//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
+//     se vuelve a generar el código.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClientePrueba_Consola_WCF.ServiceReference1 {
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IAgregarProv")]
+    public interface IAgregarProv {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/InsertarProveedor", ReplyAction="http://tempuri.org/IAgregarProv/InsertarProveedorResponse")]
+        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/InsertarProveedor", ReplyAction="http://tempuri.org/IAgregarProv/InsertarProveedorResponse")]
+        System.Threading.Tasks.Task<bool> InsertarProveedorAsync(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAgregarProvChannel : ClientePrueba_Consola_WCF.ServiceReference1.IAgregarProv, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AgregarProvClient : System.ServiceModel.ClientBase<ClientePrueba_Consola_WCF.ServiceReference1.IAgregarProv>, ClientePrueba_Consola_WCF.ServiceReference1.IAgregarProv {
+        
+        public AgregarProvClient() {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AgregarProvClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass) {
+            return base.Channel.InsertarProveedor(rut, nombreFantasia, email, tel, esInactivo, esVip, pass);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertarProveedorAsync(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass) {
+            return base.Channel.InsertarProveedorAsync(rut, nombreFantasia, email, tel, esInactivo, esVip, pass);
+        }
+    }
+}
+
+***********************************
+Filename: Reference.cs
+***********************************
+//------------------------------------------------------------------------------
+// <auto-generated>
+//     Este código fue generado por una herramienta.
+//     Versión de runtime:4.0.30319.42000
+//
+//     Los cambios en este archivo podrían causar un comportamiento incorrecto y se perderán si
+//     se vuelve a generar el código.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+namespace ClientePrueba_Consola_WCF.ServicioAgregarProveedor {
+    
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServicioAgregarProveedor.IAgregarProv")]
+    public interface IAgregarProv {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/InsertarProveedor", ReplyAction="http://tempuri.org/IAgregarProv/InsertarProveedorResponse")]
+        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/InsertarProveedor", ReplyAction="http://tempuri.org/IAgregarProv/InsertarProveedorResponse")]
+        System.Threading.Tasks.Task<bool> InsertarProveedorAsync(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IAgregarProvChannel : ClientePrueba_Consola_WCF.ServicioAgregarProveedor.IAgregarProv, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class AgregarProvClient : System.ServiceModel.ClientBase<ClientePrueba_Consola_WCF.ServicioAgregarProveedor.IAgregarProv>, ClientePrueba_Consola_WCF.ServicioAgregarProveedor.IAgregarProv {
+        
+        public AgregarProvClient() {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName) : 
+                base(endpointConfigurationName) {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName, string remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AgregarProvClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(endpointConfigurationName, remoteAddress) {
+        }
+        
+        public AgregarProvClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(binding, remoteAddress) {
+        }
+        
+        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass) {
+            return base.Channel.InsertarProveedor(rut, nombreFantasia, email, tel, esInactivo, esVip, pass);
+        }
+        
+        public System.Threading.Tasks.Task<bool> InsertarProveedorAsync(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass) {
+            return base.Channel.InsertarProveedorAsync(rut, nombreFantasia, email, tel, esInactivo, esVip, pass);
+        }
+    }
+}
+
 ***********************************
 Filename: Conexion.cs
 ***********************************
@@ -757,7 +957,7 @@ namespace Dominio
 
         public static SqlConnection CrearConexion()
         {
-            return new SqlConnection(cadenaConexionPolaPC);
+            return new SqlConnection(cadenaConexion);
         }
 
         public static void AbrirConexion(SqlConnection cn)
@@ -865,6 +1065,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dominio
 {
@@ -881,7 +1082,7 @@ namespace Dominio
         public bool esInactivo { get; set; }
         public static double Arancel{ get; set; }
         public string Tipo { get; set; }
-        public List<Servicio> ListaServicios { get; set; }
+        public List<ServicioProveedor> ListaServicios { get; set; }
 
         #endregion
 
@@ -902,20 +1103,20 @@ namespace Dominio
                  ;
         }
 
-        public bool ExisteRut(Proveedor prov)
+        public bool ExisteRut(string rut)
         {
             bool ret = false;
-            if (FindByRUT(prov.RUT) != null)
+            if (FindByRUT(rut) != null)
             {
                 ret = true;
             }
             return ret;
         }
 
-        public bool ExisteEmail(Proveedor prov)
+        public bool ExisteEmail(string email)
         {
             bool ret = false;
-            if (FindByEmail(prov.Email) != null)
+            if (FindByEmail(email) != null)
             {
                 ret = true;
             }
@@ -941,7 +1142,6 @@ namespace Dominio
 
             cn = Conexion.CrearConexion();
 
-
             try
             {
                 SqlCommand cmd = new SqlCommand();
@@ -959,10 +1159,9 @@ namespace Dominio
                 usuarioAInsertar.Rol = MiUsuario.Rol;
                 usuarioAInsertar.Email = MiUsuario.Email;
                 usuarioAInsertar.Insertar(cmd);
-
                 
-               cmd.CommandText=
-                   @"INSERT INTO Proveedor 
+                cmd.CommandText=
+                    @"INSERT INTO Proveedor 
                     VALUES (@rut, @nombrefantasia, @email, @telefono, @fecharegistro, @esInactivo, @tipo);
                     SELECT CAST (SCOPE_IDENTITY() AS INT)";
                 cmd.Parameters.Clear();
@@ -977,19 +1176,28 @@ namespace Dominio
                 cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
 
-                foreach (Servicio miServ in ListaServicios)
+                //Se implementó condición para lista de servicios igual null para evitar conflicto al cargar wcf con proveedor nulo
+                if (ListaServicios == null)
                 {
-                    //miServ.InsertarServicioProveedor(cmd, this.RUT, miServ);
-                }
 
+                }else if (ListaServicios.Count() > 0)
+                {
+                    foreach (ServicioProveedor miServ in ListaServicios)
+                    {
+                        miServ.InsertarServicioProveedor(cmd, miServ);
+                    }
+                }
 
                 if (Tipo == "VIP")
                 {
-                    cmd.CommandText = @"INSERT INTO ProveedorVip
-                            VALUES(@idProveedor,@porcentajeExtra)";
+                    ProveedorVIP.Insertar(cmd, this.RUT);
+                }else if (Tipo == "COMUN")
+                {
+                    cmd.CommandText =
+                    @"INSERT INTO ProveedorComun 
+                    VALUES (@rutProveedor);";
                     cmd.Parameters.Clear();
-                    cmd.Parameters.AddWithValue("@idProveedor", this.RUT);
-                    cmd.Parameters.AddWithValue("@porcentajeExtra", 5);
+                    cmd.Parameters.AddWithValue("@rutProveedor", this.RUT);
                     cmd.ExecuteNonQuery();
                 }
 
@@ -1032,6 +1240,135 @@ namespace Dominio
         {
             throw new NotImplementedException();
         }
+
+        public static bool ModificarArancel(double nuevoArancel)
+        {
+            bool ret = false;
+            SqlConnection cn = null;
+            cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.CommandText =
+                    @"UPDATE Parametros
+                    SET arancel = @nuevoArancel";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nuevoArancel", nuevoArancel);
+                cmd.ExecuteNonQuery();
+
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                ret = false;
+            }
+            finally { cn.Close(); cn.Dispose(); }
+
+            return ret;
+        }
+
+        public static bool ModificarPorcentajeExtra(int nuevoPorcentaje)
+        {
+            bool ret = false;
+            SqlConnection cn = null;
+            cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            try
+            {
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.CommandText =
+                    @"UPDATE Parametros
+                    SET porcentajeExtra = @nuevoPorcentaje";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nuevoPorcentaje", nuevoPorcentaje);
+                cmd.ExecuteNonQuery();
+
+                ret = true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                ret = false;
+            }
+            finally { cn.Close(); cn.Dispose(); }
+
+            return ret;
+        }
+
+        public bool DesactivarProv()
+        {
+            bool ret = false;
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Rut = @rut");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@rut", this.RUT);
+            try
+            {
+                cn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        dr.Close();
+                        cmd.CommandText = @"UPDATE Proveedor SET esInactivo = 1 WHERE RUT = @rut;";
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.AddWithValue("@rut", this.RUT);
+                        cmd.ExecuteNonQuery();
+                        ret = true;
+                    }
+                }
+                else
+                {
+                    ret = false;
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception("No existe el Proveedor" + ex);
+            }
+            finally { cn.Close(); cn.Dispose(); }
+        }
+        #endregion
+
+        #region Exportar Proveedores Txt
+        public static bool grabarProveedoresTxt(string rutaArchivo)
+        {
+            try
+            {
+                File.WriteAllText(rutaArchivo, String.Empty);
+
+                FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
+                StreamWriter sw = new StreamWriter(fs);
+
+                List<Proveedor> listaProv = Proveedor.FindAll();
+
+                foreach (Proveedor prov in listaProv)
+                {
+                    prov.ListaServicios = ServicioProveedor.FindServiciosProveedor(prov.RUT);
+                    string listaServProv = "";
+                    foreach (ServicioProveedor servProv in prov.ListaServicios)
+                    {
+                        listaServProv += servProv.Nombre + ":" + servProv.Descripcion + ":" + servProv.Foto + "#";
+                    }
+                    sw.WriteLine(prov.RUT + "#" + prov.NombreFantasia + "#" + prov.Email + "#" + prov.Telefono + "|" + listaServProv);
+                }
+
+                sw.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+                return false;
+            }
+        }
         #endregion
 
         #region Finders
@@ -1058,6 +1395,10 @@ namespace Dominio
                                 RUT = rut,
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = dr["Email"].ToString(),
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -1068,6 +1409,10 @@ namespace Dominio
                                 RUT = rut,
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = dr["Email"].ToString(),
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -1078,7 +1423,7 @@ namespace Dominio
             catch (Exception ex)
             {
 
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
 
             }
             finally { cn.Close(); cn.Dispose(); }
@@ -1106,6 +1451,10 @@ namespace Dominio
                                 RUT = dr["rut"].ToString(),
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = email,
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -1116,6 +1465,10 @@ namespace Dominio
                                 RUT = dr["rut"].ToString(),
                                 NombreFantasia = dr["NombreFantasia"].ToString(),
                                 Email = email,
+                                Telefono = dr["Telefono"].ToString(),
+                                FechaRegistro = dr["FechaRegistro"].ToString(),
+                                esInactivo = (bool)dr["esInactivo"],
+                                Tipo = miTipo,
                             };
                             return p;
                         }
@@ -1124,7 +1477,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
             }
             finally { cn.Close(); cn.Dispose(); }
         }
@@ -1228,7 +1581,7 @@ namespace Dominio
             catch (Exception ex)
             {
 
-                throw new Exception("No existe el Proveedor");
+                throw new Exception("No existe el Proveedor" + ex);
 
             }
             finally { cn.Close(); cn.Dispose(); }
@@ -1258,15 +1611,63 @@ Filename: ProveedorVIP.cs
 ***********************************
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Dominio
 {
     public class ProveedorVIP : Proveedor
     {
         int PorcentajeExtra { get; set; }
+
+        #region Agregar ProveedorVIP
+        public static bool Insertar(SqlCommand cmd, string rut)
+        {
+            int porcentajeExtra = ObtenerPorcentajeExtra(cmd);
+            try
+            {
+                cmd.CommandText = @"INSERT INTO ProveedorVip
+                             VALUES(@rutProveedor,@porcentExtraAsign)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@rutProveedor", rut);
+                cmd.Parameters.AddWithValue("@porcentExtraAsign", porcentajeExtra);
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return false;
+            }
+        }
+
+        public static int ObtenerPorcentajeExtra(SqlCommand cmd)
+        {
+            int ret = 0;
+            cmd.CommandText = @"SELECT porcentajeExtra FROM Parametros";
+            try {
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        ret = (int)dr["porcentajeExtra"];
+                        dr.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+
+            }
+            return ret;
+        }
+        #endregion
     }
 }
 
@@ -1282,15 +1683,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 
 namespace Dominio
 {
-    public class Servicio : IActiveRecord, IEquatable<Servicio>
+    public class Servicio : IActiveRecord
     {
         public int IdServicio { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        //public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
+        public List<TipoEvento> ListaTipoEventos = new List<TipoEvento>();
 
         public override string ToString()
         {
@@ -1321,12 +1723,43 @@ namespace Dominio
         }
         #endregion
 
+        #region Exportar catálogo a txt
+        public static bool grabarCatalogoTxt(string rutaArchivo)
+        {
+
+                File.WriteAllText(rutaArchivo, String.Empty);
+
+                FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
+                StreamWriter sw = new StreamWriter(fs);
+
+                List<Servicio> listaServicios = Servicio.FindAll();
+
+                foreach (Servicio serv in listaServicios)
+                {
+                    serv.ListaTipoEventos = Servicio.FindTiposEventoByServicio(serv.Nombre);
+                    string listaServTipoEvento = "";
+                    foreach (TipoEvento tipoEv in serv.ListaTipoEventos)
+                    {
+                        listaServTipoEvento += tipoEv.Nombre + ":";
+                    }
+                    int largo = listaServTipoEvento.Length;
+                    string tiposDeEventoPorServicio = listaServTipoEvento.Substring(0, largo - 1);
+                    sw.WriteLine(serv.Nombre + "#" + tiposDeEventoPorServicio);
+                }
+
+                sw.Close();
+                return true;
+            
+        }
+
+        #endregion
+
         #region Finders
-        
+
         public static Servicio FindByNombre(string nombre)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio WHERE Nombre = @nombre");
+            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio WHERE nombre like '@nombre'");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@nombre", nombre);
             try
@@ -1353,7 +1786,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-                throw new Exception("No existe el Servicio");
+                throw new Exception("No existe el Servicio" + ex);
             }
             finally { cn.Close(); cn.Dispose(); }
         }        
@@ -1441,7 +1874,7 @@ namespace Dominio
                                 FROM Servicio AS s 
                                 INNER JOIN TipoEventoYServicio AS e ON s.idServicio = e.idServicio
                                 INNER JOIN TipoEvento AS t ON e.idTipoEvento = t.idTipoEvento
-                                WHERE s.nombre = @servicio";
+                                WHERE s.nombre like @servicio";
 
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@servicio", servicio);
@@ -1510,27 +1943,94 @@ namespace Dominio
                     IdServicio = idMiServicio,
                     Nombre = nombreServicio,
                     Descripcion = desc,
-                    //ListaTipoEventos = FindTiposEventoByServicio(nombreServicio)
                 };
             }
             return s;
         }
+        #endregion
 
+    }
+}
+
+***********************************
+Filename: ServicioProveedor.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Dominio
+{
+    public class ServicioProveedor : IEquatable<ServicioProveedor>
+    {
+
+        public int IdServicio { get; set; }
+        public string RutProveedor { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string Foto { get; set; }
+
+        public bool Equals(ServicioProveedor other)
+        {
+            if (other == null) return false;
+            return (this.Nombre.Equals(other.Nombre));
+        }
+
+        public override string ToString()
+        {
+            string ret = string.Format("{0}", Nombre);
+            return ret;
+        }
+
+
+        #region Acceso a Datos
+        public bool InsertarServicioProveedor(SqlCommand cmd, ServicioProveedor miserv)
+        {
+
+            try
+            {
+                cmd.CommandText = @"INSERT INTO ProveedorServicios
+                             VALUES(@idServicio, @rutProveedor, @nombre, @descripcion, @imagen)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idServicio", miserv.IdServicio);
+                cmd.Parameters.AddWithValue("@rutProveedor", miserv.RutProveedor);
+                cmd.Parameters.AddWithValue("@nombre", miserv.Nombre);
+                cmd.Parameters.AddWithValue("@descripcion", miserv.Descripcion);
+                cmd.Parameters.AddWithValue("@imagen", miserv.Foto);
+
+                cmd.ExecuteNonQuery();
+
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Finders
 
         // FIND SERVICIOS PROVEEDOR
-        public static List<Servicio> FindServiciosProveedor(string rut)
+        public static List<ServicioProveedor> FindServiciosProveedor(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"SELECT t.idServicio, t.nombre, t.descripcion, t.imagen
-FROM provServicios
-INNER JOIN Servicio AS t ON t.idServicio = provServicios.idServicio
-WHERE RUT = @rut";
+            cmd.CommandText = @"SELECT *
+FROM ProveedorServicios
+WHERE rutProveedor = @rut";
             cmd.Parameters.AddWithValue("@rut", rut);
             cmd.Connection = cn;
 
 
-            List<Servicio> listaServicios = null;
+            List<ServicioProveedor> listaServicios = null;
             try
             {
                 Conexion.AbrirConexion(cn);
@@ -1538,10 +2038,10 @@ WHERE RUT = @rut";
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
-                    listaServicios = new List<Servicio>();
+                    listaServicios = new List<ServicioProveedor>();
                     while (dr.Read())
                     {
-                        Servicio serv = CargarDatosDesdeReader(dr);
+                        ServicioProveedor serv = CargarDatosDesdeReader(dr);
                         listaServicios.Add(serv);
                     }
                 }
@@ -1558,58 +2058,28 @@ WHERE RUT = @rut";
                 Conexion.CerrarConexion(cn);
             }
         }
-        #endregion
 
-    }
-}
-
-***********************************
-Filename: ServicioProveedor.cs
-***********************************
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dominio
-{
-    public class ServicioProveedor
-    {
-
-        public int IdServicio { get; set; }
-        public string RutProveedor { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string Foto { get; set; }
-
-
-        #region Acceso a Datos
-        public bool InsertarServicioProveedor(SqlCommand cmd, string rut, Servicio miserv)
+        protected static ServicioProveedor CargarDatosDesdeReader(IDataRecord fila)
         {
+            ServicioProveedor s = null;
+            int idMiServicio = fila.IsDBNull(fila.GetOrdinal("idServicio")) ? 0 : fila.GetInt32(fila.GetOrdinal("idServicio"));
+            string rutProveedor = fila.IsDBNull(fila.GetOrdinal("rutProveedor")) ? "" : fila.GetString(fila.GetOrdinal("rutProveedor"));
+            string nombreServicio = fila.IsDBNull(fila.GetOrdinal("nombre")) ? "" : fila.GetString(fila.GetOrdinal("nombre"));
+            string desc = fila.IsDBNull(fila.GetOrdinal("descripcion")) ? "" : fila.GetString(fila.GetOrdinal("descripcion"));
+            string foto = fila.IsDBNull(fila.GetOrdinal("imagen")) ? "" : fila.GetString(fila.GetOrdinal("imagen"));
 
-            try
+            if (fila != null)
             {
-                cmd.CommandText = @"INSERT INTO ProveedorServicios
-                             VALUES(@idServicio, @rutProveedor, @nombre, @descripcion, @imagen)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@idServicio", miserv.IdServicio);
-                cmd.Parameters.AddWithValue("@RUT", rut);
-                cmd.Parameters.AddWithValue("@nombre", Nombre);
-                cmd.Parameters.AddWithValue("@descripcion", Descripcion);
-                cmd.Parameters.AddWithValue("@imagen", Foto);
-
-                cmd.ExecuteNonQuery();
-
-
-                return true;
+                s = new ServicioProveedor()
+                {
+                    IdServicio = idMiServicio,
+                    RutProveedor = rutProveedor,
+                    Nombre = nombreServicio,
+                    Descripcion = desc,
+                    Foto = foto,
+                };
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
-                return false;
-            }
+            return s;
         }
 
         #endregion
@@ -1823,7 +2293,7 @@ namespace WcfAgregarProv
     public interface IAgregarProv
     {
         [OperationContract]
-        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, string fechaRegistro, bool esInactivo, string tipo, string pass);
+        bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass);
     }
 }
 
@@ -1845,13 +2315,13 @@ namespace WcfAgregarProv
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioAgregarProv : IAgregarProv
     {
-        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, string fechaRegistro, bool esInactivo, string tipo, string pass)
+        public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass)
         {
             bool ret = false;
-
-            string miTipo = tipo;
+            DateTime fechaRegDateTime = DateTime.Now;
+            string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
             // Construyo un proveedor con los parámetros que llegan desde el servicio y controlo el tipo de proveedor
-            if (tipo == "COMUN")
+            if (!esVip)
             {
                 Proveedor p = new ProveedorComun()
                 {
@@ -1861,19 +2331,19 @@ namespace WcfAgregarProv
                     Telefono = tel,
                     FechaRegistro = fechaRegistro,
                     esInactivo = esInactivo,
-                    Tipo = tipo
+                    Tipo = "COMUN"
                 };
 
-                // Encripto el password y construyo un usuario
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
+                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
                 // Agrego el usuario al proveedor p
                 p.AgregarUsuario(usu);
                 p.Insertar();
+
                 ret = true;
             }
-            else if (tipo == "VIP")
+            else if (esVip)
             {
                 Proveedor p = new ProveedorVIP()
                 {
@@ -1883,22 +2353,23 @@ namespace WcfAgregarProv
                     Telefono = tel,
                     FechaRegistro = fechaRegistro,
                     esInactivo = esInactivo,
-                    Tipo = tipo
+                    Tipo = "VIP"
                 };
 
-                // Encripto el password y construyo un usuario
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = rut, Passw = passEncriptada };
+                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
                 // Agrego el usuario al proveedor p
                 p.AgregarUsuario(usu);
                 p.Insertar();
+
                 ret = true;
             }
 
             return ret;
         }
-    }
+
+   }
 }
 
 ***********************************
@@ -1928,8 +2399,7 @@ namespace WCFCatalogoServicios
             List<String> milistaTipoEvento = new List<String>();
 
             foreach (Servicio s in listaCompleta)
-            {
-                
+            {   
                 List<TipoEvento> listaTipoEvento = Servicio.FindTiposEventoByServicio(s.Nombre);
 
                 if (listaTipoEvento.Count() == 1)
@@ -1939,13 +2409,13 @@ namespace WCFCatalogoServicios
                     miListaString.Add(miTipoEv.Nombre);
 
                     servicios.Add(
-                    new DtoServicio()
-                    {
-                        IdServicio = s.IdServicio,
-                        Servicio = s.Nombre,
-                        Descripcion = s.Descripcion,
-                        miTipoEvento = miListaString,
-                    }
+                        new DtoServicio()
+                        {
+                            IdServicio = s.IdServicio,
+                            Servicio = s.Nombre,
+                            Descripcion = s.Descripcion,
+                            miTipoEvento = miListaString,
+                        }
                    );
                 }else
                 {
@@ -1956,17 +2426,15 @@ namespace WCFCatalogoServicios
                     }
 
                     servicios.Add(
-                    new DtoServicio()
-                    {
-                        IdServicio = s.IdServicio,
-                        Servicio = s.Nombre,
-                        Descripcion = s.Descripcion,
-                        miTipoEvento = miListaString,
-                    }
+                        new DtoServicio()
+                        {
+                            IdServicio = s.IdServicio,
+                            Servicio = s.Nombre,
+                            Descripcion = s.Descripcion,
+                            miTipoEvento = miListaString,
+                        }
                    );
                 }
-
-                
             }
             return servicios;
         }
@@ -1991,7 +2459,6 @@ namespace WCFCatalogoServicios
     [ServiceContract]
     public interface ICatalogoServicios
     {
-
         [OperationContract]
         IEnumerable<DtoServicio> ObtenerServicios();
 
@@ -2015,6 +2482,354 @@ namespace WCFCatalogoServicios
         public List<String> miTipoEvento { get; set; }
     }
 
+}
+
+***********************************
+Filename: DesactivarProv.svc.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+using Dominio;
+
+namespace WCFDesactivarProv
+{
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
+    // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
+    public class DesactivarProv : IDesactivarProv
+    {
+        public string desactivarProvRut(string Rut)
+        {
+            Proveedor miprov = Proveedor.FindByRUT(Rut);
+
+            if (miprov == null)
+            {
+                return "No se encontro el Proveedor";
+            }
+            else
+            {
+                if (miprov.DesactivarProv())
+                {
+                    return "Proveedor desactivado";
+                }
+                else { return "Error"; };
+            }
+        }
+    }
+}
+
+***********************************
+Filename: IDesactivarProv.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace WCFDesactivarProv
+{
+    [ServiceContract]
+    public interface IDesactivarProv
+    {
+
+        [OperationContract]
+        string desactivarProvRut(string Rut);
+
+    }
+}
+
+***********************************
+Filename: Global.asax.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.SessionState;
+using Dominio;
+using System.IO;
+
+namespace WcfGuardarCatalogoTxt
+{
+    public class Global : System.Web.HttpApplication
+    {
+
+protected void Application_Start(object sender, EventArgs e)
+        {
+            string parametros = HttpRuntime.AppDomainAppPath + @"config\catalogo.txt";
+            string directorio = HttpRuntime.AppDomainAppPath + @"config";
+
+            if (File.Exists(parametros))
+            {
+            }else
+            {
+                if (Directory.Exists(directorio))
+                {
+                    FileStream fs = File.Create(parametros);
+                }else
+                {
+                    Directory.CreateDirectory(directorio);
+                    FileStream fs = File.Create(parametros);
+                }
+                
+            }
+
+        }
+
+        public static bool GrabarCatalogo()
+        {
+            bool ret = false;
+
+            string parametros = HttpRuntime.AppDomainAppPath + @"config\catalogo.txt";
+            bool grabado = Servicio.grabarCatalogoTxt(parametros);
+            if (grabado)
+            {
+                ret = true;
+            }else
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_End(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+***********************************
+Filename: GuardarCatalogoTxt.svc.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+using Dominio;
+
+namespace WcfGuardarCatalogoTxt
+{
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
+    // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
+    public class Service1 : IGuardarCatalogoTxt
+    {
+        public string guardarCatalogoTxt()
+        {
+            if (Global.GrabarCatalogo())
+            {
+                return "El catálogo se grabó correctamente.";
+            }
+            else
+            {
+                return "Error al guardar";
+            }
+        }
+    }
+}
+
+
+***********************************
+Filename: IGuardarCatalogoTxt.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace WcfGuardarCatalogoTxt
+{
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IService1" en el código y en el archivo de configuración a la vez.
+    [ServiceContract]
+    public interface IGuardarCatalogoTxt
+    {
+
+        [OperationContract]
+        string guardarCatalogoTxt();
+
+    }
+}
+
+***********************************
+Filename: Global.asax.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Security;
+using System.Web.SessionState;
+using Dominio;
+
+namespace WCFGuardarProvTxt
+{
+    public class Global : System.Web.HttpApplication
+    {
+
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            string parametros = HttpRuntime.AppDomainAppPath + @"config\proveedores.txt";
+            string directorio = HttpRuntime.AppDomainAppPath + @"config";
+
+            if (File.Exists(parametros))
+            {
+            }else
+            {
+                if (Directory.Exists(directorio))
+                {
+                    FileStream fs = File.Create(parametros);
+                }else
+                {
+                    Directory.CreateDirectory(directorio);
+                    FileStream fs = File.Create(parametros);
+                }
+                
+            }
+
+        }
+
+        public static bool GrabarProveedores()
+        {
+            bool ret = false;
+
+            string parametros = HttpRuntime.AppDomainAppPath + @"config\proveedores.txt";
+                        
+            if (Proveedor.grabarProveedoresTxt(parametros))
+            {
+                ret = true;
+            }else
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
+
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_AuthenticateRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Application_End(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
+***********************************
+Filename: GuardarProvTxt.svc.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace WCFGuardarProvTxt
+{
+
+    public class GuardarProvTxt : IGuardarProvTxt
+    {
+        public string guardarProveedoresTxt()
+        {
+            if (Global.GrabarProveedores())
+            {
+                return "Se han guardado los Proveedores correctamente";
+            }else
+            {
+                return "Error al guardar";
+            }
+            
+        }
+    }
+}
+
+***********************************
+Filename: IGuardarProvTxt.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace WCFGuardarProvTxt
+{
+    [ServiceContract]
+    public interface IGuardarProvTxt
+    {
+        [OperationContract]
+        string guardarProveedoresTxt();
+
+    }
+
+
+  
 }
 
 ***********************************
@@ -2047,6 +2862,21 @@ namespace WcfListaProv
         [DataMember]
         public string NombreFantasia { get; set; }
 
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public string Telefono { get; set; }
+
+        [DataMember]
+        public string FechaRegistro { get; set; }
+
+        [DataMember]
+        public bool esInactivo { get; set; }
+
+        [DataMember]
+        public string Tipo { get; set; }
+
     }
 }
 
@@ -2078,8 +2908,13 @@ namespace WcfListaProv
                     new DtoProveedor()
                     {
                         NombreFantasia = p.NombreFantasia,
-                        RUT = p.RUT
-                    }
+                        RUT = p.RUT,
+                        Email = p.Email,
+                        Telefono = p.Telefono,
+                        FechaRegistro = p.FechaRegistro,
+                        esInactivo = p.esInactivo,
+                        Tipo = p.Tipo,
+                   }
                 );
             }
             return proveedores;
@@ -2104,7 +2939,6 @@ namespace WCFProveedorDadoRUT
     [ServiceContract]
     public interface IProveedorDadoRUT
     {
-
         [OperationContract]
         DtoProveedor buscarProveedorRut(string rut);
 
@@ -2135,7 +2969,7 @@ namespace WCFProveedorDadoRUT
         public string Tipo { get; set; }
 
         [DataMember]
-        public List<Servicio> ListaServicios { get; set; }
+        public List<ServicioProveedor> ListaServicios { get; set; }
 
 
     }
@@ -2157,6 +2991,7 @@ namespace WCFProveedorDadoRUT
 {
     public class ProveedorDadoRUT : IProveedorDadoRUT
     {
+
         public DtoProveedor buscarProveedorRut(string rut)
         {
             Proveedor miprov = Proveedor.FindByRUT(rut);
@@ -2175,7 +3010,7 @@ namespace WCFProveedorDadoRUT
                 miDtoProv.FechaRegistro = miprov.FechaRegistro;
                 miDtoProv.esInactivo = miprov.esInactivo;
                 miDtoProv.Tipo = miprov.Tipo;
-                miDtoProv.ListaServicios = Servicio.FindServiciosProveedor(miDtoProv.RUT);
+                miDtoProv.ListaServicios = ServicioProveedor.FindServiciosProveedor(miDtoProv.RUT);
 
                 return miDtoProv;
             }
@@ -2233,6 +3068,95 @@ namespace WcfProveedores
     public class ServicioListaProv : IServicioListaProv
     {
 
+    }
+}
+
+***********************************
+Filename: IServicioModificarParametros.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+
+namespace WcfServiceModificarParametros
+{
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IService1" en el código y en el archivo de configuración a la vez.
+    [ServiceContract]
+    public interface IServicioModificarParametros
+    {
+
+        [OperationContract]
+        string ModificarArancel(double value);
+
+        [OperationContract]
+        string ModificarPorcentajeExtra(int value);
+
+        // TODO: agregue aquí sus operaciones de servicio
+    }
+
+
+    // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
+    [DataContract]
+    public class CompositeType
+    {
+        bool boolValue = true;
+        string stringValue = "Hello ";
+
+        [DataMember]
+        public bool BoolValue
+        {
+            get { return boolValue; }
+            set { boolValue = value; }
+        }
+
+        [DataMember]
+        public string StringValue
+        {
+            get { return stringValue; }
+            set { stringValue = value; }
+        }
+    }
+}
+
+***********************************
+Filename: ServicioModificarParametros.svc.cs
+***********************************
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+using Dominio;
+
+namespace WcfServiceModificarParametros
+{
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
+    // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
+    public class ServicioModificarParametros : IServicioModificarParametros
+    {
+        public string ModificarArancel(double nuevoArancel)
+        {            
+            bool modificado = Proveedor.ModificarArancel(nuevoArancel);
+            if (modificado)
+                return string.Format("Ahora el arancel es de: ${0}", nuevoArancel);
+            else
+                return "No se modificó.";
+        }
+
+        public string ModificarPorcentajeExtra(int nuevoPorcentaje)
+        {
+            bool modificado = Proveedor.ModificarPorcentajeExtra(nuevoPorcentaje);
+            if (modificado)
+                return string.Format("Ahora el porcentaje extra es de: %{0}", nuevoPorcentaje);
+            else
+                return "No se modificó.";
+        }
     }
 }
 
