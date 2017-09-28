@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="be90e21f-992e-4b20-a752-accd4d60e38d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51568/ServicioListaProv.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioListaProv.xsd" MetadataType="Schema" ID="d2ab98ed-f308-4303-94a7-8433922704cd" SourceId="1" SourceUrl="http://localhost:51568/ServicioListaProv.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioListaProv.disco" MetadataType="Disco" ID="fc8bf14b-9266-45be-8451-3e109777a155" SourceId="1" SourceUrl="http://localhost:51568/ServicioListaProv.svc?disco" />
+    <MetadataFile FileName="ServicioListaProv1.xsd" MetadataType="Schema" ID="20b84118-8f72-4cc9-89e7-62cf320ed68b" SourceId="1" SourceUrl="http://localhost:51568/ServicioListaProv.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioListaProv.wsdl" MetadataType="Wsdl" ID="818b8b45-8c20-4a6e-bdc9-d1dd14eeaa52" SourceId="1" SourceUrl="http://localhost:51568/ServicioListaProv.svc?wsdl" />
+    <MetadataFile FileName="ServicioListaProv2.xsd" MetadataType="Schema" ID="757b9ebf-ab08-4940-b948-bb4d21f45750" SourceId="1" SourceUrl="http://localhost:51568/ServicioListaProv.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

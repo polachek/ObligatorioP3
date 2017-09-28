@@ -13,13 +13,9 @@ namespace AppWeb
         {
             if (Session["User"] == null)
             {
-                System.Windows.Forms.MessageBox.Show("Es necesario estar Logeado para ver esta seccion");
+                System.Windows.Forms.MessageBox.Show("Para ver este contenido debes iniciar sesión.");
                 Response.Redirect("~/Login.aspx");
             }
         }
-
-
-
-
     }
 }

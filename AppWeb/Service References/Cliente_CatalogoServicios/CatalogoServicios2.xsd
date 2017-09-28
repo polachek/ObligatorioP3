@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFCatalogoServicios" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFCatalogoServicios" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:53817/CatalogoServicios.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="ArrayOfDtoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DtoServicio" nillable="true" type="tns:DtoServicio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDtoServicio" nillable="true" type="tns:ArrayOfDtoServicio" />
+  <xs:complexType name="DtoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdServicio" type="xs:int" />
+      <xs:element minOccurs="0" name="Servicio" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="miTipoEvento" nillable="true" type="q1:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DtoServicio" nillable="true" type="tns:DtoServicio" />
+</xs:schema>

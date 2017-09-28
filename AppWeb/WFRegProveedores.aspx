@@ -3,7 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
  <div class="page-regprov">
-  
   <div id="wpaltaproveedor">
       <h1 class="main-title">Registro de Proveedores</h1>
 

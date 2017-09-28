@@ -48,6 +48,8 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -72,8 +74,144 @@
     <Content Include="packages.config" />
     <Content Include="PanelAdministrador.aspx" />
     <Content Include="PanelProveedor.aspx" />
+    <None Include="Service References\Cliente_AgregarProv\ServicioAgregarProv.disco" />
+    <None Include="Service References\Cliente_AgregarProv\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_AgregarProv\configuration.svcinfo" />
+    <None Include="Service References\Cliente_AgregarProv\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\Cliente_CatalogoServicios\AppWeb.Cliente_CatalogoServicios.DtoServicio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\Cliente_AgregarProv\ServicioAgregarProv.wsdl" />
+    <None Include="Service References\Cliente_AgregarProv\ServicioAgregarProv.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_AgregarProv\ServicioAgregarProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios.wsdl" />
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_DesactivarProv\DesactivarProv.wsdl" />
+    <None Include="Service References\Cliente_DesactivarProv\DesactivarProv.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_DesactivarProv\DesactivarProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\GuardarCatalogoTxt.disco" />
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\configuration.svcinfo" />
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Cliente_GuardarProvTxt\GuardarProvTxt.disco" />
+    <None Include="Service References\Cliente_GuardarProvTxt\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_GuardarProvTxt\configuration.svcinfo" />
+    <None Include="Service References\Cliente_GuardarProvTxt\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Cliente_CatalogoServicios\CatalogoServicios.disco" />
+    <None Include="Service References\Cliente_CatalogoServicios\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_CatalogoServicios\configuration.svcinfo" />
+    <None Include="Service References\Cliente_CatalogoServicios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Cliente_DesactivarProv\DesactivarProv.disco" />
+    <None Include="Service References\Cliente_DesactivarProv\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_DesactivarProv\configuration.svcinfo" />
+    <None Include="Service References\Cliente_DesactivarProv\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\Cliente_ListaProv\AppWeb.Cliente_ListaProv.DtoProveedor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\Cliente_ListaProv\ServicioListaProv.disco" />
+    <None Include="Service References\Cliente_ListaProv\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_ListaProv\configuration.svcinfo" />
+    <None Include="Service References\Cliente_ListaProv\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\Cliente_ModificarParametros\ServicioModificarParametros.disco" />
+    <None Include="Service References\Cliente_ModificarParametros\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_ModificarParametros\configuration.svcinfo" />
+    <None Include="Service References\Cliente_ModificarParametros\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Service References\Cliente_ProveedorDadoRUT\AppWeb.Cliente_ProveedorDadoRUT.DtoProveedor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\Cliente_ListaProv\ServicioListaProv.wsdl" />
+    <None Include="Service References\Cliente_ListaProv\ServicioListaProv.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ListaProv\ServicioListaProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ListaProv\ServicioListaProv2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ModificarParametros\ServicioModificarParametros.wsdl" />
+    <None Include="Service References\Cliente_ModificarParametros\ServicioModificarParametros.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ModificarParametros\ServicioModificarParametros1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT.disco" />
+    <None Include="Service References\Cliente_ProveedorDadoRUT\configuration91.svcinfo" />
+    <None Include="Service References\Cliente_ProveedorDadoRUT\configuration.svcinfo" />
+    <None Include="Service References\Cliente_ProveedorDadoRUT\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Sitio.Master" />
     <Content Include="WFRegProveedores.aspx" />
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\GuardarCatalogoTxt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\GuardarCatalogoTxt1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_GuardarCatalogoTxt\Service1.wsdl" />
+    <None Include="Service References\Cliente_GuardarProvTxt\GuardarProvTxt.wsdl" />
+    <None Include="Service References\Cliente_GuardarProvTxt\GuardarProvTxt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_GuardarProvTxt\GuardarProvTxt1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT.wsdl" />
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Cliente_ProveedorDadoRUT\ProveedorDadoRUT3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -125,6 +263,46 @@
       <DependentUpon>PanelProveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\Cliente_AgregarProv\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_CatalogoServicios\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_DesactivarProv\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_GuardarCatalogoTxt\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_GuardarProvTxt\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_ListaProv\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_ModificarParametros\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Cliente_ProveedorDadoRUT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Sitio.Master.cs">
       <DependentUpon>Sitio.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -145,6 +323,19 @@
       <Project>{d1a9c1a9-d5d7-40ec-9ed0-e786a1acc496}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Cliente_AgregarProv\" />
+    <WCFMetadataStorage Include="Service References\Cliente_CatalogoServicios\" />
+    <WCFMetadataStorage Include="Service References\Cliente_DesactivarProv\" />
+    <WCFMetadataStorage Include="Service References\Cliente_GuardarCatalogoTxt\" />
+    <WCFMetadataStorage Include="Service References\Cliente_GuardarProvTxt\" />
+    <WCFMetadataStorage Include="Service References\Cliente_ListaProv\" />
+    <WCFMetadataStorage Include="Service References\Cliente_ModificarParametros\" />
+    <WCFMetadataStorage Include="Service References\Cliente_ProveedorDadoRUT\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
