@@ -6,3 +6,11 @@ C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP
 C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.csprojResolveAssemblyReference.cache
 C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.dll
 C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.pdb
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.dll.config
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.dll
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.pdb
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.dll
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.pdb
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.csprojResolveAssemblyReference.cache
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.dll
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.pdb

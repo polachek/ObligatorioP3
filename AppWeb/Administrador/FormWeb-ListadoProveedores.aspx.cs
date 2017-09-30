@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Dominio;
 
-namespace AppWeb.Administrador
+namespace AppWeb
 {
     public partial class FormWeb_ListadoProveedores : System.Web.UI.Page
     {
@@ -42,11 +42,13 @@ namespace AppWeb.Administrador
                 GridViewServiciosProv.DataSource = prov.ListaServicios;
                 GridViewServiciosProv.DataBind();
 
-                if (!prov.esInactivo) {
+                if (!prov.esInactivo)
+                {
                     LBInactivo.ForeColor = System.Drawing.Color.Green;
                     string strEsInactivo = "Es Inactivo : No";
                     LBInactivo.Text = strEsInactivo;
-                }else
+                }
+                else
                 {
                     LBInactivo.ForeColor = System.Drawing.Color.Red;
                     string strEsInactivo = "Es Inactivo : Si";
@@ -59,7 +61,7 @@ namespace AppWeb.Administrador
                     string strEsVip = "Es VIP : No";
                     LBVip.Text = strEsVip;
                 }
-                else if(prov.Tipo == "VIP")
+                else if (prov.Tipo == "VIP")
                 {
                     LBVip.ForeColor = System.Drawing.Color.Red;
                     string strEsVip = "Es VIP : Si";
@@ -70,12 +72,13 @@ namespace AppWeb.Administrador
                 {
                     int porcentExt = Proveedor.FindPorcentajeVip(prov.RUT);
                     Extra.Text = "Porcentaje extra: " + porcentExt;
-                }else
+                }
+                else
                 {
                     Extra.Text = "";
                 }
             }
-           
+
         }
     }
 }

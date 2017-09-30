@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace AppWeb.Administrador {
+namespace AppWeb {
     
     
     public partial class FormWeb_ListadoProveedores {

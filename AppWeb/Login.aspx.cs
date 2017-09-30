@@ -42,7 +42,7 @@ namespace AppWeb
                 // Si el rol es 1 => el usuario es ADMINISTRADOR
                 else if (Session["Rol"].ToString() == "1")
                 {
-                    Response.Redirect("~/PanelAdministrador.aspx");
+                    Response.Redirect("~/Administrador/ServicioBuscarProv.aspx");
                 }
                 else
                 {

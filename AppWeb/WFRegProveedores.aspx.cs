@@ -14,9 +14,7 @@ namespace AppWeb
         private static List<ServicioProveedor> ListaMiServicios;
 
         protected void Page_Load(object sender, EventArgs e)
-        {
-            Cliente_AgregarProv.AgregarProvClient cli = new Cliente_AgregarProv.AgregarProvClient();
-            
+        {            
             cargarServicios();
             if (ListaMiServicios == null)
             {

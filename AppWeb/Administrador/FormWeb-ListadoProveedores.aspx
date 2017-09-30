@@ -1,9 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Sitio.Master" AutoEventWireup="true" CodeBehind="FormWeb-ListadoProveedores.aspx.cs" Inherits="AppWeb.Administrador.FormWeb_ListadoProveedores" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadSitio" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
-
-  <div class="page-listado-proveedores">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Administrador/Administrador.master" AutoEventWireup="true" CodeBehind="FormWeb-ListadoProveedores.aspx.cs" Inherits="AppWeb.FormWeb_ListadoProveedores" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContenidoAdmin" runat="server">
+     <div class="page-listado-proveedores">
     <h1>Listado de Proveedores</h1>
 
     <asp:Panel ID="Panel1" runat="server">
@@ -41,9 +38,4 @@
            <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" />
            <asp:ImageField DataImageUrlField="Foto" HeaderText="Foto" ItemStyle-CssClass="img-servprov" />
           </Columns>
-         </asp:GridView>
-     </div>
-    </asp:Panel>
-
-  </div>
 </asp:Content>

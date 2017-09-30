@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e1f8e59d-ca91-4580-8a0e-440506b05126" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:54486/ProveedorDadoRUT.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProveedorDadoRUT.wsdl" MetadataType="Wsdl" ID="cf664563-5040-4269-93d9-3b7727274f61" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?wsdl" />
+    <MetadataFile FileName="ProveedorDadoRUT.xsd" MetadataType="Schema" ID="1da186d8-6421-4631-8d38-6ce92f87bec5" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd1" />
+    <MetadataFile FileName="ProveedorDadoRUT.disco" MetadataType="Disco" ID="57dff66d-e83c-424e-bbef-18dc9dd79158" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?disco" />
+    <MetadataFile FileName="ProveedorDadoRUT1.xsd" MetadataType="Schema" ID="e01c7837-3208-4ac3-8bc2-3cc7d54f1cb9" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd2" />
+    <MetadataFile FileName="ProveedorDadoRUT2.xsd" MetadataType="Schema" ID="45e3c9da-3ebc-41c3-ba16-ed783be60678" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd0" />
+    <MetadataFile FileName="ProveedorDadoRUT3.xsd" MetadataType="Schema" ID="2b5579be-fd55-4996-940b-8ebeea5e6e01" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
