@@ -317,12 +317,12 @@ namespace Dominio
         public static Proveedor FindByRUT(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Rut = @rut");
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Proveedor WHERE Rut = @rut");
             cmd.Connection = cn;
             cmd.Parameters.AddWithValue("@rut", rut);
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -379,7 +379,7 @@ namespace Dominio
             cmd.Parameters.AddWithValue("@email", email);
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                     if (dr.Read())
@@ -505,7 +505,7 @@ namespace Dominio
             cmd.Parameters.AddWithValue("@rut", rut);
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {

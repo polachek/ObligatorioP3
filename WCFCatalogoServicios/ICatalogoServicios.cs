@@ -16,8 +16,9 @@ namespace WCFCatalogoServicios
         [OperationContract]
         IEnumerable<DtoServicio> ObtenerServicios();
 
+        [OperationContract]
+        DtoServicio BuscarServicio(int fila);
     }
-
 
     // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
     [DataContract]
@@ -25,15 +26,21 @@ namespace WCFCatalogoServicios
     {
         [DataMember]
         public int IdServicio { get; set; }
-
         [DataMember]
         public string Servicio { get; set; }
-
         [DataMember]
         public string Descripcion { get; set; }
-
         [DataMember]
-        public List<String> miTipoEvento { get; set; }
+        public List<DtoTipoEvento> misTiposEventos { get; set; }
     }
-
+    
+    [DataContract]
+    public class DtoTipoEvento
+    {
+        [DataMember]
+        public string Nombre { get; set; }
+        [DataMember]
+        public string Descripcion { get; set; }
+    }
+    
 }

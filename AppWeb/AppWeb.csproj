@@ -90,6 +90,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ServiceReference3\AppWeb.ServiceReference3.DtoServicio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference3\CatalogoServicios.disco" />
+    <None Include="Service References\ServiceReference3\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference3\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference3\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServicioAgregarProv.aspx" />
     <Content Include="Administrador\ServicioListadoProv.aspx" />
     <Content Include="Administrador\ServicioMostrarCatalogo.aspx" />
@@ -117,6 +127,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference2\ServicioAgregarProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference3\CatalogoServicios.wsdl" />
+    <None Include="Service References\ServiceReference3\CatalogoServicios.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference3\CatalogoServicios1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference3\CatalogoServicios2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Web.Debug.config">
@@ -183,6 +203,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceReference2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference3\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -267,6 +292,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ServiceReference1\" />
     <WCFMetadataStorage Include="Service References\ServiceReference2\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference3\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

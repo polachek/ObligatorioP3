@@ -79,42 +79,6 @@ namespace Dominio
         #endregion
 
         #region Finders
-
-        public static Servicio FindByNombre(string nombre)
-        {
-            SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Servicio WHERE nombre like '@nombre'");
-            cmd.Connection = cn;
-            cmd.Parameters.AddWithValue("@nombre", nombre);
-            try
-            {
-                cn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                    if (dr.Read())
-                    {
-                        int miIdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
-                        string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
-                        string desc = dr.IsDBNull(dr.GetOrdinal("Descripcion")) ? "" : dr.GetString(dr.GetOrdinal("Descripcion"));
-
-                        Servicio s = new Servicio
-                        {
-                            IdServicio = miIdServicio,
-                            Nombre = nombreServicio,
-                            Descripcion = desc,
-                            //ListaTipoEventos = new List<TipoEvento>()
-                        };                       
-                        return s;
-                    }
-                return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("No existe el Servicio" + ex);
-            }
-            finally { cn.Close(); cn.Dispose(); }
-        }        
-
         public static List<Servicio> FindAll()
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -150,6 +114,85 @@ namespace Dominio
             }
         }
 
+        public static Servicio FindById(int id)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Servicio WHERE idServicio = @id");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@id", id);
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        int miIdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
+                        string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
+                        string desc = dr.IsDBNull(dr.GetOrdinal("Descripcion")) ? "" : dr.GetString(dr.GetOrdinal("Descripcion"));
+                        List<TipoEvento> tipoEventos = FindTiposEventoByServicio(nombreServicio);
+                        Servicio s = new Servicio
+                        {
+                            IdServicio = miIdServicio,
+                            Nombre = nombreServicio,
+                            Descripcion = desc,
+                            ListaTipoEventos = tipoEventos
+                        };
+                        return s;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No existe el Servicio" + ex);
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+            }
+        }
+
+        public static Servicio FindByNombre(string nombre)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM Servicio WHERE nombre = '@nombre'");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@nombre", nombre);
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {                        
+                        int miIdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
+                        string nombreServicio = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
+                        string desc = dr.IsDBNull(dr.GetOrdinal("Descripcion")) ? "" : dr.GetString(dr.GetOrdinal("Descripcion"));
+                        List<TipoEvento> tipoEventos = FindTiposEventoByServicio(nombreServicio);
+                        Servicio s = new Servicio
+                        {
+                            IdServicio = miIdServicio,
+                            Nombre = nombreServicio,
+                            Descripcion = desc,
+                            ListaTipoEventos = tipoEventos
+                        };                       
+                        return s;
+                    }
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("No existe el Servicio" + ex);
+            }
+            finally {
+                Conexion.CerrarConexion(cn);
+            }
+        }
+
         public static List<Servicio> FindServicioTipo()
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -177,17 +220,15 @@ namespace Dominio
                 return listaServicios;
             }
             catch (SqlException ex)
-            {
-                //
+            {                
                 System.Diagnostics.Debug.Assert(false, ex.Message);
                 return null;
             }
             finally
             {
-                Conexion.CerrarConexion(cn);
+                cn.Close();
             }
         }
-
 
         public static List<TipoEvento> FindTiposEventoByServicio(string servicio)
         {
