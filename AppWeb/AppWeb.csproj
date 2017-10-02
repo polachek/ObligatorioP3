@@ -110,6 +110,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceReference5\GuardarCatalogoTxt.disco" />
+    <None Include="Service References\ServiceReference5\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference5\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference5\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServicioAgregarProv.aspx" />
     <Content Include="Administrador\ServicioListadoProv.aspx" />
     <Content Include="Administrador\ServicioMostrarCatalogo.aspx" />
@@ -159,6 +166,13 @@
     <None Include="Service References\ServiceReference4\ServicioListaProv2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceReference5\GuardarCatalogoTxt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference5\GuardarCatalogoTxt1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference5\Service1.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -233,6 +247,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceReference4\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference5\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -319,6 +338,7 @@
     <WCFMetadataStorage Include="Service References\ServiceReference2\" />
     <WCFMetadataStorage Include="Service References\ServiceReference3\" />
     <WCFMetadataStorage Include="Service References\ServiceReference4\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference5\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

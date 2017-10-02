@@ -11,5 +11,23 @@ namespace AppWeb {
     
     
     public partial class ServicioGuardarCatalogo {
+        
+        /// <summary>
+        /// Control BtnGuardarCatalogo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnGuardarCatalogo;
+        
+        /// <summary>
+        /// Control LblGuardado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblGuardado;
     }
 }
