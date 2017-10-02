@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AppWeb.ServiceReference4;
+using Dominio;
+
 
 namespace AppWeb
 {
@@ -11,7 +14,12 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ServicioListaProvClient clienteWCF = new ServicioListaProvClient();
+            clienteWCF.Open();
+            GVProveedores.DataSource = clienteWCF.ObtenerProveedores();
+            GVProveedores.DataBind();
+            clienteWCF.Close();
         }
     }
+
 }
