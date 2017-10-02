@@ -14,34 +14,17 @@ namespace WcfServiceModificarParametros
     {
 
         [OperationContract]
-        string ModificarArancel(double value);
+        bool ModificarArancel(double value);
 
         [OperationContract]
-        string ModificarPorcentajeExtra(int value);
+        bool ModificarPorcentajeExtra(int value);
+
+        [OperationContract]
+        decimal ObtenerArancel();
+
+        [OperationContract]
+        int ObtenerPorcentajeExtra();
 
         // TODO: agregue aquí sus operaciones de servicio
-    }
-
-
-    // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
     }
 }

@@ -34,8 +34,12 @@ namespace Dominio
             return ret;
         }
 
-
         #region Métodos de lógica
+
+        /// <summary>
+        /// VALIDA LOS DATOS EN FORM PARA AGREGAR PROVEEDOR
+        /// </summary>
+        /// <returns></returns>
         public virtual bool Validar()
         {
             return this.RUT.Length == 12 
@@ -45,6 +49,11 @@ namespace Dominio
                  ;
         }
 
+        /// <summary>
+        /// CONTROLA SI EXISTE EL RUT INGRESADO
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns></returns>
         public bool ExisteRut(string rut)
         {
             bool ret = false;
@@ -55,6 +64,11 @@ namespace Dominio
             return ret;
         }
 
+        /// <summary>
+        /// CONTROLA SI EXISTE EL EMAIL INGRESADO
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public bool ExisteEmail(string email)
         {
             bool ret = false;
@@ -68,6 +82,11 @@ namespace Dominio
 
         #region Manejo de Usuario
 
+        /// <summary>
+        /// AGREGA EL OBJETO USUARIO
+        /// </summary>
+        /// <param name="usu"></param>
+        /// <returns></returns>
         public bool AgregarUsuario(Usuario usu)
         {
             this.MiUsuario = usu;
@@ -76,6 +95,10 @@ namespace Dominio
         #endregion
 
         #region Acceso a datos
+        /// <summary>
+        /// AGREGA UN PROVEEDOR A LA BASE DE DATOS
+        /// </summary>
+        /// <returns></returns>
         public bool Insertar()
         {
             SqlConnection cn = null;
@@ -153,7 +176,11 @@ namespace Dominio
             }
             finally { cn.Close(); cn.Dispose(); trn.Dispose(); }
         }
-
+    
+        /// <summary>
+        /// ELIMINA UN PROVEEDOR DADO RUT
+        /// </summary>
+        /// <returns></returns>
         public bool Eliminar()
         {
             string cadenaDelete = @"DELETE Proveedor WHERE RUT=@rut;";
@@ -183,6 +210,80 @@ namespace Dominio
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// OBTIENE ARANCEL
+        /// </summary>
+        /// <returns></returns>
+        public static decimal ObtenerArancel()
+        {
+            decimal ret = 0;
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(); 
+            cmd.Connection = cn;
+            cmd.CommandText = @"SELECT Arancel FROM Parametros";
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read()) {
+                        ret = dr.IsDBNull(dr.GetOrdinal("arancel")) ? 0 : dr.GetDecimal(dr.GetOrdinal("arancel"));
+                    }
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return ret;
+            }
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// OBTIENE PORCENTAJE EXTRA
+        /// </summary>
+        /// <returns></returns>
+        public static int ObtenerPorcentajeExtra()
+        {
+            int ret = 0;
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = cn;
+            cmd.CommandText = @"SELECT porcentajeExtra FROM Parametros";
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read()) {
+                        ret = dr.IsDBNull(dr.GetOrdinal("porcentajeExtra")) ? 0 : dr.GetInt32(dr.GetOrdinal("porcentajeExtra"));
+                    }
+                }
+                return ret;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return ret;
+            }
+            finally
+            {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// MODIFICAR ARANCEL
+        /// </summary>
+        /// <param name="nuevoArancel"></param>
+        /// <returns></returns>
         public static bool ModificarArancel(double nuevoArancel)
         {
             bool ret = false;
@@ -191,15 +292,12 @@ namespace Dominio
             SqlCommand cmd = new SqlCommand();
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 cmd.Connection = cn;
-                cmd.CommandText =
-                    @"UPDATE Parametros
-                    SET arancel = @nuevoArancel";
+                cmd.CommandText =@"UPDATE Parametros SET arancel = @nuevoArancel";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nuevoArancel", nuevoArancel);
                 cmd.ExecuteNonQuery();
-
                 ret = true;
             }
             catch (Exception ex)
@@ -207,11 +305,18 @@ namespace Dominio
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                 ret = false;
             }
-            finally { cn.Close(); cn.Dispose(); }
-
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
             return ret;
         }
 
+        /// <summary>
+        /// MODIFICAR PORCENTAJE
+        /// </summary>
+        /// <param name="nuevoPorcentaje"></param>
+        /// <returns></returns>
         public static bool ModificarPorcentajeExtra(int nuevoPorcentaje)
         {
             bool ret = false;
@@ -220,15 +325,12 @@ namespace Dominio
             SqlCommand cmd = new SqlCommand();
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 cmd.Connection = cn;
-                cmd.CommandText =
-                    @"UPDATE Parametros
-                    SET porcentajeExtra = @nuevoPorcentaje";
+                cmd.CommandText = @"UPDATE Parametros SET porcentajeExtra = @nuevoPorcentaje";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@nuevoPorcentaje", nuevoPorcentaje);
                 cmd.ExecuteNonQuery();
-
                 ret = true;
             }
             catch (Exception ex)
@@ -236,11 +338,17 @@ namespace Dominio
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                 ret = false;
             }
-            finally { cn.Close(); cn.Dispose(); }
-
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
             return ret;
         }
 
+        /// <summary>
+        /// DESACTIVAR PROVEEDOR
+        /// </summary>
+        /// <returns></returns>
         public bool DesactivarProv()
         {
             bool ret = false;
@@ -250,7 +358,7 @@ namespace Dominio
             cmd.Parameters.AddWithValue("@rut", this.RUT);
             try
             {
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -272,10 +380,12 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-
                 throw new Exception("No existe el Proveedor" + ex);
             }
-            finally { cn.Close(); cn.Dispose(); }
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
         }
         #endregion
 
@@ -301,19 +411,24 @@ namespace Dominio
                     }
                     sw.WriteLine(prov.RUT + "#" + prov.NombreFantasia + "#" + prov.Email + "#" + prov.Telefono + "|" + listaServProv);
                 }
-
                 sw.Close();
                 return true;
             }
             catch (Exception e)
             {
-                Console.WriteLine("An error occurred: '{0}'", e);
+                Console.WriteLine("Ocurrió un error: '{0}'", e);
                 return false;
             }
         }
         #endregion
 
         #region Finders
+
+        /// <summary>
+        /// BUSCAR PROVEEDOR POR RUT
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns></returns>
         public static Proveedor FindByRUT(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -364,13 +479,20 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-
                 throw new Exception("No existe el Proveedor" + ex);
-
             }
-            finally { cn.Close(); cn.Dispose(); }
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
         }
 
+
+        /// <summary>
+        /// BUSCAR PROVEEDOR POR MAIL
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static Proveedor FindByEmail(string email)
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -385,7 +507,6 @@ namespace Dominio
                     if (dr.Read())
                     {
                         string miTipo = dr["tipo"].ToString();
-
                         if (miTipo == "COMUN")
                         {
                             Proveedor p = new ProveedorComun
@@ -421,9 +542,17 @@ namespace Dominio
             {
                 throw new Exception("No existe el Proveedor" + ex);
             }
-            finally { cn.Close(); cn.Dispose(); }
+            finally {
+                Conexion.CerrarConexion(cn);
+                cn.Dispose();
+            }
         }
        
+        
+        /// <summary>
+        /// OBTENER TODOS LOS PROVEEDORES
+        /// </summary>
+        /// <returns></returns>
         public static List<Proveedor> FindAll()
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -434,7 +563,6 @@ namespace Dominio
             try
             {
                 Conexion.AbrirConexion(cn);
-
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -448,17 +576,23 @@ namespace Dominio
                 return listaProveedores;
             }
             catch (SqlException ex)
-            {
-                //
+            {                
                 System.Diagnostics.Debug.Assert(false, ex.Message);
                 return null;
             }
             finally
             {
                 Conexion.CerrarConexion(cn);
+                cn.Dispose();
             }
         }
 
+
+        /// <summary>
+        /// CARGAR DATOS DESDE READER
+        /// </summary>
+        /// <param name="fila"></param>
+        /// <returns></returns>
         protected static Proveedor CargarDatosDesdeReader(IDataRecord fila)
         {
             Proveedor p = null;
@@ -497,6 +631,11 @@ namespace Dominio
             return p;
         }
 
+        /// <summary>
+        /// OBTIENE EL PORCENTAJE EXTRA DADO RUT
+        /// </summary>
+        /// <param name="rut"></param>
+        /// <returns></returns>
         public static int FindPorcentajeVip(string rut)
         {
             SqlConnection cn = Conexion.CrearConexion();
@@ -522,9 +661,7 @@ namespace Dominio
             }
             catch (Exception ex)
             {
-
                 throw new Exception("No existe el Proveedor" + ex);
-
             }
             finally { cn.Close(); cn.Dispose(); }
         }

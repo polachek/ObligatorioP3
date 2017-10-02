@@ -117,6 +117,20 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\ServiceReference6\GuardarProvTxt.disco" />
+    <None Include="Service References\ServiceReference6\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference6\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference6\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceReference7\ServicioModificarParametros.disco" />
+    <None Include="Service References\ServiceReference7\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference7\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference7\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServicioAgregarProv.aspx" />
     <Content Include="Administrador\ServicioListadoProv.aspx" />
     <Content Include="Administrador\ServicioMostrarCatalogo.aspx" />
@@ -173,6 +187,20 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference5\Service1.wsdl" />
+    <None Include="Service References\ServiceReference6\GuardarProvTxt.wsdl" />
+    <None Include="Service References\ServiceReference6\GuardarProvTxt.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference6\GuardarProvTxt1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference7\ServicioModificarParametros.wsdl" />
+    <None Include="Service References\ServiceReference7\ServicioModificarParametros.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference7\ServicioModificarParametros1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -252,6 +280,16 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceReference5\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference6\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference7\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -339,6 +377,8 @@
     <WCFMetadataStorage Include="Service References\ServiceReference3\" />
     <WCFMetadataStorage Include="Service References\ServiceReference4\" />
     <WCFMetadataStorage Include="Service References\ServiceReference5\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference6\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference7\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

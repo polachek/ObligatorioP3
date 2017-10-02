@@ -50,7 +50,7 @@ namespace Dominio
         #region Exportar catálogo a txt
         public static bool grabarCatalogoTxt(string rutaArchivo)
         {
-
+            try{ 
                 File.WriteAllText(rutaArchivo, String.Empty);
 
                 FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
@@ -72,8 +72,14 @@ namespace Dominio
                 }
 
                 sw.Close();
-                return true;
-            
+                return true;  
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Ocurrió un error: '{0}'", e);
+                return false;
+            }          
         }
 
         #endregion

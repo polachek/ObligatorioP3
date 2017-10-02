@@ -13,22 +13,24 @@ namespace WcfServiceModificarParametros
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioModificarParametros : IServicioModificarParametros
     {
-        public string ModificarArancel(double nuevoArancel)
-        {            
-            bool modificado = Proveedor.ModificarArancel(nuevoArancel);
-            if (modificado)
-                return string.Format("Ahora el arancel es de: ${0}", nuevoArancel);
-            else
-                return "No se modificó.";
+        public bool ModificarArancel(double nuevoArancel)
+        {
+            return Proveedor.ModificarArancel(nuevoArancel);            
         }
 
-        public string ModificarPorcentajeExtra(int nuevoPorcentaje)
+        public bool ModificarPorcentajeExtra(int nuevoPorcentaje)
         {
-            bool modificado = Proveedor.ModificarPorcentajeExtra(nuevoPorcentaje);
-            if (modificado)
-                return string.Format("Ahora el porcentaje extra es de: %{0}", nuevoPorcentaje);
-            else
-                return "No se modificó.";
+            return Proveedor.ModificarPorcentajeExtra(nuevoPorcentaje);            
+        }
+
+        public decimal ObtenerArancel()
+        {
+            return Proveedor.ObtenerArancel();            
+        }
+
+        public int ObtenerPorcentajeExtra()
+        {
+            return Proveedor.ObtenerPorcentajeExtra();
         }
     }
 }

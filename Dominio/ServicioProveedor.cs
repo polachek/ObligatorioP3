@@ -67,11 +67,10 @@ namespace Dominio
             SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = @"SELECT *
-FROM ProveedorServicios
-WHERE rutProveedor = @rut";
+                            FROM ProveedorServicios
+                            WHERE rutProveedor = @rut";
             cmd.Parameters.AddWithValue("@rut", rut);
             cmd.Connection = cn;
-
 
             List<ServicioProveedor> listaServicios = null;
             try
