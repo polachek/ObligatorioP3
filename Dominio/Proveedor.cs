@@ -101,19 +101,14 @@ namespace Dominio
         /// <returns></returns>
         public bool Insertar()
         {
-            SqlConnection cn = null;
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
             if (!this.Validar()) return false;
             SqlTransaction trn = null;
-
-            cn = Conexion.CrearConexion();
-
             try
             {
-                SqlCommand cmd = new SqlCommand();
-
-                cn.Open();
+                Conexion.AbrirConexion(cn);
                 trn = cn.BeginTransaction();
-
                 cmd.Connection = cn;
                 cmd.Transaction = trn;
                 
@@ -142,10 +137,8 @@ namespace Dominio
                 cmd.ExecuteNonQuery();
 
                 //Se implementó condición para lista de servicios igual null para evitar conflicto al cargar wcf con proveedor nulo
-                if (ListaServicios == null)
-                {
-
-                }else if (ListaServicios.Count() > 0)
+                if (ListaServicios == null){}
+                else if (ListaServicios.Count() > 0)
                 {
                     foreach (ServicioProveedor miServ in ListaServicios)
                     {
@@ -156,7 +149,8 @@ namespace Dominio
                 if (Tipo == "VIP")
                 {
                     ProveedorVIP.Insertar(cmd, this.RUT);
-                }else if (Tipo == "COMUN")
+                }
+                else if (Tipo == "COMUN")
                 {
                     cmd.CommandText =
                     @"INSERT INTO ProveedorComun 
@@ -174,7 +168,10 @@ namespace Dominio
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
                 return false;
             }
-            finally { cn.Close(); cn.Dispose(); trn.Dispose(); }
+            finally {
+                Conexion.CerrarConexion(cn);
+                trn.Dispose();
+            }
         }
     
         /// <summary>
@@ -183,11 +180,10 @@ namespace Dominio
         /// <returns></returns>
         public bool Eliminar()
         {
-            string cadenaDelete = @"DELETE Proveedor WHERE RUT=@rut;";
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = cadenaDelete;
-            cmd.Parameters.Add(new SqlParameter("@rut", this.RUT));
             SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"DELETE Proveedor WHERE RUT=@rut;";
+            cmd.Parameters.Add(new SqlParameter("@rut", this.RUT));
             try
             {
                 Conexion.AbrirConexion(cn);
@@ -240,7 +236,6 @@ namespace Dominio
             }
             finally {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
         }
 
@@ -275,7 +270,6 @@ namespace Dominio
             finally
             {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
         }
 
@@ -287,8 +281,7 @@ namespace Dominio
         public static bool ModificarArancel(double nuevoArancel)
         {
             bool ret = false;
-            SqlConnection cn = null;
-            cn = Conexion.CrearConexion();
+            SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
             try
             {
@@ -299,17 +292,16 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@nuevoArancel", nuevoArancel);
                 cmd.ExecuteNonQuery();
                 ret = true;
+                return ret;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
-                ret = false;
+                return ret;
             }
             finally {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
-            return ret;
         }
 
         /// <summary>
@@ -320,8 +312,7 @@ namespace Dominio
         public static bool ModificarPorcentajeExtra(int nuevoPorcentaje)
         {
             bool ret = false;
-            SqlConnection cn = null;
-            cn = Conexion.CrearConexion();
+            SqlConnection cn = Conexion.CrearConexion();
             SqlCommand cmd = new SqlCommand();
             try
             {
@@ -332,49 +323,65 @@ namespace Dominio
                 cmd.Parameters.AddWithValue("@nuevoPorcentaje", nuevoPorcentaje);
                 cmd.ExecuteNonQuery();
                 ret = true;
+                return ret;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
-                ret = false;
+                return ret;
             }
             finally {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
-            return ret;
         }
 
         /// <summary>
         /// DESACTIVAR PROVEEDOR
         /// </summary>
         /// <returns></returns>
-        public bool DesactivarProv()
+        public static bool DesactivarProv(string rut)
         {
             bool ret = false;
             SqlConnection cn = Conexion.CrearConexion();
-            SqlCommand cmd = new SqlCommand(@"SELECT * From Proveedor WHERE Rut = @rut");
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction trn = null;
             cmd.Connection = cn;
-            cmd.Parameters.AddWithValue("@rut", this.RUT);
+            cmd.Transaction = trn;
+            cmd.CommandText = @"UPDATE Proveedor SET esInactivo = 1 WHERE RUT = @rut;";
+            cmd.Parameters.AddWithValue("@rut", rut);
             try
             {
-                Conexion.AbrirConexion(cn);
-                SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows)
-                {
-                    if (dr.Read())
+                Proveedor p = FindByRUT(rut);
+                if (p != null) {
+                    Conexion.AbrirConexion(cn);
+                    trn = cn.BeginTransaction();
+                    cmd.Transaction = trn;
+                    int filas = cmd.ExecuteNonQuery();
+
+                    int cantServicios = 0;
+
+                    if (p.ListaServicios != null && p.ListaServicios.Count >= 0)
                     {
-                        dr.Close();
-                        cmd.CommandText = @"UPDATE Proveedor SET esInactivo = 1 WHERE RUT = @rut;";
-                        cmd.Parameters.Clear();
-                        cmd.Parameters.AddWithValue("@rut", this.RUT);
-                        cmd.ExecuteNonQuery();
-                        ret = true;
+                        cmd.CommandText = @"DELETE FROM ProveedorServicios WHERE rutProveedor = @rutProveedor";
+                        cantServicios = p.ListaServicios.Count();
+                        foreach (ServicioProveedor sp in p.ListaServicios)
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.Add(new SqlParameter("@rutProveedor", rut));
+                            filas += cmd.ExecuteNonQuery();
+                        }
                     }
-                }
-                else
-                {
-                    ret = false;
+
+                    if (filas == 1 + cantServicios)
+                    {
+                        trn.Commit();
+                        return true;
+                    }
+                    else
+                    {
+                        trn.Rollback();
+                        return false;
+                    }
                 }
                 return ret;
             }
@@ -384,18 +391,64 @@ namespace Dominio
             }
             finally {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
         }
+
+
+        /// <summary>
+        /// AGREGAR SERVICIOS A PROVEEDOR
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public static Proveedor AgregarServiciosAProveedor(Proveedor p) {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand(@"SELECT * FROM ProveedorServicios WHERE rutProveedor = @rut");
+            cmd.Connection = cn;
+            cmd.Parameters.AddWithValue("@rut", p.RUT);
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        p.ListaServicios = new List<ServicioProveedor>();
+                        ServicioProveedor sp = new ServicioProveedor();
+                        sp.RutProveedor = p.RUT;
+                        sp.IdServicio = dr.IsDBNull(dr.GetOrdinal("idServicio")) ? 0 : dr.GetInt32(dr.GetOrdinal("idServicio"));
+                        sp.Descripcion = dr.IsDBNull(dr.GetOrdinal("descripcion")) ? "" : dr.GetString(dr.GetOrdinal("descripcion"));
+                        sp.Nombre = dr.IsDBNull(dr.GetOrdinal("nombre")) ? "" : dr.GetString(dr.GetOrdinal("nombre"));
+                        sp.Foto = dr.IsDBNull(dr.GetOrdinal("imagen")) ? "" : dr.GetString(dr.GetOrdinal("imagen"));
+
+                        p.ListaServicios.Add(sp);
+                    }
+                }
+                return p;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return p=null;
+            }
+            finally
+            {
+            }
+        }
+
         #endregion
 
         #region Exportar Proveedores Txt
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rutaArchivo"></param>
+        /// <returns></returns>
         public static bool grabarProveedoresTxt(string rutaArchivo)
         {
             try
             {
                 File.WriteAllText(rutaArchivo, String.Empty);
-
                 FileStream fs = new FileStream(rutaArchivo, FileMode.Open);
                 StreamWriter sw = new StreamWriter(fs);
 
@@ -457,6 +510,7 @@ namespace Dominio
                                 esInactivo = (bool)dr["esInactivo"],
                                 Tipo = miTipo,
                             };
+                            p = AgregarServiciosAProveedor(p);
                             return p;
                         }
                         else if (miTipo == "VIP")
@@ -471,6 +525,7 @@ namespace Dominio
                                 esInactivo = (bool)dr["esInactivo"],
                                 Tipo = miTipo,
                             };
+                            p = AgregarServiciosAProveedor(p);
                             return p;
                         }
                     }
@@ -544,7 +599,6 @@ namespace Dominio
             }
             finally {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
         }
        
@@ -583,7 +637,6 @@ namespace Dominio
             finally
             {
                 Conexion.CerrarConexion(cn);
-                cn.Dispose();
             }
         }
 
@@ -663,7 +716,9 @@ namespace Dominio
             {
                 throw new Exception("No existe el Proveedor" + ex);
             }
-            finally { cn.Close(); cn.Dispose(); }
+            finally {
+                Conexion.CerrarConexion(cn);
+            }
         }
         #endregion
     }

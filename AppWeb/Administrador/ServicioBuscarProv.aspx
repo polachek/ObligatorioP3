@@ -3,7 +3,7 @@
     <h2>Buscar proveedor</h2>
 
     <asp:Panel ID="PanelBusqueda" runat="server">    
-        <asp:TextBox ID="TxtBuscarProv" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TBBuscarProv" runat="server"></asp:TextBox>
         <asp:LinkButton ID="LnkBuscarProv" runat="server" OnClick="BuscarProv_Click" CssClass="btn btn-default">Buscar proveedor</asp:LinkButton>
     </asp:Panel>
     <asp:Panel ID="PanelResultado" runat="server">

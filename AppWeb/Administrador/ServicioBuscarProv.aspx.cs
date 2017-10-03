@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using AppWeb.ServiceReference1;
 using WCFProveedorDadoRUT;
-using Dominio;
 
 namespace AppWeb
 {
@@ -19,7 +18,7 @@ namespace AppWeb
 
         protected void BuscarProv_Click(object sender, EventArgs e)
         {
-            string rut = TxtBuscarProv.Text;
+            string rut = TBBuscarProv.Text;
             ProveedorDadoRUTClient provWCF = new ProveedorDadoRUTClient();
             provWCF.Open();
             DtoProveedor p = provWCF.buscarProveedorRut(rut);
@@ -30,7 +29,7 @@ namespace AppWeb
                 LblRUT.Text = "RUT: " + p.RUT;
                 LblNombre.Text = "Nombre: " + p.NombreFantasia;
                 string servicios = "";
-                foreach (ServicioProveedor s in p.ListaServicios)
+                foreach (DtoServicioProveedor s in p.ListaServicios)
                 {
                     servicios += s.Nombre + " ";
                 }

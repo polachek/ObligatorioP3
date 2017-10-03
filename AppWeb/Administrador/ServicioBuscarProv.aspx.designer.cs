@@ -22,13 +22,13 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.Panel PanelBusqueda;
         
         /// <summary>
-        /// Control TxtBuscarProv.
+        /// Control TBBuscarProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TxtBuscarProv;
+        protected global::System.Web.UI.WebControls.TextBox TBBuscarProv;
         
         /// <summary>
         /// Control LnkBuscarProv.

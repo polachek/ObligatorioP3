@@ -12,7 +12,7 @@ namespace WCFProveedorDadoRUT
     public class ProveedorDadoRUT : IProveedorDadoRUT
     {
 
-        public DtoProveedor buscarProveedorRut(string rut)
+        public DtoProveedor BuscarProveedorRut(string rut)
         {
             Proveedor miprov = Proveedor.FindByRUT(rut);
 
@@ -30,8 +30,18 @@ namespace WCFProveedorDadoRUT
                 miDtoProv.FechaRegistro = miprov.FechaRegistro;
                 miDtoProv.esInactivo = miprov.esInactivo;
                 miDtoProv.Tipo = miprov.Tipo;
-                miDtoProv.ListaServicios = ServicioProveedor.FindServiciosProveedor(miDtoProv.RUT);
+                miDtoProv.ListaServicios = new List<DtoServicioProveedor>();
 
+                foreach (ServicioProveedor s in miprov.ListaServicios) {
+                    DtoServicioProveedor miDtoServicioProv = new DtoServicioProveedor();
+                    miDtoServicioProv.IdServicio = s.IdServicio;
+                    miDtoServicioProv.Nombre = s.Nombre;
+                    miDtoServicioProv.RutProveedor = s.RutProveedor;
+                    miDtoServicioProv.Descripcion = s.Descripcion;
+                    miDtoServicioProv.Foto = s.Foto;
+
+                    miDtoProv.ListaServicios.Add(miDtoServicioProv);
+                }
                 return miDtoProv;
             }
         }

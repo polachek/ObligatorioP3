@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e1f8e59d-ca91-4580-8a0e-440506b05126" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a2e1e719-dd60-4fa6-91db-470ce08ee65a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,12 @@
     <MetadataSource Address="http://localhost:54486/ProveedorDadoRUT.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ProveedorDadoRUT.wsdl" MetadataType="Wsdl" ID="cf664563-5040-4269-93d9-3b7727274f61" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?wsdl" />
-    <MetadataFile FileName="ProveedorDadoRUT.xsd" MetadataType="Schema" ID="1da186d8-6421-4631-8d38-6ce92f87bec5" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd1" />
-    <MetadataFile FileName="ProveedorDadoRUT.disco" MetadataType="Disco" ID="57dff66d-e83c-424e-bbef-18dc9dd79158" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?disco" />
-    <MetadataFile FileName="ProveedorDadoRUT1.xsd" MetadataType="Schema" ID="e01c7837-3208-4ac3-8bc2-3cc7d54f1cb9" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd2" />
-    <MetadataFile FileName="ProveedorDadoRUT2.xsd" MetadataType="Schema" ID="45e3c9da-3ebc-41c3-ba16-ed783be60678" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd0" />
-    <MetadataFile FileName="ProveedorDadoRUT3.xsd" MetadataType="Schema" ID="2b5579be-fd55-4996-940b-8ebeea5e6e01" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd3" />
+    <MetadataFile FileName="ProveedorDadoRUT.wsdl" MetadataType="Wsdl" ID="50d9f1e9-002b-4cb7-a755-65d1a5094f2b" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?wsdl" />
+    <MetadataFile FileName="ProveedorDadoRUT.xsd" MetadataType="Schema" ID="09839b29-7e3f-48d6-8431-e6f4cc1337fa" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd1" />
+    <MetadataFile FileName="ProveedorDadoRUT.disco" MetadataType="Disco" ID="d7439a20-d0bc-4315-9574-7a26a4384eb5" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?disco" />
+    <MetadataFile FileName="ProveedorDadoRUT1.xsd" MetadataType="Schema" ID="517c9247-b04f-440f-aa51-21c3f11ff50e" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd2" />
+    <MetadataFile FileName="ProveedorDadoRUT2.xsd" MetadataType="Schema" ID="598c58ea-3356-471d-af9d-a7f46aef4091" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd0" />
+    <MetadataFile FileName="ProveedorDadoRUT3.xsd" MetadataType="Schema" ID="32782342-e6cb-4714-ba98-d2166a655653" SourceId="1" SourceUrl="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd3" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

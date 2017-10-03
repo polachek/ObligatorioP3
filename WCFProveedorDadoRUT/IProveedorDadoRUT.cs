@@ -13,7 +13,7 @@ namespace WCFProveedorDadoRUT
     public interface IProveedorDadoRUT
     {
         [OperationContract]
-        DtoProveedor buscarProveedorRut(string rut);
+        DtoProveedor BuscarProveedorRut(string rut);
 
     }
 
@@ -22,28 +22,34 @@ namespace WCFProveedorDadoRUT
     {
         [DataMember]
         public string RUT { get; set; }
-
         [DataMember]
         public string NombreFantasia { get; set; }
-
         [DataMember]
         public string Email { get; set; }
-
         [DataMember]
         public string Telefono { get; set; }
-
         [DataMember]
         public string FechaRegistro { get; set; }
-
         [DataMember]
         public bool esInactivo { get; set; }
-
         [DataMember]
         public string Tipo { get; set; }
-
         [DataMember]
-        public List<ServicioProveedor> ListaServicios { get; set; }
+        public List<DtoServicioProveedor> ListaServicios { get; set; }
+    }
 
-
+    [DataContract]
+    public class DtoServicioProveedor
+    {
+        [DataMember]
+        public int IdServicio { get; set; }
+        [DataMember]
+        public string RutProveedor { get; set; }
+        [DataMember]
+        public string Nombre { get; set; }
+        [DataMember]
+        public string Descripcion { get; set; }
+        [DataMember]
+        public string Foto { get; set; }
     }
 }

@@ -70,23 +70,37 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Administrador\FormWeb-ListadoProveedores.aspx" />
+    <Content Include="Administrador\ServicioDesactivarProveedor.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
     <Content Include="PanelAdministrador.aspx" />
     <Content Include="PanelProveedor.aspx" />
     <Content Include="Administrador\Administrador.master" />
     <Content Include="Properties\DataSources\WCFProveedorDadoRUT.DtoProveedor.datasource" />
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.disco" />
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.wsdl" />
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT3.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.disco" />
     <None Include="Service References\ServiceReference2\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference2\configuration.svcinfo" />
     <None Include="Service References\ServiceReference2\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.disco" />
+    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -131,6 +145,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Service References\ServiceReference8\AppWeb.ServiceReference8.DtoProveedor.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\ServiceReference8\DesactivarProv.disco" />
+    <None Include="Service References\ServiceReference8\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference8\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference8\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServicioAgregarProv.aspx" />
     <Content Include="Administrador\ServicioListadoProv.aspx" />
     <Content Include="Administrador\ServicioMostrarCatalogo.aspx" />
@@ -140,19 +164,6 @@
     <Content Include="Administrador\ServicioModificarParametros.aspx" />
     <Content Include="Sitio.Master" />
     <Content Include="WFRegProveedores.aspx" />
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.wsdl" />
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\ProveedorDadoRUT3.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.wsdl" />
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.xsd">
       <SubType>Designer</SubType>
@@ -201,6 +212,16 @@
     <None Include="Service References\ServiceReference7\ServicioModificarParametros1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceReference8\DesactivarProv.wsdl" />
+    <None Include="Service References\ServiceReference8\DesactivarProv.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference8\DesactivarProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference8\DesactivarProv2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,6 +250,13 @@
     </Compile>
     <Compile Include="Administrador\FormWeb-ListadoProveedores.aspx.designer.cs">
       <DependentUpon>FormWeb-ListadoProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrador\ServicioDesactivarProveedor.aspx.cs">
+      <DependentUpon>ServicioDesactivarProveedor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrador\ServicioDesactivarProveedor.aspx.designer.cs">
+      <DependentUpon>ServicioDesactivarProveedor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
@@ -290,6 +318,11 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\ServiceReference7\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceReference8\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -379,6 +412,7 @@
     <WCFMetadataStorage Include="Service References\ServiceReference5\" />
     <WCFMetadataStorage Include="Service References\ServiceReference6\" />
     <WCFMetadataStorage Include="Service References\ServiceReference7\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference8\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
