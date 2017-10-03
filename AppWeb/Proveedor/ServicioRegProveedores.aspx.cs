@@ -20,7 +20,7 @@ namespace AppWeb
             clienteWCF.Close();
         }
 
-        protected void BtnAccion_Click(object sender, EventArgs e)
+        protected void BtnRegistroProv_Click(object sender, EventArgs e)
         {
             AgregarProvClient clienteWCF = new AgregarProvClient();
             clienteWCF.Open();
@@ -57,6 +57,7 @@ namespace AppWeb
                 {
                     LblAsignacion.Text = "";
                 }
+                Session["prov"] = p as DtoProveedor;
             }
             else if (tipo == "VIP")
             {
@@ -73,8 +74,9 @@ namespace AppWeb
                 {
                     LblAsignacion.Text = "";
                 }
+                Session["prov"] = p as DtoProveedor;
             }
-            Session["prov"] = p as
+
             clienteWCF.Close();
         }
         
