@@ -5,25 +5,24 @@
       <xsd:import schemaLocation="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WCFProveedorDadoRUT" />
-      <xsd:import schemaLocation="http://localhost:54486/ProveedorDadoRUT.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Dominio" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IProveedorDadoRUT_buscarProveedorRut_InputMessage">
-    <wsdl:part name="parameters" element="tns:buscarProveedorRut" />
+  <wsdl:message name="IProveedorDadoRUT_BuscarProveedorRut_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarProveedorRut" />
   </wsdl:message>
-  <wsdl:message name="IProveedorDadoRUT_buscarProveedorRut_OutputMessage">
-    <wsdl:part name="parameters" element="tns:buscarProveedorRutResponse" />
+  <wsdl:message name="IProveedorDadoRUT_BuscarProveedorRut_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuscarProveedorRutResponse" />
   </wsdl:message>
   <wsdl:portType name="IProveedorDadoRUT">
-    <wsdl:operation name="buscarProveedorRut">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRut" message="tns:IProveedorDadoRUT_buscarProveedorRut_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRutResponse" message="tns:IProveedorDadoRUT_buscarProveedorRut_OutputMessage" />
+    <wsdl:operation name="BuscarProveedorRut">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRut" message="tns:IProveedorDadoRUT_BuscarProveedorRut_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRutResponse" message="tns:IProveedorDadoRUT_BuscarProveedorRut_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProveedorDadoRUT" type="tns:IProveedorDadoRUT">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="buscarProveedorRut">
-      <soap:operation soapAction="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRut" style="document" />
+    <wsdl:operation name="BuscarProveedorRut">
+      <soap:operation soapAction="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRut" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

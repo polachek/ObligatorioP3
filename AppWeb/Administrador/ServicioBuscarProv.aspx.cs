@@ -21,7 +21,7 @@ namespace AppWeb
             string rut = TBBuscarProv.Text;
             ProveedorDadoRUTClient provWCF = new ProveedorDadoRUTClient();
             provWCF.Open();
-            DtoProveedor p = provWCF.buscarProveedorRut(rut);
+            DtoProveedor p = provWCF.BuscarProveedorRut(rut);
             Session["Proveedor"] = p;
             provWCF.Close();
             if (Session["Proveedor"] != null)

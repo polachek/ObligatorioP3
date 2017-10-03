@@ -15,11 +15,11 @@ namespace AppWeb.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IProveedorDadoRUT")]
     public interface IProveedorDadoRUT {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRut", ReplyAction="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRutResponse")]
-        WCFProveedorDadoRUT.DtoProveedor buscarProveedorRut(string rut);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRut", ReplyAction="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRutResponse")]
+        WCFProveedorDadoRUT.DtoProveedor BuscarProveedorRut(string rut);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRut", ReplyAction="http://tempuri.org/IProveedorDadoRUT/buscarProveedorRutResponse")]
-        System.Threading.Tasks.Task<WCFProveedorDadoRUT.DtoProveedor> buscarProveedorRutAsync(string rut);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRut", ReplyAction="http://tempuri.org/IProveedorDadoRUT/BuscarProveedorRutResponse")]
+        System.Threading.Tasks.Task<WCFProveedorDadoRUT.DtoProveedor> BuscarProveedorRutAsync(string rut);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace AppWeb.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public WCFProveedorDadoRUT.DtoProveedor buscarProveedorRut(string rut) {
-            return base.Channel.buscarProveedorRut(rut);
+        public WCFProveedorDadoRUT.DtoProveedor BuscarProveedorRut(string rut) {
+            return base.Channel.BuscarProveedorRut(rut);
         }
         
-        public System.Threading.Tasks.Task<WCFProveedorDadoRUT.DtoProveedor> buscarProveedorRutAsync(string rut) {
-            return base.Channel.buscarProveedorRutAsync(rut);
+        public System.Threading.Tasks.Task<WCFProveedorDadoRUT.DtoProveedor> BuscarProveedorRutAsync(string rut) {
+            return base.Channel.BuscarProveedorRutAsync(rut);
         }
     }
 }
