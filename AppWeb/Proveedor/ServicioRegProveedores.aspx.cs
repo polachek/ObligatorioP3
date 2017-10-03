@@ -105,9 +105,11 @@ namespace AppWeb
 
         protected void BtnAsigServAccion_Click(object sender, EventArgs e)
         {
-            ServicioProveedor servProv = new ServicioProveedor();
+            AgregarProvClient clienteWCF = new AgregarProvClient();
+            clienteWCF.Open();
+            DtoServicioProveedor servProv = new DtoServicioProveedor();
+            DtoProveedor miProveedor = Session["prov"] as DtoProveedor;
 
-            Proveedor miProveedor = Session["ProvINSession"] as Proveedor;
             servProv.RutProveedor = miProveedor.RUT;
             servProv.Descripcion = TBDescripcion.Text;
             string ruta = Server.MapPath("~/images/servicios-proveedor/");

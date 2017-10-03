@@ -69,7 +69,7 @@
             <asp:FileUpload ID="ServFotoUpload" runat="server" />
             <br />
             <br />
-            <asp:Button ID="BtnAgregarServicio" runat="server" Text="AgregarServicio" CssClass="boton_personalizado"/>
+            <asp:Button ID="BtnAgregarServicio" runat="server" Text="AgregarServicio" CssClass="boton_personalizado" OnClick="BtnAsigServAccion_Click"/>
             <br />
             <br />
             <asp:Button ID="BtnRegistroProv" CssClass="boton_personalizado" runat="server" Text="Registrar Proveedor" OnClick="BtnRegistroProv_Click" />
