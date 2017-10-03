@@ -388,6 +388,176 @@ namespace AppWeb.ServiceReference9 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DtoServicio", Namespace="http://schemas.datacontract.org/2004/07/WcfAgregarProv")]
+    [System.SerializableAttribute()]
+    public partial class DtoServicio : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescripcionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdServicioField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private AppWeb.ServiceReference9.DtoTipoEvento[] ListaTipoEventosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion {
+            get {
+                return this.DescripcionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
+                    this.DescripcionField = value;
+                    this.RaisePropertyChanged("Descripcion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdServicio {
+            get {
+                return this.IdServicioField;
+            }
+            set {
+                if ((this.IdServicioField.Equals(value) != true)) {
+                    this.IdServicioField = value;
+                    this.RaisePropertyChanged("IdServicio");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public AppWeb.ServiceReference9.DtoTipoEvento[] ListaTipoEventos {
+            get {
+                return this.ListaTipoEventosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ListaTipoEventosField, value) != true)) {
+                    this.ListaTipoEventosField = value;
+                    this.RaisePropertyChanged("ListaTipoEventos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DtoTipoEvento", Namespace="http://schemas.datacontract.org/2004/07/WcfAgregarProv")]
+    [System.SerializableAttribute()]
+    public partial class DtoTipoEvento : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescripcionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NombreField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idTipoEventoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion {
+            get {
+                return this.DescripcionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescripcionField, value) != true)) {
+                    this.DescripcionField = value;
+                    this.RaisePropertyChanged("Descripcion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombre {
+            get {
+                return this.NombreField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NombreField, value) != true)) {
+                    this.NombreField = value;
+                    this.RaisePropertyChanged("Nombre");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int idTipoEvento {
+            get {
+                return this.idTipoEventoField;
+            }
+            set {
+                if ((this.idTipoEventoField.Equals(value) != true)) {
+                    this.idTipoEventoField = value;
+                    this.RaisePropertyChanged("idTipoEvento");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference9.IAgregarProv")]
     public interface IAgregarProv {
@@ -421,6 +591,12 @@ namespace AppWeb.ServiceReference9 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/ExisteMail", ReplyAction="http://tempuri.org/IAgregarProv/ExisteMailResponse")]
         System.Threading.Tasks.Task<bool> ExisteMailAsync(string rut);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/CargarServicios", ReplyAction="http://tempuri.org/IAgregarProv/CargarServiciosResponse")]
+        AppWeb.ServiceReference9.DtoServicio[] CargarServicios();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAgregarProv/CargarServicios", ReplyAction="http://tempuri.org/IAgregarProv/CargarServiciosResponse")]
+        System.Threading.Tasks.Task<AppWeb.ServiceReference9.DtoServicio[]> CargarServiciosAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -488,6 +664,14 @@ namespace AppWeb.ServiceReference9 {
         
         public System.Threading.Tasks.Task<bool> ExisteMailAsync(string rut) {
             return base.Channel.ExisteMailAsync(rut);
+        }
+        
+        public AppWeb.ServiceReference9.DtoServicio[] CargarServicios() {
+            return base.Channel.CargarServicios();
+        }
+        
+        public System.Threading.Tasks.Task<AppWeb.ServiceReference9.DtoServicio[]> CargarServiciosAsync() {
+            return base.Channel.CargarServiciosAsync();
         }
     }
 }

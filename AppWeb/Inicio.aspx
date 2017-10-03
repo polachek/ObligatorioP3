@@ -24,7 +24,6 @@
                   <asp:MenuItem Text="Registro de Proveedores" Value="Registro de Proveedores" NavigateUrl="WFRegProveedores.aspx"></asp:MenuItem>
               </Items>
           </asp:Menu>
-             <asp:Button ID="Button1" runat="server" Text="Button" />
          </form>
 	  </header>
         <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>

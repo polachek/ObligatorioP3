@@ -13,7 +13,11 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            AgregarProvClient clienteWCF = new AgregarProvClient();
+            clienteWCF.Open();
+            ListBoxServicios.DataSource = clienteWCF.CargarServicios();
+            ListBoxServicios.DataBind();
+            clienteWCF.Close();
         }
 
         protected void BtnAccion_Click(object sender, EventArgs e)
@@ -52,13 +56,6 @@ namespace AppWeb
                 else
                 {
                     LblAsignacion.Text = "";
-                    Session["ProvINSessionPass"] = pass;
-                    Session["ProvINSession"] = p;
-                    cargarServicios();
-                    if (ListaMiServicios == null)
-                    {
-                        ListaMiServicios = new List<ServicioProveedor>();
-                    }
                 }
             }
             else if (tipo == "VIP")
@@ -75,18 +72,12 @@ namespace AppWeb
                 else
                 {
                     LblAsignacion.Text = "";
-                    Session["ProvINSessionPass"] = pass;
-                    Session["ProvINSession"] = p;
-                    cargarServicios();
-                    if (ListaMiServicios == null)
-                    {
-                        ListaMiServicios = new List<ServicioProveedor>();
-                    }
                 }
             }
-
+            Session["prov"] = p as
+            clienteWCF.Close();
         }
-
+        
         private void insertarProveedor(Proveedor p, string pass)
         {
             // Verificaciones de Rut y Email OK
@@ -121,12 +112,7 @@ namespace AppWeb
             ListBoxServicios.DataBind();
 
         }
-
-        private void cargarServicios()
-        {
-            List<Servicio> listaServicios = Servicio.FindAll();
-        }
-
+        
         
 
         protected void BtnAsigServAccion_Click(object sender, EventArgs e)

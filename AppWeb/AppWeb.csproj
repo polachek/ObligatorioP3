@@ -158,6 +158,9 @@
     <Content Include="Administrador\ServicioBuscarProv.aspx" />
     <Content Include="Administrador\ServicioGuardarProv.aspx" />
     <Content Include="Administrador\ServicioModificarParametros.aspx" />
+    <Content Include="Service References\ServiceReference9\AppWeb.ServiceReference9.DtoServicio.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference9\ServicioAgregarProv.disco" />
     <None Include="Service References\ServiceReference9\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference9\configuration.svcinfo" />

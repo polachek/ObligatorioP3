@@ -79,4 +79,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="CargarServicios">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CargarServiciosResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/WcfAgregarProv" minOccurs="0" name="CargarServiciosResult" nillable="true" type="q5:ArrayOfDtoServicio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

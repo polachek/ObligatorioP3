@@ -40,4 +40,33 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DtoServicioProveedor" nillable="true" type="tns:DtoServicioProveedor" />
+  <xs:complexType name="ArrayOfDtoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DtoServicio" nillable="true" type="tns:DtoServicio" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDtoServicio" nillable="true" type="tns:ArrayOfDtoServicio" />
+  <xs:complexType name="DtoServicio">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdServicio" type="xs:int" />
+      <xs:element minOccurs="0" name="ListaTipoEventos" nillable="true" type="tns:ArrayOfDtoTipoEvento" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DtoServicio" nillable="true" type="tns:DtoServicio" />
+  <xs:complexType name="ArrayOfDtoTipoEvento">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DtoTipoEvento" nillable="true" type="tns:DtoTipoEvento" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDtoTipoEvento" nillable="true" type="tns:ArrayOfDtoTipoEvento" />
+  <xs:complexType name="DtoTipoEvento">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idTipoEvento" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DtoTipoEvento" nillable="true" type="tns:DtoTipoEvento" />
 </xs:schema>
