@@ -107,10 +107,12 @@ namespace AppWeb
         {
             AgregarProvClient clienteWCF = new AgregarProvClient();
             clienteWCF.Open();
-            DtoServicioProveedor servProv = new DtoServicioProveedor();
+
             DtoProveedor miProveedor = Session["prov"] as DtoProveedor;
 
-            servProv.RutProveedor = miProveedor.RUT;
+            DtoServicioProveedor servProv = new DtoServicioProveedor();
+            servProv.IdServicio = ListBoxServicios.DataValueField;
+            servProv.Nombre = ListBoxServicios.DataTextField;
             servProv.Descripcion = TBDescripcion.Text;
             string ruta = Server.MapPath("~/images/servicios-proveedor/");
 
