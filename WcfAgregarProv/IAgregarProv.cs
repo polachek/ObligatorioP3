@@ -19,7 +19,7 @@ namespace WcfAgregarProv
         bool AgregarUsuario(DtoUsuario usu, DtoProveedor prov);
 
         [OperationContract]
-        bool AgregarListaServicios(IEnumerable<DtoServicioProveedor> servicios, DtoProveedor prov);
+        bool AgregarServicioAProveedor(DtoServicioProveedor servicio, DtoProveedor prov);
     }
 
     [DataContract]

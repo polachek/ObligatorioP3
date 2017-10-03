@@ -13,7 +13,7 @@ namespace WcfAgregarProv
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioAgregarProv : IAgregarProv
     {
-        public bool AgregarListaServicios(IEnumerable<DtoServicioProveedor> servicios, DtoProveedor prov)
+        public bool AgregarServicioAProveedor(DtoServicioProveedor servicio, DtoProveedor prov)
         {
             bool ret = false;
             if (prov.Tipo == "COMUN")
@@ -22,17 +22,14 @@ namespace WcfAgregarProv
                 Proveedor p = new ProveedorComun();
                 //Inicializa la lista de ServicioProveedor
                 p.ListaServicios = new List<ServicioProveedor>();
-                //Para cada DtoServicioProveedor de la lista que viene por parámetro, crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
-                foreach (DtoServicioProveedor s in servicios)
-                {
-                    ServicioProveedor miServicio = new ServicioProveedor();
-                    miServicio.IdServicio = s.IdServicio;
-                    miServicio.RutProveedor = s.RutProveedor;
-                    miServicio.Descripcion = s.Descripcion;
-                    miServicio.Foto = s.Foto;
-                    ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
-                    p.ListaServicios.Add(miServicio);
-                }
+                //Con el DtoServicioProveedor que viene por parámetro crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
+                ServicioProveedor miServicio = new ServicioProveedor();
+                miServicio.IdServicio = servicio.IdServicio;
+                miServicio.RutProveedor = servicio.RutProveedor;
+                miServicio.Descripcion = servicio.Descripcion;
+                miServicio.Foto = servicio.Foto;
+                ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
+                p.ListaServicios.Add(miServicio);
             }
             else if (prov.Tipo == "VIP")
             {
@@ -40,17 +37,14 @@ namespace WcfAgregarProv
                 Proveedor p = new ProveedorVIP();
                 //Inicializa la lista de ServicioProveedor
                 p.ListaServicios = new List<ServicioProveedor>();
-                //Para cada DtoServicioProveedor de la lista que viene por parámetro, crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
-                foreach (DtoServicioProveedor s in servicios)
-                {
-                    ServicioProveedor miServicio = new ServicioProveedor();
-                    miServicio.IdServicio = s.IdServicio;
-                    miServicio.RutProveedor = s.RutProveedor;
-                    miServicio.Descripcion = s.Descripcion;
-                    miServicio.Foto = s.Foto;
-                    ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
-                    p.ListaServicios.Add(miServicio);
-                }
+                //Con el DtoServicioProveedor que viene por parámetro crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
+                ServicioProveedor miServicio = new ServicioProveedor();
+                miServicio.IdServicio = servicio.IdServicio;
+                miServicio.RutProveedor = servicio.RutProveedor;
+                miServicio.Descripcion = servicio.Descripcion;
+                miServicio.Foto = servicio.Foto;
+                ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
+                p.ListaServicios.Add(miServicio);
             }
             return ret;
         }

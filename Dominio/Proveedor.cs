@@ -136,6 +136,7 @@ namespace Dominio
                 cmd.Transaction = trn;
                 cmd.ExecuteNonQuery();
 
+
                 //Se implementó condición para lista de servicios igual null para evitar conflicto al cargar wcf con proveedor nulo
                 if (this.ListaServicios == null){}
                 else if (this.ListaServicios.Count() > 0)
