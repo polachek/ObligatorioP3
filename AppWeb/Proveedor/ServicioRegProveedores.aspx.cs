@@ -56,6 +56,7 @@ namespace AppWeb
                 }
                 else
                 {
+                    bool esVip = false;
                     clienteWCF.InsertarProveedor(rut, nomFant, email, tel, esInactivo, esVip, pass);
                     LblAsignacion.Text = "";
                 }
@@ -74,6 +75,8 @@ namespace AppWeb
                 }
                 else
                 {
+                    bool esVip = true;
+                    clienteWCF.InsertarProveedor(rut, nomFant, email, tel, esInactivo, esVip, pass);
                     LblAsignacion.Text = "";
                 }
                 Session["prov"] = p as DtoProveedor;
@@ -82,25 +85,7 @@ namespace AppWeb
             clienteWCF.Close();
         }
         
-        private void insertarProveedor(Proveedor p, string pass)
-        {
-            // Verificaciones de Rut y Email OK
-            LblAsignacion.Text = "";
-            string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-            Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
-
-            p.AgregarUsuario(usu);
-
-            p.ListaServicios = ListaMiServicios;
-
-            if (p.Insertar())
-            {
-                LblAsignacion.Text = "Insertaste a : " + p.RUT;
-                limpiarForm();
-            }
-            else
-                LblAsignacion.Text = "No";
-        }
+        
 
         private void limpiarForm()
         {
@@ -110,7 +95,6 @@ namespace AppWeb
             TxtTel.Text = "";
             TxtPass.Text = "";
             CheckBoxVip.Checked = false;
-            ListaMiServicios.Clear();
             ListBoxServicios.Items.Clear();
             ListBoxServicios.DataSource = null;
             ListBoxServicios.DataBind();
