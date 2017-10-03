@@ -33,6 +33,7 @@ namespace AppWeb
             string tel = TxtTel.Text;
             string pass = TxtPass.Text;
             string tipo = "";
+            bool esInactivo = false;
 
             LblAsignacion.Text = "";
             if (CheckBoxVip.Checked)
@@ -55,6 +56,7 @@ namespace AppWeb
                 }
                 else
                 {
+                    clienteWCF.InsertarProveedor(rut, nomFant, email, tel, esInactivo, esVip, pass);
                     LblAsignacion.Text = "";
                 }
                 Session["prov"] = p as DtoProveedor;
