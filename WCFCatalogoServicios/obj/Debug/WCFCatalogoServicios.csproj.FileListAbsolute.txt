@@ -11,5 +11,6 @@ C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServici
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.pdb
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.pdb
+C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.csprojResolveAssemblyReference.cache
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.pdb

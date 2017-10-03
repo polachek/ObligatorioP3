@@ -20,6 +20,15 @@ namespace WcfAgregarProv
 
         [OperationContract]
         bool AgregarServicioAProveedor(DtoServicioProveedor servicio, DtoProveedor prov);
+
+        [OperationContract]
+        bool ExisteRUT(string rut);
+
+        [OperationContract]
+        bool ExisteMail(string rut);
+
+        [OperationContract]
+        IEnumerable<DtoServicio> CargarServicios();
     }
 
     [DataContract]
@@ -48,6 +57,19 @@ namespace WcfAgregarProv
     }
 
     [DataContract]
+    public class DtoServicio
+    {
+        [DataMember]
+        public int IdServicio { get; set; }
+        [DataMember]
+        public string Nombre { get; set; }
+        [DataMember]
+        public string Descripcion { get; set; }
+        [DataMember]
+        public List<DtoTipoEvento> ListaTipoEventos = new List<DtoTipoEvento>();
+    }
+
+    [DataContract]
     public class DtoServicioProveedor
     {
         [DataMember]
@@ -60,6 +82,17 @@ namespace WcfAgregarProv
         public string Descripcion { get; set; }
         [DataMember]
         public string Foto { get; set; }
+    }
+
+    [DataContract]
+    public class DtoTipoEvento
+    {
+        [DataMember]
+        public int idTipoEvento { get; set; }
+        [DataMember]
+        public string Nombre { get; set; }
+        [DataMember]
+        public string Descripcion { get; set; }
     }
 
     [DataContract]

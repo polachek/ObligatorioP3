@@ -86,6 +86,21 @@ namespace WcfAgregarProv
             return false;
         }
 
+        public DtoServicio CargarServicios()
+        {
+            return Servicio.FindAll();
+        }
+
+        public bool ExisteMail(string rut)
+        {
+            return Proveedor.ExisteEmail(rut);
+        }
+
+        public bool ExisteRUT(string rut)
+        {
+            return Proveedor.ExisteEmail(rut);
+        }
+
         public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass)
         {
             bool ret = false;

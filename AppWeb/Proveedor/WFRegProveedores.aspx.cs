@@ -40,11 +40,11 @@ namespace AppWeb
                 if (tipo == "COMUN")
                 {
                     Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p.RUT))
+                    if (Proveedor.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p.Email))
+                    else if (Proveedor.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }
@@ -65,11 +65,11 @@ namespace AppWeb
                 else if (tipo == "VIP")
                 {
                     Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo};
-                    if (p.ExisteRut(p.RUT))
+                    if (Proveedor.ExisteRut(p.RUT))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                     }
-                    else if (p.ExisteEmail(p.Email))
+                    else if (Proveedor.ExisteEmail(p.Email))
                     {
                         Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
                     }

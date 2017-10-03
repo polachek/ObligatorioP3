@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using AppWeb.ServiceReference9;
+using System.IO;
 
 namespace AppWeb
 {
     public partial class Formulario_web1 : System.Web.UI.Page
     {
-        private static List<ServicioProveedor> ListaMiServicios;
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -18,7 +18,10 @@ namespace AppWeb
 
         protected void BtnAccion_Click(object sender, EventArgs e)
         {
-            Asignacion.Text = "";
+            AgregarProvClient clienteWCF = new AgregarProvClient();
+            clienteWCF.Open();
+
+            LblAsignacion.Text = "";
 
             string rut = TxtRut.Text;
             string nomFant = TxtNomFantasia.Text;
@@ -27,7 +30,7 @@ namespace AppWeb
             string pass = TxtPass.Text;
             string tipo = "";
 
-            Asignacion.Text = "";
+            LblAsignacion.Text = "";
             if (CheckBoxVip.Checked)
             { tipo = "VIP"; }
             else { tipo = "COMUN"; }
@@ -37,22 +40,20 @@ namespace AppWeb
 
             if (tipo == "COMUN")
             {
-                Proveedor p = new ProveedorComun { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                if (p.ExisteRut(p.RUT))
+                DtoProveedor p = new DtoProveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
+                if (clienteWCF.ExisteRUT(p.RUT))
                 {
-                    Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
+                    LblAsignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                 }
-                else if (p.ExisteEmail(p.Email))
+                else if (clienteWCF.ExisteMail(p.Email))
                 {
-                    Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
+                    LblAsignacion.Text = "Ya existe un proveedor con el email ingresado.";
                 }
                 else
                 {
-                    Asignacion.Text = "";
+                    LblAsignacion.Text = "";
                     Session["ProvINSessionPass"] = pass;
                     Session["ProvINSession"] = p;
-                    Paso1AltaProv.Visible = false;
-                    Paso2ServProv.Visible = true;
                     cargarServicios();
                     if (ListaMiServicios == null)
                     {
@@ -62,22 +63,20 @@ namespace AppWeb
             }
             else if (tipo == "VIP")
             {
-                Proveedor p = new ProveedorVIP { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
-                if (p.ExisteRut(p.RUT))
+                DtoProveedor p = new DtoProveedor { RUT = rut, NombreFantasia = nomFant, Email = email, Telefono = tel, FechaRegistro = fechaRegistro, esInactivo = false, Tipo = tipo };
+                if (clienteWCF.ExisteRUT(p.RUT))
                 {
-                    Asignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
+                    LblAsignacion.Text = "Ya existe un proveedor con el RUT ingresado.";
                 }
-                else if (p.ExisteEmail(p.Email))
+                else if (clienteWCF.ExisteMail(p.Email))
                 {
-                    Asignacion.Text = "Ya existe un proveedor con el email ingresado.";
+                    LblAsignacion.Text = "Ya existe un proveedor con el email ingresado.";
                 }
                 else
                 {
-                    Asignacion.Text = "";
+                    LblAsignacion.Text = "";
                     Session["ProvINSessionPass"] = pass;
                     Session["ProvINSession"] = p;
-                    Paso1AltaProv.Visible = false;
-                    Paso2ServProv.Visible = true;
                     cargarServicios();
                     if (ListaMiServicios == null)
                     {
@@ -91,7 +90,7 @@ namespace AppWeb
         private void insertarProveedor(Proveedor p, string pass)
         {
             // Verificaciones de Rut y Email OK
-            Asignacion.Text = "";
+            LblAsignacion.Text = "";
             string passEncriptada = Usuario.EncriptarPassSHA512(pass);
             Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
@@ -101,11 +100,11 @@ namespace AppWeb
 
             if (p.Insertar())
             {
-                Asignacion.Text = "Insertaste a : " + p.RUT;
+                LblAsignacion.Text = "Insertaste a : " + p.RUT;
                 limpiarForm();
             }
             else
-                Asignacion.Text = "No";
+                LblAsignacion.Text = "No";
         }
 
         private void limpiarForm()
@@ -126,46 +125,17 @@ namespace AppWeb
         private void cargarServicios()
         {
             List<Servicio> listaServicios = Servicio.FindAll();
-            if (listaServicios == null || listaServicios.Count == 0)
-            {
-                PanelCantServicios.Visible = true;
-            }
-            else
-            {
-                PanelCantServicios.Visible = false;
-                GridViewListadoServicios.DataSource = listaServicios;
-                GridViewListadoServicios.DataBind();
-            }
         }
 
-        protected void GridServicios_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            List<Servicio> listaServicios = Servicio.FindAll();
-
-            int fila = int.Parse(e.CommandArgument + "");
-
-            if (e.CommandName == "AgregarServicio")
-            {
-                PanelAsignarServicio.Visible = true;
-
-                Servicio serv = new Servicio();
-                serv = listaServicios[fila];
-                HiddeIdServicio.Value = serv.IdServicio.ToString();
-
-                if (serv != null) { ServNombre.Text = serv.Nombre; }
-            }
-        }
+        
 
         protected void BtnAsigServAccion_Click(object sender, EventArgs e)
         {
             ServicioProveedor servProv = new ServicioProveedor();
 
             Proveedor miProveedor = Session["ProvINSession"] as Proveedor;
-
-            servProv.Nombre = ServNombre.Text;
-            servProv.IdServicio = int.Parse(HiddeIdServicio.Value);
             servProv.RutProveedor = miProveedor.RUT;
-            servProv.Descripcion = ServDesc.Text;
+            servProv.Descripcion = TBDescripcion.Text;
             string ruta = Server.MapPath("~/images/servicios-proveedor/");
 
             if (ServFotoUpload.HasFile)
@@ -185,16 +155,12 @@ namespace AppWeb
 
             if (ListaMiServicios.Contains(servProv))
             {
-                Asignacion.Text = "Servicio ya agregado";
+                LblAsignacion.Text = "Servicio ya agregado";
             }
             else
             {
-                Asignacion.Text = "";
+                LblAsignacion.Text = "";
                 ListaMiServicios.Add(servProv);
-
-                ServNombre.Text = "";
-                ServDesc.Text = "";
-                PanelAsignarServicio.Visible = false;
             }
 
             if (ListaMiServicios.Count() != 0)
@@ -213,8 +179,6 @@ namespace AppWeb
             }
             else
             {
-                Paso1AltaProv.Visible = true;
-                Paso2ServProv.Visible = false;
                 Proveedor p = Session["ProvINSession"] as Proveedor;
                 string pass = Session["ProvINSessionPass"].ToString();
                 insertarProveedor(p, pass);

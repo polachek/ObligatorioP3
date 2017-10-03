@@ -13,31 +13,31 @@ namespace AppWeb {
     public partial class Formulario_web1 {
         
         /// <summary>
-        /// Control Paso1AltaProv.
+        /// Control PanelRegistroProv.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Paso1AltaProv;
+        protected global::System.Web.UI.WebControls.Panel PanelRegistroProv;
         
         /// <summary>
-        /// Control Panel2.
+        /// Control PanelRUT.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel2;
+        protected global::System.Web.UI.WebControls.Panel PanelRUT;
         
         /// <summary>
-        /// Control Label4.
+        /// Control LblRut.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label LblRut;
         
         /// <summary>
         /// Control TxtRut.
@@ -67,22 +67,22 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.Label ErrorRut;
         
         /// <summary>
-        /// Control Panel3.
+        /// Control PanelNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel3;
+        protected global::System.Web.UI.WebControls.Panel PanelNombre;
         
         /// <summary>
-        /// Control Label1.
+        /// Control LblNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LblNombre;
         
         /// <summary>
         /// Control TxtNomFantasia.
@@ -103,22 +103,22 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// Control Panel1.
+        /// Control PanelEMail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel1;
+        protected global::System.Web.UI.WebControls.Panel PanelEMail;
         
         /// <summary>
-        /// Control Label2.
+        /// Control LblEMail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label LblEMail;
         
         /// <summary>
         /// Control TxtEmail.
@@ -139,22 +139,22 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
-        /// Control Panel4.
+        /// Control PanelTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel4;
+        protected global::System.Web.UI.WebControls.Panel PanelTelefono;
         
         /// <summary>
-        /// Control Label3.
+        /// Control LblTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label LblTelefono;
         
         /// <summary>
         /// Control TxtTel.
@@ -175,22 +175,22 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
         
         /// <summary>
-        /// Control Panel5.
+        /// Control PanelPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel5;
+        protected global::System.Web.UI.WebControls.Panel PanelPass;
         
         /// <summary>
-        /// Control Label5.
+        /// Control LblPass.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label LblPass;
         
         /// <summary>
         /// Control TxtPass.
@@ -211,13 +211,13 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator5;
         
         /// <summary>
-        /// Control Panel6.
+        /// Control PanelVIP.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel6;
+        protected global::System.Web.UI.WebControls.Panel PanelVIP;
         
         /// <summary>
         /// Control CheckBoxVip.
@@ -229,31 +229,22 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxVip;
         
         /// <summary>
-        /// Control BtnAccion.
+        /// Control LblAsignacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAccion;
+        protected global::System.Web.UI.WebControls.Label LblAsignacion;
         
         /// <summary>
-        /// Control Asignacion.
+        /// Control LblServicios.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Asignacion;
-        
-        /// <summary>
-        /// Control Paso2ServProv.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Paso2ServProv;
+        protected global::System.Web.UI.WebControls.Label LblServicios;
         
         /// <summary>
         /// Control ListBoxServicios.
@@ -265,76 +256,31 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
         
         /// <summary>
-        /// Control GridViewListadoServicios.
+        /// Control LblDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewListadoServicios;
+        protected global::System.Web.UI.WebControls.Label LblDescripcion;
         
         /// <summary>
-        /// Control PanelCantServicios.
+        /// Control TBDescripcion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCantServicios;
+        protected global::System.Web.UI.WebControls.TextBox TBDescripcion;
         
         /// <summary>
-        /// Control Label7.
+        /// Control LblFoto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
-        
-        /// <summary>
-        /// Control PanelAsignarServicio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAsignarServicio;
-        
-        /// <summary>
-        /// Control HiddeIdServicio.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField HiddeIdServicio;
-        
-        /// <summary>
-        /// Control ServNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ServNombre;
-        
-        /// <summary>
-        /// Control ServDesc.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox ServDesc;
-        
-        /// <summary>
-        /// Control RegularExpressionValidator6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator6;
+        protected global::System.Web.UI.WebControls.Label LblFoto;
         
         /// <summary>
         /// Control ServFotoUpload.
@@ -346,13 +292,13 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.FileUpload ServFotoUpload;
         
         /// <summary>
-        /// Control BtnAsigServ.
+        /// Control BtnAgregarServicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BtnAsigServ;
+        protected global::System.Web.UI.WebControls.Button BtnAgregarServicio;
         
         /// <summary>
         /// Control BtnRegistroProv.

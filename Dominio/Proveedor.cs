@@ -54,7 +54,7 @@ namespace Dominio
         /// </summary>
         /// <param name="rut"></param>
         /// <returns></returns>
-        public bool ExisteRut(string rut)
+        public static bool ExisteRut(string rut)
         {
             bool ret = false;
             if (FindByRUT(rut) != null)
@@ -69,7 +69,7 @@ namespace Dominio
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public bool ExisteEmail(string email)
+        public static bool ExisteEmail(string email)
         {
             bool ret = false;
             if (FindByEmail(email) != null)

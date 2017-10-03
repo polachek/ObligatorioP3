@@ -158,6 +158,13 @@
     <Content Include="Administrador\ServicioBuscarProv.aspx" />
     <Content Include="Administrador\ServicioGuardarProv.aspx" />
     <Content Include="Administrador\ServicioModificarParametros.aspx" />
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv.disco" />
+    <None Include="Service References\ServiceReference9\configuration91.svcinfo" />
+    <None Include="Service References\ServiceReference9\configuration.svcinfo" />
+    <None Include="Service References\ServiceReference9\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Sitio.Master" />
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.wsdl" />
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.xsd">
@@ -215,6 +222,19 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference8\DesactivarProv2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv.wsdl" />
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference9\ServicioAgregarProv3.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Web.Debug.config">
@@ -364,6 +384,11 @@
     <Compile Include="Administrador\ServicioModificarParametros.aspx.designer.cs">
       <DependentUpon>ServicioModificarParametros.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\ServiceReference9\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Sitio.Master.cs">
       <DependentUpon>Sitio.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -394,6 +419,7 @@
     <WCFMetadataStorage Include="Service References\ServiceReference6\" />
     <WCFMetadataStorage Include="Service References\ServiceReference7\" />
     <WCFMetadataStorage Include="Service References\ServiceReference8\" />
+    <WCFMetadataStorage Include="Service References\ServiceReference9\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
