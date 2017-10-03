@@ -13,15 +13,94 @@ namespace WcfAgregarProv
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServicioAgregarProv : IAgregarProv
     {
+        public bool AgregarListaServicios(IEnumerable<DtoServicioProveedor> servicios, DtoProveedor prov)
+        {
+            bool ret = false;
+            if (prov.Tipo == "COMUN")
+            {
+                //Construye un Proveedor
+                Proveedor p = new ProveedorComun();
+                //Inicializa la lista de ServicioProveedor
+                p.ListaServicios = new List<ServicioProveedor>();
+                //Para cada DtoServicioProveedor de la lista que viene por parámetro, crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
+                foreach (DtoServicioProveedor s in servicios)
+                {
+                    ServicioProveedor miServicio = new ServicioProveedor();
+                    miServicio.IdServicio = s.IdServicio;
+                    miServicio.RutProveedor = s.RutProveedor;
+                    miServicio.Descripcion = s.Descripcion;
+                    miServicio.Foto = s.Foto;
+                    ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
+                    p.ListaServicios.Add(miServicio);
+                }
+            }
+            else if (prov.Tipo == "VIP")
+            {
+                //Construye un Proveedor
+                Proveedor p = new ProveedorVIP();
+                //Inicializa la lista de ServicioProveedor
+                p.ListaServicios = new List<ServicioProveedor>();
+                //Para cada DtoServicioProveedor de la lista que viene por parámetro, crea un nuevo ServicioProveedor y lo agrega a la lista del Proveedor
+                foreach (DtoServicioProveedor s in servicios)
+                {
+                    ServicioProveedor miServicio = new ServicioProveedor();
+                    miServicio.IdServicio = s.IdServicio;
+                    miServicio.RutProveedor = s.RutProveedor;
+                    miServicio.Descripcion = s.Descripcion;
+                    miServicio.Foto = s.Foto;
+                    ServicioProveedor.InsertarServicioProveedorSinTnr(miServicio);
+                    p.ListaServicios.Add(miServicio);
+                }
+            }
+            return ret;
+        }
+
+        public bool AgregarUsuario(DtoUsuario usu, DtoProveedor prov)
+        {
+            //Construye Usuario a partir de DtoUsuario
+            Usuario u = new Usuario();
+            u.Email = usu.Email;
+            u.Rol = usu.Rol;
+            u.User = usu.User;
+
+            //Construye Proveedor a partir de DtoProveedor
+            if (prov.Tipo == "COMUN")
+            {
+                Proveedor p = new ProveedorComun();
+                p.RUT = prov.RUT;
+                p.NombreFantasia = prov.NombreFantasia;
+                p.Email = prov.Email;
+                p.Telefono = prov.Telefono;
+                p.FechaRegistro = prov.FechaRegistro;
+                p.esInactivo = prov.esInactivo;
+                p.Tipo = "COMUN";
+
+                return p.AgregarUsuario(u);
+            }
+            else if (prov.Tipo == "COMUN") {
+                Proveedor p = new ProveedorComun();
+                p.RUT = prov.RUT;
+                p.NombreFantasia = prov.NombreFantasia;
+                p.Email = prov.Email;
+                p.Telefono = prov.Telefono;
+                p.FechaRegistro = prov.FechaRegistro;
+                p.esInactivo = prov.esInactivo;
+                p.Tipo = "VIP";
+
+                return p.AgregarUsuario(u);
+            }
+            return false;
+        }
+
         public bool InsertarProveedor(string rut, string nombreFantasia, string email, string tel, bool esInactivo, bool esVip, string pass)
         {
             bool ret = false;
             DateTime fechaRegDateTime = DateTime.Now;
             string fechaRegistro = fechaRegDateTime.ToString("yyyy-MM-dd");
-            // Construyo un proveedor con los parámetros que llegan desde el servicio y controlo el tipo de proveedor
+            // Construyo un DtoProveedor con los parámetros que llegan desde el cliente y controlo el tipo de proveedor
             if (!esVip)
             {
-                Proveedor p = new ProveedorComun()
+                DtoProveedor p = new DtoProveedor()
                 {
                     RUT = rut,
                     NombreFantasia = nombreFantasia,
@@ -33,17 +112,29 @@ namespace WcfAgregarProv
                 };
 
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
+                DtoUsuario usu = new DtoUsuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
-                // Agrego el usuario al proveedor p
-                p.AgregarUsuario(usu);
-                p.Insertar();
+                // Agrego el DtoUsuario al DtoProveedor p
+                this.AgregarUsuario(usu, p);
+
+                //Construye un Proveedor 
+                Proveedor proveedorAInsertar = new ProveedorComun();
+                proveedorAInsertar.RUT = p.RUT;
+                proveedorAInsertar.NombreFantasia = p.NombreFantasia;
+                proveedorAInsertar.Email = p.Email;
+                proveedorAInsertar.Telefono = p.Telefono;
+                proveedorAInsertar.FechaRegistro = p.FechaRegistro;
+                proveedorAInsertar.esInactivo = p.esInactivo;
+                proveedorAInsertar.Tipo = "COMUN";
+
+                //Inserto el Proveedor en BD
+                proveedorAInsertar.Insertar();
 
                 ret = true;
             }
             else if (esVip)
             {
-                Proveedor p = new ProveedorVIP()
+                DtoProveedor p = new DtoProveedor()
                 {
                     RUT = rut,
                     NombreFantasia = nombreFantasia,
@@ -55,15 +146,26 @@ namespace WcfAgregarProv
                 };
 
                 string passEncriptada = Usuario.EncriptarPassSHA512(pass);
-                Usuario usu = new Usuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
+                DtoUsuario usu = new DtoUsuario { User = p.RUT, Passw = passEncriptada, Rol = 2, Email = p.Email };
 
-                // Agrego el usuario al proveedor p
-                p.AgregarUsuario(usu);
-                p.Insertar();
+                // Agrego el DtoUsuario al DtoProveedor p
+                AgregarUsuario(usu, p);
+
+                //Construye un Proveedor 
+                Proveedor proveedorAInsertar = new ProveedorVIP();
+                proveedorAInsertar.RUT = p.RUT;
+                proveedorAInsertar.NombreFantasia = p.NombreFantasia;
+                proveedorAInsertar.Email = p.Email;
+                proveedorAInsertar.Telefono = p.Telefono;
+                proveedorAInsertar.FechaRegistro = p.FechaRegistro;
+                proveedorAInsertar.esInactivo = p.esInactivo;
+                proveedorAInsertar.Tipo = "VIP";
+
+                //Inserto el Proveedor en BD
+                proveedorAInsertar.Insertar();
 
                 ret = true;
             }
-
             return ret;
         }
 

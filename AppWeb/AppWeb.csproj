@@ -73,8 +73,6 @@
     <Content Include="Administrador\ServicioDesactivarProveedor.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="packages.config" />
-    <Content Include="PanelAdministrador.aspx" />
-    <Content Include="PanelProveedor.aspx" />
     <Content Include="Administrador\Administrador.master" />
     <Content Include="Properties\DataSources\WCFProveedorDadoRUT.DtoProveedor.datasource" />
     <None Include="Service References\ServiceReference1\ProveedorDadoRUT.wsdl" />
@@ -101,6 +99,8 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Proveedor\ServicioRegProveedores.aspx" />
+    <Content Include="Proveedor\WFRegProveedores.aspx" />
     <Content Include="Service References\ServiceReference3\AppWeb.ServiceReference3.DtoServicio.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -152,7 +152,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="ServicioAgregarProv.aspx" />
     <Content Include="Administrador\ServicioListadoProv.aspx" />
     <Content Include="Administrador\ServicioMostrarCatalogo.aspx" />
     <Content Include="Administrador\ServicioGuardarCatalogo.aspx" />
@@ -160,7 +159,6 @@
     <Content Include="Administrador\ServicioGuardarProv.aspx" />
     <Content Include="Administrador\ServicioModificarParametros.aspx" />
     <Content Include="Sitio.Master" />
-    <Content Include="WFRegProveedores.aspx" />
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.wsdl" />
     <None Include="Service References\ServiceReference2\ServicioAgregarProv.xsd">
       <SubType>Designer</SubType>
@@ -269,21 +267,21 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PanelAdministrador.aspx.cs">
-      <DependentUpon>PanelAdministrador.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PanelAdministrador.aspx.designer.cs">
-      <DependentUpon>PanelAdministrador.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PanelProveedor.aspx.cs">
-      <DependentUpon>PanelProveedor.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PanelProveedor.aspx.designer.cs">
-      <DependentUpon>PanelProveedor.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proveedor\ServicioRegProveedores.aspx.cs">
+      <DependentUpon>ServicioRegProveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proveedor\ServicioRegProveedores.aspx.designer.cs">
+      <DependentUpon>ServicioRegProveedores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proveedor\WFRegProveedores.aspx.cs">
+      <DependentUpon>WFRegProveedores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Proveedor\WFRegProveedores.aspx.designer.cs">
+      <DependentUpon>WFRegProveedores.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -323,13 +321,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="ServicioAgregarProv.aspx.cs">
-      <DependentUpon>ServicioAgregarProv.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ServicioAgregarProv.aspx.designer.cs">
-      <DependentUpon>ServicioAgregarProv.aspx</DependentUpon>
     </Compile>
     <Compile Include="Administrador\ServicioListadoProv.aspx.cs">
       <DependentUpon>ServicioListadoProv.aspx</DependentUpon>
@@ -379,13 +370,6 @@
     </Compile>
     <Compile Include="Sitio.Master.designer.cs">
       <DependentUpon>Sitio.Master</DependentUpon>
-    </Compile>
-    <Compile Include="WFRegProveedores.aspx.cs">
-      <DependentUpon>WFRegProveedores.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WFRegProveedores.aspx.designer.cs">
-      <DependentUpon>WFRegProveedores.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

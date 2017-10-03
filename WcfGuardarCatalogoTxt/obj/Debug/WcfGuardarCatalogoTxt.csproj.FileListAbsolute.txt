@@ -37,6 +37,5 @@ C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Serv
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Web.xml
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.ApplicationInsights.xml
-C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.csprojResolveAssemblyReference.cache
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.pdb

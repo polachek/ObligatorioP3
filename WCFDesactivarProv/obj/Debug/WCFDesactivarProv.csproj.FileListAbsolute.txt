@@ -19,6 +19,5 @@ C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\bin\WCFDesactivarProv.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\bin\WCFDesactivarProv.pdb
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\bin\Dominio.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\bin\Dominio.pdb
-C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.csprojResolveAssemblyReference.cache
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.pdb

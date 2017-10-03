@@ -47,7 +47,6 @@ namespace Dominio
 
                 cmd.ExecuteNonQuery();
 
-
                 return true;
             }
             catch (Exception ex)
@@ -57,6 +56,34 @@ namespace Dominio
             }
         }
 
+
+        public static bool InsertarServicioProveedorSinTnr(ServicioProveedor miserv)
+        {
+            SqlConnection cn = Conexion.CrearConexion();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = @"INSERT INTO ProveedorServicios
+                             VALUES(@idServicio, @rutProveedor, @nombre, @descripcion, @imagen)";
+            cmd.Parameters.AddWithValue("@idServicio", miserv.IdServicio);
+            cmd.Parameters.AddWithValue("@rutProveedor", miserv.RutProveedor);
+            cmd.Parameters.AddWithValue("@nombre", miserv.Nombre);
+            cmd.Parameters.AddWithValue("@descripcion", miserv.Descripcion);
+            cmd.Parameters.AddWithValue("@imagen", miserv.Foto);
+            cmd.Connection = cn;
+            try
+            {
+                Conexion.AbrirConexion(cn);
+                int filas = cmd.ExecuteNonQuery();
+                if (filas == 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                return false;
+            }
+        }
         #endregion
 
         #region Finders

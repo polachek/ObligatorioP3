@@ -137,8 +137,8 @@ namespace Dominio
                 cmd.ExecuteNonQuery();
 
                 //Se implementó condición para lista de servicios igual null para evitar conflicto al cargar wcf con proveedor nulo
-                if (ListaServicios == null){}
-                else if (ListaServicios.Count() > 0)
+                if (this.ListaServicios == null){}
+                else if (this.ListaServicios.Count() > 0)
                 {
                     foreach (ServicioProveedor miServ in ListaServicios)
                     {
@@ -166,6 +166,7 @@ namespace Dominio
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.Assert(false, "Error: " + ex.Message);
+                trn.Rollback();
                 return false;
             }
             finally {
@@ -433,6 +434,7 @@ namespace Dominio
             }
             finally
             {
+                Conexion.CerrarConexion(cn);
             }
         }
 
