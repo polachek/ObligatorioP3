@@ -15,11 +15,7 @@ namespace AppWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {            
-            cargarServicios();
-            if (ListaMiServicios == null)
-            {
-                ListaMiServicios = new List<ServicioProveedor>();
-            }
+
         }
 
         protected void BtnAccion_Click(object sender, EventArgs e)
@@ -33,17 +29,6 @@ namespace AppWeb
             string pass = TxtPass.Text;
             string tipo = "";
 
-
-            if (ListaMiServicios.Count() == 0)
-            {
-                Asignacion.Text = "No se puede agregar un Proveedor sin Servicios asociados";
-            }
-            else if (pass == "")
-            {
-                Asignacion.Text = "Es necesario asignar una contraseña al usuario";
-            }
-            else
-            {
                 Asignacion.Text = "";
                 if (CheckBoxVip.Checked)
                 { tipo = "VIP"; }
@@ -66,8 +51,16 @@ namespace AppWeb
                     else
                     {
                         Asignacion.Text = "";
-                        insertarProveedor(p, pass); 
-                    }
+                        Session["ProvINSessionPass"] = pass;
+                        Session["ProvINSession"] = p;
+                        Paso1AltaProv.Visible = false;
+                        Paso2ServProv.Visible = true;
+                        cargarServicios();
+                        if (ListaMiServicios == null)
+                        {
+                            ListaMiServicios = new List<ServicioProveedor>();
+                        }
+                 }
                 }
                 else if (tipo == "VIP")
                 {
@@ -83,10 +76,17 @@ namespace AppWeb
                     else
                     {
                         Asignacion.Text = "";
-                        insertarProveedor(p, pass);
-                    }
-                }
-            }
+                        Session["ProvINSessionPass"] = pass;
+                        Session["ProvINSession"] = p;
+                        Paso1AltaProv.Visible = false;
+                        Paso2ServProv.Visible = true;
+                        cargarServicios();
+                        if (ListaMiServicios == null)
+                        {
+                            ListaMiServicios = new List<ServicioProveedor>();
+                        }
+                  }
+                } 
 
         }
 
@@ -162,9 +162,11 @@ namespace AppWeb
         {
             ServicioProveedor servProv = new ServicioProveedor();
 
+            Proveedor miProveedor = Session["ProvINSession"] as Proveedor;
+
             servProv.Nombre = ServNombre.Text;
             servProv.IdServicio = int.Parse(HiddeIdServicio.Value);
-            servProv.RutProveedor = TxtRut.Text;
+            servProv.RutProveedor = miProveedor.RUT;
             servProv.Descripcion = ServDesc.Text;
             string ruta = Server.MapPath("~/images/servicios-proveedor/");
 
@@ -203,6 +205,21 @@ namespace AppWeb
                 ListBoxServicios.DataBind();
             }
 
+        }
+
+        protected void BtnRegistroProv_Click(object sender, EventArgs e)
+        {
+            if (ListaMiServicios.Count() == 0)
+            {
+                LBAsignacionReg.Text = "No se puede agregar un Proveedor sin Servicios asociados";
+            }else
+            {
+                Paso1AltaProv.Visible = true;
+                Paso2ServProv.Visible = false;
+                Proveedor p = Session["ProvINSession"] as Proveedor;
+                string pass = Session["ProvINSessionPass"].ToString();
+                insertarProveedor(p, pass); 
+            }
         }
 
     }

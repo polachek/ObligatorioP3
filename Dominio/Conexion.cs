@@ -22,7 +22,7 @@ namespace Dominio
 
         public static SqlConnection CrearConexion()
         {
-            return new SqlConnection(cadenaConexion);
+            return new SqlConnection(cadenaConexionPolaPC);
         }
 
         public static void AbrirConexion(SqlConnection cn)

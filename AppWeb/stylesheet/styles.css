@@ -9,6 +9,10 @@ body{
 	clear: both;
 }
 
+h1.main-title{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .boton_personalizado{
     text-decoration: none;
     padding: 10px;
@@ -74,15 +78,11 @@ body{
 }
 
 .page-regprov #WpAltaProveedor{
-	width: 30%;
     padding: 1%;
-	display: inline-block;
 }
 
 .page-regprov #regprov-right{
-	width: 56%;
     padding: 1%;
-	display: inline-block;
 }
 
 /** GRID VIEW STYLES **/

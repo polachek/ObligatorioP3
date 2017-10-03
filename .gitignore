@@ -152,5 +152,14 @@ WcfServiceModificarParametros/obj/
 WcfServiceModificarParametros/obj/*
 WcfServiceModificarParametros/bin/
 WcfServiceModificarParametros/bin/*
+WcfGuardarCatalogoTxt/bin/*
+WcfGuardarCatalogoTxt/bin/
+WcfGuardarCatalogoTxt/obj/*
+WcfGuardarCatalogoTxt/obj/*
+AppWeb/bin/
+AppWeb/bin/*
+WCFDesactivarProv/bin/*
+WCFDesactivarProv/bin/
+WCFDesactivarProv/obj/*
+WCFDesactivarProv/obj/*
 
-WcfGuardarCatalogoTxt/config/catalogo.txt

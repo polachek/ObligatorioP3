@@ -19,3 +19,24 @@ C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Serv
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Web.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.WindowsServer.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\ApplicationInsights.config
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\WcfGuardarCatalogoTxt.dll.config
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\WcfGuardarCatalogoTxt.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\WcfGuardarCatalogoTxt.pdb
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Dominio.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Agent.Intercept.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.DependencyCollector.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.PerfCounterCollector.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.ServerTelemetryChannel.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Web.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.WindowsServer.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.ApplicationInsights.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Dominio.pdb
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.DependencyCollector.xml
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.ServerTelemetryChannel.xml
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.Web.xml
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.AI.WindowsServer.xml
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\bin\Microsoft.ApplicationInsights.xml
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.csprojResolveAssemblyReference.cache
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.dll
+C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WcfGuardarCatalogoTxt\obj\Debug\WcfGuardarCatalogoTxt.pdb

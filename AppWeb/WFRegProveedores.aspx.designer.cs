@@ -13,6 +13,15 @@ namespace AppWeb {
     public partial class WFRegProveedores {
         
         /// <summary>
+        /// Control Paso1AltaProv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Paso1AltaProv;
+        
+        /// <summary>
         /// Control Panel2.
         /// </summary>
         /// <remarks>
@@ -220,15 +229,6 @@ namespace AppWeb {
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxVip;
         
         /// <summary>
-        /// Control ListBoxServicios.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
-        
-        /// <summary>
         /// Control BtnAccion.
         /// </summary>
         /// <remarks>
@@ -245,6 +245,24 @@ namespace AppWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Asignacion;
+        
+        /// <summary>
+        /// Control Paso2ServProv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Paso2ServProv;
+        
+        /// <summary>
+        /// Control ListBoxServicios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox ListBoxServicios;
         
         /// <summary>
         /// Control GridViewListadoServicios.
@@ -335,5 +353,23 @@ namespace AppWeb {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnAsigServ;
+        
+        /// <summary>
+        /// Control BtnRegistroProv.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnRegistroProv;
+        
+        /// <summary>
+        /// Control LBAsignacionReg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LBAsignacionReg;
     }
 }
