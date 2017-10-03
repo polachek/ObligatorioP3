@@ -86,9 +86,26 @@ namespace WcfAgregarProv
             return false;
         }
 
-        public DtoServicio CargarServicios()
+        public IEnumerable<DtoServicio> CargarServicios()
         {
-            return Servicio.FindAll();
+            List<DtoServicio> misDtoServicios = new List<DtoServicio>();
+            List<Servicio> servicios = Servicio.FindAll();
+            foreach (Servicio s in servicios) {
+                DtoServicio dtoServicio = new DtoServicio();
+                dtoServicio.Nombre = s.Nombre;
+                dtoServicio.Descripcion = s.Descripcion;
+                dtoServicio.IdServicio = s.IdServicio;
+                foreach(TipoEvento t in s.ListaTipoEventos)
+                {
+                    DtoTipoEvento miDtoTipo = new DtoTipoEvento();
+                    miDtoTipo.idTipoEvento = t.idTipoEvento;
+                    miDtoTipo.Nombre = t.Nombre;
+                    miDtoTipo.Descripcion = t.Descripcion;
+                    dtoServicio.ListaTipoEventos.Add(miDtoTipo);
+                }
+                misDtoServicios.Add(dtoServicio);
+            }
+            return misDtoServicios;
         }
 
         public bool ExisteMail(string rut)
