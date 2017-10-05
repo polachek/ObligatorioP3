@@ -14,3 +14,11 @@ C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.pdb
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.csprojResolveAssemblyReference.cache
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.pdb
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.dll.config
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.dll
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\bin\WCFCatalogoServicios.pdb
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.dll
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\bin\Dominio.pdb
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.csprojResolveAssemblyReference.cache
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.dll
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFCatalogoServicios\obj\Debug\WCFCatalogoServicios.pdb

@@ -3,7 +3,6 @@ D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\bin
 D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\bin\WCFDesactivarProv.pdb
 D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\bin\Dominio.dll
 D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\bin\Dominio.pdb
-D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.csprojResolveAssemblyReference.cache
 D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.dll
 D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.pdb
 C:\Users\Polachek\Desktop\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\bin\WCFDesactivarProv.dll.config
@@ -22,3 +21,4 @@ C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\bin\Dominio.pdb
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.csprojResolveAssemblyReference.cache
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.dll
 C:\Users\sebas\Desktop\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.pdb
+D:\ORT\Semestre 3\Programacion 3\Obligatorio\ObligatorioP3\WCFDesactivarProv\obj\Debug\WCFDesactivarProv.csprojResolveAssemblyReference.cache

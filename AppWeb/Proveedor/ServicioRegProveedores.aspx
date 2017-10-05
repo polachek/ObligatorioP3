@@ -58,7 +58,7 @@
             <h2>Servicios Ofrecidos</h2>
             <asp:Label ID="LblServicios" runat="server" Text="Seleccione el tipo de servicio:"></asp:Label>
             <br />
-            <asp:ListBox ID="ListBoxServicios" runat="server"></asp:ListBox>
+                <asp:DropDownList ID="ListBoxServicios" runat="server"></asp:DropDownList>
             <br />
             <asp:Label ID="LblDescripcion" runat="server" Text="Describa el servicio ofrecido:"></asp:Label>
             <br />

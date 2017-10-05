@@ -11,6 +11,8 @@ namespace AppWeb
 {
     public partial class Formulario_web1 : System.Web.UI.Page
     {
+        List<DtoServicioProveedor> misDtosServicios = new List<DtoServicioProveedor>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             AgregarProvClient clienteWCF = new AgregarProvClient();
@@ -58,6 +60,9 @@ namespace AppWeb
                 {
                     bool esVip = false;
                     clienteWCF.InsertarProveedor(rut, nomFant, email, tel, esInactivo, esVip, pass);
+                    foreach (DtoServicioProveedor s in misDtosServicios) {
+                        clienteWCF.AgregarServicioAProveedor(s,p);
+                    }
                     LblAsignacion.Text = "";
                 }
                 Session["prov"] = p as DtoProveedor;
@@ -77,6 +82,10 @@ namespace AppWeb
                 {
                     bool esVip = true;
                     clienteWCF.InsertarProveedor(rut, nomFant, email, tel, esInactivo, esVip, pass);
+                    foreach (DtoServicioProveedor s in misDtosServicios)
+                    {
+                        clienteWCF.AgregarServicioAProveedor(s, p);
+                    }
                     LblAsignacion.Text = "";
                 }
                 Session["prov"] = p as DtoProveedor;
@@ -111,7 +120,10 @@ namespace AppWeb
             DtoProveedor miProveedor = Session["prov"] as DtoProveedor;
 
             DtoServicioProveedor servProv = new DtoServicioProveedor();
-            servProv.IdServicio = ListBoxServicios.DataValueField;
+
+            string mitmpServ = ListBoxServicios.SelectedValue;
+
+            servProv.IdServicio = ListBoxServicios.SelectedIndex;
             servProv.Nombre = ListBoxServicios.DataTextField;
             servProv.Descripcion = TBDescripcion.Text;
             string ruta = Server.MapPath("~/images/servicios-proveedor/");
@@ -130,37 +142,7 @@ namespace AppWeb
                 servProv.Foto = "~/images/servicios-proveedor/" + nombreArch;
             }
 
-
-            if (ListaMiServicios.Contains(servProv))
-            {
-                LblAsignacion.Text = "Servicio ya agregado";
-            }
-            else
-            {
-                LblAsignacion.Text = "";
-                ListaMiServicios.Add(servProv);
-            }
-
-            if (ListaMiServicios.Count() != 0)
-            {
-                ListBoxServicios.DataSource = ListaMiServicios;
-                ListBoxServicios.DataBind();
-            }
-
-        }
-
-        protected void BtnRegistroProv_Click(object sender, EventArgs e)
-        {
-            if (ListaMiServicios.Count() == 0)
-            {
-                LBAsignacionReg.Text = "No se puede agregar un Proveedor sin Servicios asociados";
-            }
-            else
-            {
-                Proveedor p = Session["ProvINSession"] as Proveedor;
-                string pass = Session["ProvINSessionPass"].ToString();
-                insertarProveedor(p, pass);
-            }
+            misDtosServicios.Add(servProv);
         }
 
     }
