@@ -381,8 +381,8 @@ namespace Dominio
                     }
                     else
                     {
-                        trn.Rollback();
-                        return false;
+                        trn.Commit();
+                        return true;
                     }
                 }
                 return ret;

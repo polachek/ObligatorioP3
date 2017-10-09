@@ -21,7 +21,7 @@
               <Items>
                   <asp:MenuItem Text="Catalogo de Servicios" Value="Catalogo de Servicios"></asp:MenuItem>
                   <asp:MenuItem Text="Iniciar Sesion" Value="Iniciar Sesion" NavigateUrl="Login.aspx"></asp:MenuItem> 
-                  <asp:MenuItem Text="Registro de Proveedores" Value="Registro de Proveedores" NavigateUrl="WFRegProveedores.aspx"></asp:MenuItem>
+                  <asp:MenuItem Text="Registro de Proveedores" Value="Registro de Proveedores" NavigateUrl="Proveedor/WFRegProveedores.aspx"></asp:MenuItem>
               </Items>
           </asp:Menu>
          </form>
