@@ -1,0 +1,4 @@
+123456789012#Test Defensa#test@testtt.com#098125008|Fotografia:Linda foto:~/images/servicios-proveedor/Rut_123456789012__ServicioID_1.jpg#
+923456789012#Test defensaaa#defensa@gmail.com#09812001|Fotografia:Fotografia Defensa:~/images/servicios-proveedor/Rut_923456789012__ServicioID_1.png#Wedding planner:Wedding Defensa:~/images/servicios-proveedor/Rut_923456789012__ServicioID_3.jpg#
+999999999991#Proveedor Prueba Uno#provtest1@provtest.com#099999991|Fotografia:Proveedor Test 1 descripcion servicio Fotografia:~/images/servicios-proveedor/Rut_999999999991__ServicioID_1.jpg#
+999999999992#Proveedor Prueba Dos#provtest2@provtest.com#099999992|Catering:Proveedor Test 2 descripcion servicio Catering:~/images/servicios-proveedor/Rut_999999999992__ServicioID_2.jpg#Wedding planner:Proveedor Test 2 descripcion servicio Wedding planner:~/images/servicios-proveedor/Rut_999999999992__ServicioID_3.jpg#

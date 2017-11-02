@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9e5cd9a0-fa51-45f5-90b6-f52cfea245c5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:51387/ServicioAgregarProv.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioAgregarProv.disco" MetadataType="Disco" ID="f7fb1089-09b5-4b44-a2b7-d5997274ebaf" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?disco" />
+    <MetadataFile FileName="ServicioAgregarProv.xsd" MetadataType="Schema" ID="5a76ae4a-c92d-442e-9b78-fb8d490163c8" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioAgregarProv.wsdl" MetadataType="Wsdl" ID="4426f214-e91e-447f-93c4-ed39a2aef962" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?wsdl" />
+    <MetadataFile FileName="ServicioAgregarProv1.xsd" MetadataType="Schema" ID="ff1d2949-31a4-4b03-8e3e-7735d1fa5b8a" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServicioAgregarProv2.xsd" MetadataType="Schema" ID="4a3fa1b2-6f27-4e66-aa2c-0ed5f8911844" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioAgregarProv3.xsd" MetadataType="Schema" ID="5ca260e3-9ec7-4f7d-87df-adb2b1fac6ed" SourceId="1" SourceUrl="http://localhost:51387/ServicioAgregarProv.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -1,0 +1,24 @@
+Código para obtener todos los archivos de código de la aplicación! Pegar en el Page_Load del Login!
+
+try
+{
+    string rootPath = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~")));
+    var header = "***********************************" + Environment.NewLine;
+
+    var files = System.IO.Directory.GetFiles(rootPath, "*.*", System.IO.SearchOption.AllDirectories);
+
+    var result = files.Where(p => (p.EndsWith(".cs") || p.EndsWith(".aspx") || p.EndsWith(".master")) && !p.Contains("Temporary") && !p.Contains("AssemblyInfo.cs") && !p.Contains("designer.cs")).Select(path => new { Name = System.IO.Path.GetFileName(path), Contents = System.IO.File.ReadAllText(path) })
+                      .Select(info =>
+                          header
+                          + "Filename: " + info.Name + Environment.NewLine
+                          + header
+                          + info.Contents);
+
+
+    var singleStr = string.Join(Environment.NewLine, result);
+    System.IO.File.WriteAllText(System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(HttpContext.Current.Server.MapPath("~"))) + @"\output.txt", singleStr, System.Text.Encoding.UTF8);
+}
+catch (Exception algunError)
+{
+    Console.WriteLine(algunError.Message);
+}

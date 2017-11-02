@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Sitio.master.cs" Inherits="AppWeb.Sitio" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder ID="HeadSitio" runat="server">
+    </asp:ContentPlaceHolder>
+<link href="stylesheet/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+     <header id="header">
+      <div class="header-left">
+	   <h1>ProvEventos</h1>
+	   <p>Eventos &nbsp;&bull;&nbsp; Fotografía &nbsp;&bull;&nbsp; Discoteca &nbsp;&bull;&nbsp; Fiestas</p>
+      </div>
+      <div class="header-mid"><img class="image-header" src="/stylesheet/images/header-img.png" /></div>
+      <div class="header-right">
+
+          <asp:Panel ID="userLog" runat="server" Visible="false">
+            <asp:Button ID="Btn_Salir" runat="server" Text="Salir" OnClick="BtnSalir_Click" />
+            <asp:Label ID="LBUser" runat="server"></asp:Label>
+          </asp:Panel>
+          <asp:Panel ID="userNotlog" runat="server" Visible="false">
+              <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx">Inciar Sesion</asp:HyperLink>
+          </asp:Panel>
+          
+      </div>
+      <div class="clear-both"></div>
+	 </header>
+
+        <asp:ContentPlaceHolder ID="PlaceSitio" runat="server">
+       
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

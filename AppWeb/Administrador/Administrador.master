@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Sitio.Master" AutoEventWireup="true" CodeBehind="Administrador.master.cs" Inherits="AppWeb.Administrador1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadSitio" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="PlaceSitio" runat="server">
+        <h1 class="main-title">Panel de administracion para Administradores</h1>
+        <asp:Menu ID="Menu1" runat="server">
+            <Items>
+                <asp:MenuItem Text="WebForms" Value="WebForms">
+                    <asp:MenuItem NavigateUrl="~/Administrador/FormWeb-ListadoProveedores.aspx" Text="Listado de proveedores" Value="Listado de proveedores"></asp:MenuItem>
+                </asp:MenuItem>
+                <asp:MenuItem Text="Servicios WCF" Value="Servicios WCF">
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioBuscarProv.aspx" Text="Buscar proveedor" Value="BuscarProv"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioListadoProv.aspx" Text="Ver proveedores" Value="ListadoProv"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioMostrarCatalogo.aspx" Text="Catálogo de servicios" Value="VerCatalogo"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioModificarParametros.aspx" Text="Modificar parámetros" Value="ModificarParametros"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioGuardarCatalogo.aspx" Text="Guardar catalogo en archivo de texto" Value="GuardarCatalogo"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/Administrador/ServicioGuardarProv.aspx" Text="Guardar proveedor en archivo de texto" Value="GuardarProveedor"></asp:MenuItem>
+                </asp:MenuItem>
+            </Items>
+        </asp:Menu>
+    <asp:ContentPlaceHolder ID="ContenidoAdmin" runat="server" >
+
+    </asp:ContentPlaceHolder>
+</asp:Content>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WCFProveedorDadoRUT" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WCFProveedorDadoRUT" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DtoProveedor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FechaRegistro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ListaServicios" nillable="true" type="tns:ArrayOfDtoServicioProveedor" />
+      <xs:element minOccurs="0" name="NombreFantasia" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RUT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Tipo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="esInactivo" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DtoProveedor" nillable="true" type="tns:DtoProveedor" />
+  <xs:complexType name="ArrayOfDtoServicioProveedor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DtoServicioProveedor" nillable="true" type="tns:DtoServicioProveedor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDtoServicioProveedor" nillable="true" type="tns:ArrayOfDtoServicioProveedor" />
+  <xs:complexType name="DtoServicioProveedor">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Foto" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdServicio" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RutProveedor" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DtoServicioProveedor" nillable="true" type="tns:DtoServicioProveedor" />
+</xs:schema>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7485e664-3aa6-4671-96d5-2a22a80272a7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:53817/CatalogoServicios.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CatalogoServicios.xsd" MetadataType="Schema" ID="7a22b814-8489-4f30-bfa8-0acb1d5d30ee" SourceId="1" SourceUrl="http://localhost:53817/CatalogoServicios.svc?xsd=xsd0" />
+    <MetadataFile FileName="CatalogoServicios.wsdl" MetadataType="Wsdl" ID="3b6b0d4d-4c89-42c3-90d4-52f631ecc235" SourceId="1" SourceUrl="http://localhost:53817/CatalogoServicios.svc?wsdl" />
+    <MetadataFile FileName="CatalogoServicios1.xsd" MetadataType="Schema" ID="491250ee-8bf9-462c-80c5-054a173bfea6" SourceId="1" SourceUrl="http://localhost:53817/CatalogoServicios.svc?xsd=xsd2" />
+    <MetadataFile FileName="CatalogoServicios.disco" MetadataType="Disco" ID="7b69a9a9-9f14-4929-9aa9-578ff159963c" SourceId="1" SourceUrl="http://localhost:53817/CatalogoServicios.svc?disco" />
+    <MetadataFile FileName="CatalogoServicios2.xsd" MetadataType="Schema" ID="c14b11ab-e2a1-44af-b86a-bd765b4873fa" SourceId="1" SourceUrl="http://localhost:53817/CatalogoServicios.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
